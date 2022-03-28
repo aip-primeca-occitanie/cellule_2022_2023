@@ -1,0 +1,2 @@
+set(aiguillages_MESSAGE_FILES "/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/aiguillages/msg/Capteurs.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/aiguillages/msg/Actionneurs.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/aiguillages/msg/ExchangeSh.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/aiguillages/msg/Msg_SensorState.msg")
+set(aiguillages_SERVICE_FILES "")

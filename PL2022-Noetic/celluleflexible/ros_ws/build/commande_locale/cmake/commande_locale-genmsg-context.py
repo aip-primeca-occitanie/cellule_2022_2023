@@ -1,0 +1,11 @@
+# generated from genmsg/cmake/pkg-genmsg.context.in
+
+messages_str = "/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_AddProduct.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_StopControl.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_Color.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_SwitchControl.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_PinControl.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_AddProduct.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_Erreur.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/RobotJoints.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/TacheFinieMsg.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/DeplacerPieceMsg.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Actionneurs.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Capteurs.msg;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg/Msg_ChoixMode.msg"
+services_str = "/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/srv/SrvAddProduct.srv;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/srv/SrvFinInit.srv;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/srv/SrvAddProductPushBack.srv"
+pkg_name = "commande_locale"
+dependencies_str = "std_msgs"
+langs = "gencpp;geneus;genlisp;gennodejs;genpy"
+dep_include_paths_str = "commande_locale;/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/src/commande_locale/msg;std_msgs;/opt/ros/noetic/share/std_msgs/cmake/../msg"
+PYTHON_EXECUTABLE = "/usr/bin/python3"
+package_has_static_sources = '' == 'TRUE'
+genmsg_check_deps_script = "/opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py"

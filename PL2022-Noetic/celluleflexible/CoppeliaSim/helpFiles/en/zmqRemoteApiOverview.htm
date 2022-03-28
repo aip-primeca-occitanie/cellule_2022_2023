@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>ZeroMQ remote API</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>ZeroMQ remote API</h1>
+
+<p>The ZeroMQ remote API is one of <a href="meansOfCommunication.htm">several ways an application can connect with CoppeliaSim</a>.</p>
+
+<p>The ZeroMQ remote API allows to control a simulation (or the simulator itself) from an external application or a remote hardware (e.g. real robot, remote computer, etc.). It offers all API functions also available via a CoppeliaSim script: this includes all <a href="apiFunctions.htm">regular API functions</a> (i.e. sim.* -type functions), but also all API functions provided by <a href="plugins.htm">plugins</a> (e.g. simOMPL.*, simUI.*, simIK.*, etc.). The ZeroMQ remoteAPI represents a very thin Python wrapper around mentioned API functions, and can be used in the exact same way as from within a CoppeliaSim script.</p>
+<p>The ZeroMQ remote API functions are interacting with CoppeliaSim via <a href="http://api.zeromq.org/" target="_blank">ZeroMQ</a> and its <a href="simZMQ.htm">interface plugin</a> to CoppeliaSim and the ZMQ remote API <a href="addOns.htm">add-on</a>. All this happens in a hidden fashion to the user. The remote API can let one or several external applications interact with CoppeliaSim in a stepped  (i.e. <em>synchronized</em> with each simulation step) or non-stepped way (i.e. the normal operation mode), and even remote control of the simulator is supported (e.g. remotely loading a scene, starting, pausing or stopping a simulation for instance).</p>
+
+<p class="warningBox">Note: the ZeroMQ remote API also runs on CoppeliaSim V4.2.0, if you follow this procedure: clone the <a href="https://github.com/CoppeliaRobotics/zmqRemoteApi.git" target="_blank">ZeroMQ remote API repository</a> into your <em>CoppeliaSim/programming</em> folder. Then use<a href="https://coppeliaRobotics.com/files/tmp/simAddOnZMQ remote API.lua" target="_blank"> this compatibility add-on</a> and <a href="https://coppeliaRobotics.com/files/tmp/cbor.lua" target="_blank"> that script</a>, and place them into your<em> CoppeliaSim/</em> and <em>CoppeliaSim/Lua</em> folders respectively.</p>
+
+<p>See programming/zmqRemoteApi folder or <a href="https://github.com/CoppeliaRobotics/zmqRemoteApi" target="_blank">its related repository</a> for examples.</p>
+<br>
+
+<h2>Python</h2>
+<p>ZeroMQ and CBOR are required packages:</p>
+<code class="hljs coppelia-terminal">$ /path/to/python -m pip install pyzmq
+$ /path/to/python -m pip install cbor</code>
+<p>Here a very simple example ZeroMQ remote API client code (run it in programming/zmqRemoteApi/clients/python/)</p>
+<code class="hljs language-python coppelia-zmq-remote-api-client">import time
+from zmqRemoteApi import RemoteAPIClient
+client = RemoteAPIClient()
+sim = client.getObject('sim')
+client.setStepping(True)
+
+sim.startSimulation()
+while (t := sim.getSimulationTime()) &lt; 3:
+    s = f'Simulation time: {t:.2f} [s]'
+    print(s)
+    client.step()
+sim.stopSimulation()</code>
+
+
+<br>
+
+<h2>C++</h2>
+<p>ZeroMQ is a required package:</p>
+<code class="hljs coppelia-terminal"><strong>Windows</strong>, e.g. via vcpkg:
+$ vcpkg install zeromq
+
+<strong>Ubuntu:</strong>
+$ sudo apt install libzmq3-dev
+
+<strong>macOSX</strong>, e.g. via brew:
+$ brew install zeromq</code>
+
+<p>Some examples can be found in programming/zmqRemoteApi/clients/cpp/. Build them with:</p>
+<code class="hljs coppelia-terminal">$ mkdir build
+$ cd build
+$ cmake ..
+$ cmake --build . --config Release</code>
+
+
+<br>
+
+
+
+
+<p>Here another very simple C++ ZeroMQ remote API client:</p>
+<code class="hljs language-cpp coppelia-zmq-remote-api-client">#include &quot;RemoteAPIClient.h&quot;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+int main()
+{
+    RemoteAPIClient client;
+    client.setStepping(true);
+    client.call(&quot;sim.startSimulation&quot;, nullptr);
+    float simTime=0.0f;
+    while (simTime&lt;3.0f)
+    {
+        std::cout &lt;&lt; &quot;Simulation time: &quot; &lt;&lt; std::setprecision(3) &lt;&lt; simTime &lt;&lt; &quot; [s]&quot; &lt;&lt; std::endl;
+        client.step();
+        simTime=client.call(&quot;sim.getSimulationTime&quot;)[0].as&lt;float&gt;();
+    }    
+    client.call(&quot;sim.stopSimulation&quot;, nullptr);
+
+    return 0;
+}
+</code>
+
+<br>
+
+<h2>Lua</h2>
+<p>Connecting 2 or more CoppeliaSim instances can easily be achieved with following simple example of a child script:</p>
+<code class="hljs language-lua coppelia-zmq-remote-api-client">function sysCall_init()
+    remoteApiClient=require'luaZmqRemoteApi'
+    remoteApiClient.init('127.0.0.1',23002)
+    simx=remoteApiClient.getObject('sim')
+    
+    remoteApiClient.setStepping(true)
+    simx.startSimulation()
+end
+
+function sysCall_sensing()
+    remoteApiClient.step()
+end
+
+function sysCall_cleanup()
+    simx.stopSimulation()
+    remoteApiClient.cleanup()
+end</code>
+
+
+<br>
+
+
+<br>
+<br>
+ </tr>
+ <tr>
+   <td > 
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

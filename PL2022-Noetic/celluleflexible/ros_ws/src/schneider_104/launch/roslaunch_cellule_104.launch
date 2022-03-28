@@ -1,0 +1,4 @@
+<launch>
+  <node name="app_cellule104" pkg="schneider_104" type="app_cellule104" output="screen" launch-prefix="xterm -geometry '80x20+550+0' -e" args="app_cellule104"/>
+  <node name="client_cellule_tp_104" pkg="schneider_104" type="client_cellule_tp_104.py" launch-prefix="xterm -geometry '80x20+550+0' -e" args="Client_cellule_104"/>
+</launch>

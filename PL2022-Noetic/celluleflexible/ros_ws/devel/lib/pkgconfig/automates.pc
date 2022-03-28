@@ -1,0 +1,8 @@
+prefix=/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/devel
+
+Name: automates
+Description: Description of automates
+Version: 0.0.0
+Cflags: -I/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs message_runtime

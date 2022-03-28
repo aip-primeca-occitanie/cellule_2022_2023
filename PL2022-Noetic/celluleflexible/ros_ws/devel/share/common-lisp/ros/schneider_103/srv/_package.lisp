@@ -1,0 +1,10 @@
+(cl:defpackage schneider_103-srv
+  (:use )
+  (:export
+   "RETOUR_CELLULE_103"
+   "<RETOUR_CELLULE_103-REQUEST>"
+   "RETOUR_CELLULE_103-REQUEST"
+   "<RETOUR_CELLULE_103-RESPONSE>"
+   "RETOUR_CELLULE_103-RESPONSE"
+  ))
+

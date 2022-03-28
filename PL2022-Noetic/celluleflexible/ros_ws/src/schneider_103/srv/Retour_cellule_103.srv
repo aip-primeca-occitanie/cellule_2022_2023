@@ -1,0 +1,36 @@
+int32 memoire
+---
+
+bool ST6
+bool ST7
+bool ST18
+bool ST19
+bool R3D
+bool R4D
+bool R9D
+bool R10D
+bool R3G
+bool R4G
+bool R9G
+bool R10G
+bool D3
+bool D4
+bool D9
+bool D10
+bool V3
+bool V4
+bool V9
+bool V10
+bool PS7
+bool PS18
+bool PS19
+bool D3D
+bool D4D
+bool D9D
+bool D10D
+bool D3G
+bool D4G
+bool D9G
+bool D10G
+bool CP3
+bool CP8

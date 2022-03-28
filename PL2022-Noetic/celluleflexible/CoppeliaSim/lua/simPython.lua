@@ -1,0 +1,3 @@
+local simSpline={}
+
+return simSpline
