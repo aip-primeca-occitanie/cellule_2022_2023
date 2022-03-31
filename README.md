@@ -2,17 +2,13 @@
 
 Dans le répertoire de travail : 
 
-          git clone -b Noetic https://github.com/Yacoubo/PL2022.git
+          git clone https://github.com/aip-primeca-occitanie/Cellule_2022_copelia.git
 
 Il faut renommer le répertoire PL2022 en TERcelluleflexible
 
 Puis lancement du test
 
           commande : cd TERcelluleflexible/celluleflexible/ros_ws
-          Supprimer les dossiers build et devel
-          commande : cd src
-          Supprimer le fichier CMakeLists.txt
-          commande : cd ..
           commande : catkin_make
           commande source devel/setup.bash
           commande : cd ..
