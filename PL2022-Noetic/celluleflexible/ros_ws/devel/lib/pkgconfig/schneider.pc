@@ -1,8 +1,0 @@
-prefix=/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/devel
-
-Name: schneider
-Description: Description of schneider
-Version: 0.0.0
-Cflags: -I/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/devel/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime

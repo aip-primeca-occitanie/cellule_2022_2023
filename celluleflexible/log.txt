@@ -1,0 +1,4 @@
+Creation fichier log: Thu Mar 31 11:50:23 2022
+
+NouveauProduit: 14 :0.95
+EcrasementProduit:1

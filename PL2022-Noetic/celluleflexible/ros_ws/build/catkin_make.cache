@@ -1,2 +1,0 @@
-aiguillages:commande:commande_locale:launcher:robots:schneider:schneider_103:schneider_104:shuttles
--DCATKIN_DEVEL_PREFIX=/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/projet-long20/TERcelluleflexible/celluleflexible/ros_ws/install -G Unix Makefiles
