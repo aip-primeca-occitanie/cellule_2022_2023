@@ -28,6 +28,9 @@ Petit guide pour lancer le projet sur votre machine : (Ubuntu 16, ROS Kinetic)
 
           ./launch.sh
           
+  Si cela ne marche pas, essayer clic droit sur le fichier launch.sh -> Propriétés, onglet Permissions
+  et cocher la case "Autoriser l'exécution du fichier comme un programme"
+  
 En résumé (pour copier/coller dans un terminal):
 
           git clone https://gitlab.enseeiht.fr/sandra/TERcelluleflexible.git

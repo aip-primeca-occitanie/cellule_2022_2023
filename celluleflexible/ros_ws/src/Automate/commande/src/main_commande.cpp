@@ -212,7 +212,7 @@ int main(int argc, char **argv)
 			cmd.Ouvrir_PS(22);
 			cmd.Ouvrir_PS(23);
 			cmd.Ouvrir_PS(24);
-			 robot.AjouterProduit(POSTE_1,2);			
+			robot.AjouterProduit(POSTE_1,2);			
 			
 			M[13]++;
 
