@@ -9,13 +9,13 @@
 using namespace std;
 
 
-Yakuza_tp::Yakuza_tp(ros::NodeHandle noeud):mode{0}, yaskaType{0}
+Yakuza_tp::Yakuza_tp(ros::NodeHandle noeud):yaskaType_{Yaska_::Coppelia}
 {	
 	
-	choixMode = noeud.subscribe("/commande_locale/ChoixMode", 10,&Yakuza_tp::TypeMode,this);
-	robot=noeud.subscribe("/commande/Simulation/DeplacerPiece",10,&Yakuza_tp::RobCallabck,this);
-	pub_yaku = noeud.advertise<std_msgs::Int32>("/control_yakuza", 1);
-	
+	choixMode_ = noeud.subscribe("/commande_locale/ChoixMode", 10,&Yakuza_tp::TypeMode,this);
+	robot_ = noeud.subscribe("/commande/Simulation/DeplacerPiece",10,&Yakuza_tp::RobCallabck,this);
+	pub_yaku_ = noeud.advertise<std_msgs::Int32>("/control_yakuza", 1);
+
 }
 
 Yakuza_tp::~Yakuza_tp()
@@ -24,39 +24,37 @@ Yakuza_tp::~Yakuza_tp()
 
 void Yakuza_tp::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 {
-	mode = msg1->mode;
-	yaskaType = msg1->yaska;
-
+	yaskaType_ = msg1->yaska;
 }
 
 void Yakuza_tp::RobCallabck(const commande_locale::DeplacerPieceMsg msg)
 {
-	if( (mode==0 && yaskaType==1) || (mode == 1 && yaskaType == 2) ){
+	if( yaskaType_ != Yaska_::Coppelia ){
 		if (msg.num_robot==4)
 		{
 			if(msg.positionA==2)
 			{
-				DeplacementRobot.data=1;
+				DeplacementRobot_.data=Group_::DN1P;
 			}
 			else if(msg.positionA==3)
 			{
 				
-				DeplacementRobot.data=3;
+				DeplacementRobot_.data=Group_::DPN1;
 			}
 			else if (msg.positionB==2)
 			{
-				DeplacementRobot.data=2;
+				DeplacementRobot_.data=Group_::DN2P;
 			}
 			else if (msg.positionB==3)
 			{
-				DeplacementRobot.data=4;
+				DeplacementRobot_.data=Group_::DPN2;
 			}
-			pub_yaku.publish(DeplacementRobot);
+			pub_yaku_.publish(DeplacementRobot_);
 		}
 	
 
 	}
-
+	else{ std::cout << "Changez le mode Yaskawa dans les paramètres pour visualiser les trajectoires" << std::endl; };
 
 }
 

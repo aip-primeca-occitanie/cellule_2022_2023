@@ -305,15 +305,20 @@ int main(int argc, char **argv)
 			}
 			display();
 		}
+		// Si deux tâche R4 a la suite
 		if(M[9]){ 
-			if(robot.FinDeplacerPiece(ROBOT_4))
-			{
+			if(robot.FinDeplacerPiece(ROBOT_4)){
+				cpt ++; // compteur pour gérer plusieurs tâches R4 successives
+			}
+			if(!robot.FinDeplacerPiece(ROBOT_4) && cpt ==1){
 				M[9]--;
+				cpt--; // fin deplacierpiece remis a zero, on peut passer a l'action suivante
 				robot.DeplacerPiece(ROBOT_4,2,4);
 				M[30]++;
 			}
 			display();
 		}
+		
 		if(M[30]){
 			if(robot.FinDeplacerPiece(ROBOT_4)){
 				M[30]--;

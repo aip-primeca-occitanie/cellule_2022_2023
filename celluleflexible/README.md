@@ -1,6 +1,6 @@
 # TER atelier flexible ou cellule flexible
 
-Petit guide pour lancer le projet sur votre machine : (Ubuntu 16, ROS Kinetic)
+Petit guide pour lancer le projet sur votre machine : (Ubuntu 20.04, ROS Noetic)
 
 - 0) Il est toujours bon de faire un 
 

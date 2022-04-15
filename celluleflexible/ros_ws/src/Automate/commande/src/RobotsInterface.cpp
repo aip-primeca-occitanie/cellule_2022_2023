@@ -380,7 +380,7 @@ int RobotsInterface::FinDeplacerPiece(int numRobot)
 {
 	if(mode==0){
 		int Etat;
-		if (yaskaType==1){
+		if (yaskaType != 0){
 			if (numRobot==4){
 				return FinTacheAtelierR4;
 			}
@@ -408,11 +408,11 @@ int RobotsInterface::FinDeplacerPiece(int numRobot)
 		if (numRobot==1 && kukaType ==1){
 			return FinTacheAtelierR1;
 		}
-		if (numRobot==4){
+		if (numRobot==4 && yaskaType != 0){
 			return FinTacheAtelierR4;
 		}
 	}
-	return -1;
+	return 1;
 }
 
 

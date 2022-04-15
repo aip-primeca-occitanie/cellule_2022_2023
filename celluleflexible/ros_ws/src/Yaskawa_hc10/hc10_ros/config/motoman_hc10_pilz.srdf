@@ -45,6 +45,14 @@
         <joint name="joint_5_b" value="-1.95477" />
         <joint name="joint_6_t" value="0.820305" />
     </group_state>
+    <group_state name="Intermediaire_1" group="DN2P">
+        <joint name="joint_1_s" value="1.5" />
+        <joint name="joint_2_l" value="0.25" />
+        <joint name="joint_3_u" value="2.2" />
+        <joint name="joint_4_r" value="0.0" />
+        <joint name="joint_5_b" value="-1.93" />
+        <joint name="joint_6_t" value="0.78" />
+    </group_state>
     <group_state name="Above_working_space" group="DN2P">
 	 <joint name="joint_1_s" value="0.610865" />
         <joint name="joint_2_l" value="0.663225" />
@@ -188,6 +196,14 @@
         <joint name="joint_4_r" value="0.0349066" />
         <joint name="joint_5_b" value="-0.872665" />
         <joint name="joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Intermediaire_1" group="DPN2">
+        <joint name="joint_1_s" value="1.5" />
+        <joint name="joint_2_l" value="0.25" />
+        <joint name="joint_3_u" value="2.2" />
+        <joint name="joint_4_r" value="0.0" />
+        <joint name="joint_5_b" value="-1.93" />
+        <joint name="joint_6_t" value="0.78" />
     </group_state>
     <group_state name="Above_shuttle_2" group="DPN2">
         <joint name="joint_1_s" value="2.35619" />

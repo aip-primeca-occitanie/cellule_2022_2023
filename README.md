@@ -2,13 +2,17 @@
 
 Dans le répertoire de travail : 
 
-          git clone https://github.com/aip-primeca-occitanie/Cellule_2022_copelia.git
+          git clone -b Noetic https://github.com/Yacoubo/PL2022.git
 
 Il faut renommer le répertoire PL2022 en TERcelluleflexible
 
 Puis lancement du test
 
           commande : cd TERcelluleflexible/celluleflexible/ros_ws
+          Supprimer les dossiers build et devel
+          commande : cd src
+          Supprimer le fichier CMakeLists.txt
+          commande : cd ..
           commande : catkin_make
           commande source devel/setup.bash
           commande : cd ..
@@ -36,7 +40,7 @@ A présent vous êtes prêt à commencer le TER, se référer aux fichiers dans 
 
 
 Quelques erreurs lors de l'installation la première fois
-s'assurer d'avoir fait dans le terminal: source /opt/ros/melodic/setup.bash
+s'assurer d'avoir fait dans le terminal: source /opt/ros/noetic/setup.bash
 s'assurer que xterm est installé: sudo apt install xterm
 recupérer coppelia sim ubuntu18 et écraser/fusionner avec le dossier actuel
 depuis le dossier ros_ws faire source devel/setup.bash

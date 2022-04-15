@@ -18,15 +18,13 @@ class Yakuza_tp
 {
 
 private:
-	ros::Publisher pub_yaku;
-	ros::Subscriber choixMode;
-	std_msgs::String msg;
-	
-	string data;
-	ros::Subscriber robot;
-	std_msgs::Int32 DeplacementRobot;
-	int mode;
-	int yaskaType;
+	ros::Publisher pub_yaku_;
+	ros::Subscriber choixMode_;
+	ros::Subscriber robot_;
+	std_msgs::Int32 DeplacementRobot_;
+	int yaskaType_;
+	enum Yaska_{Coppelia = 0, Rviz, Atelier};
+	enum Group_{DN1P = 1, DN2P, DPN1, DPN2};
 	
 public:
 	Yakuza_tp(ros::NodeHandle noeud);
