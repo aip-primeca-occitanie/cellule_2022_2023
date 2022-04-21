@@ -45,7 +45,7 @@
         <joint name="joint_5_b" value="-1.95477" />
         <joint name="joint_6_t" value="0.820305" />
     </group_state>
-    <group_state name="Intermediaire_1" group="DN2P">
+    <group_state name="Middle" group="DN2P">
         <joint name="joint_1_s" value="1.5" />
         <joint name="joint_2_l" value="0.25" />
         <joint name="joint_3_u" value="2.2" />
@@ -103,11 +103,11 @@
     </group_state>
     <group_state name="Above_shuttle_1" group="DN1P">
         <joint name="joint_1_s" value="2.75762" />
-        <joint name="joint_2_l" value="0.331613" />
-        <joint name="joint_3_u" value="2.16421" />
-        <joint name="joint_4_r" value="-0.0349066" />
-        <joint name="joint_5_b" value="-1.81514" />
-        <joint name="joint_6_t" value="0.366519" />
+        <joint name="joint_2_l" value="0.541052" />
+        <joint name="joint_3_u" value="2.89725" />
+        <joint name="joint_4_r" value="-0.0523599" />
+        <joint name="joint_5_b" value="-2.35619" />
+        <joint name="joint_6_t" value="0.349066" />
     </group_state>
     <group_state name="On_shuttle_1" group="DN1P">
         <joint name="joint_1_s" value="2.75762" />
@@ -119,11 +119,11 @@
     </group_state>
     <group_state name="Above_shuttle_1" group="DN1P">
         <joint name="joint_1_s" value="2.75762" />
-        <joint name="joint_2_l" value="0.331613" />
-        <joint name="joint_3_u" value="2.16421" />
-        <joint name="joint_4_r" value="-0.0349066" />
-        <joint name="joint_5_b" value="-1.81514" />
-        <joint name="joint_6_t" value="0.366519" />
+        <joint name="joint_2_l" value="0.541052" />
+        <joint name="joint_3_u" value="2.89725" />
+        <joint name="joint_4_r" value="-0.0523599" />
+        <joint name="joint_5_b" value="-2.35619" />
+        <joint name="joint_6_t" value="0.349066" />
     </group_state>
     <group_state name="Above_working_space" group="DN1P">
 	 <joint name="joint_1_s" value="0.610865" />
@@ -197,7 +197,7 @@
         <joint name="joint_5_b" value="-0.872665" />
         <joint name="joint_6_t" value="2.19911" />
     </group_state>
-    <group_state name="Intermediaire_1" group="DPN2">
+    <group_state name="Middle" group="DPN2">
         <joint name="joint_1_s" value="1.5" />
         <joint name="joint_2_l" value="0.25" />
         <joint name="joint_3_u" value="2.2" />
@@ -280,11 +280,11 @@
     </group_state>
     <group_state name="Above_shuttle_1" group="DPN1">
         <joint name="joint_1_s" value="2.75762" />
-        <joint name="joint_2_l" value="0.331613" />
-        <joint name="joint_3_u" value="2.16421" />
-        <joint name="joint_4_r" value="-0.0349066" />
-        <joint name="joint_5_b" value="-1.81514" />
-        <joint name="joint_6_t" value="0.366519" />
+        <joint name="joint_2_l" value="0.541052" />
+        <joint name="joint_3_u" value="2.89725" />
+        <joint name="joint_4_r" value="-0.0523599" />
+        <joint name="joint_5_b" value="-2.35619" />
+        <joint name="joint_6_t" value="0.349066" />
     </group_state>
     <group_state name="On_shuttle_1" group="DPN1">
         <joint name="joint_1_s" value="2.75762" />
@@ -296,11 +296,11 @@
     </group_state>
     <group_state name="Above_shuttle_1" group="DPN1">
         <joint name="joint_1_s" value="2.75762" />
-        <joint name="joint_2_l" value="0.331613" />
-        <joint name="joint_3_u" value="2.16421" />
-        <joint name="joint_4_r" value="-0.0349066" />
-        <joint name="joint_5_b" value="-1.81514" />
-        <joint name="joint_6_t" value="0.366519" />
+        <joint name="joint_2_l" value="0.541052" />
+        <joint name="joint_3_u" value="2.89725" />
+        <joint name="joint_4_r" value="-0.0523599" />
+        <joint name="joint_5_b" value="-2.35619" />
+        <joint name="joint_6_t" value="0.349066" />
     </group_state>
     <group_state name="home" group="DPN1">
         <joint name="joint_1_s" value="0" />

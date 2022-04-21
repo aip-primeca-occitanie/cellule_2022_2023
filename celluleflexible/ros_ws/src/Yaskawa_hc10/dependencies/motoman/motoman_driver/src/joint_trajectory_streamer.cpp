@@ -533,7 +533,6 @@ void MotomanJointTrajectoryStreamer::streamingThread()
           this->state_ = TransferStates::IDLE;
           break;
         }
-
         if (reply_status.reply_.getResult() == MotionReplyResults::SUCCESS)
         {
           ROS_DEBUG("Point[%d of %d] sent to controller",

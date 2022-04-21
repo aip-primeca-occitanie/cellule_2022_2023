@@ -58,6 +58,5 @@ install(
 
 catkin_install_python(
   PROGRAMS
-  scripts/add_interferences.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

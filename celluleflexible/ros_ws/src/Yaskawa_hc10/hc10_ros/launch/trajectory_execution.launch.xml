@@ -12,9 +12,11 @@
   <param name="trajectory_execution/allowed_goal_duration_margin" value="0.5"/> <!-- default 0.5 -->
   <!-- Allowed joint-value tolerance for validation that trajectory's first point matches current robot state -->
   <param name="trajectory_execution/allowed_start_tolerance" value="0.01"/> <!-- default 0.01 -->
-
+  <!-- Uncomment the line below to avoid TIMEDOUT during trajectory execution -->
+  <!-- <param name ="trajectory_execution/execution_duration_monitoring" value="true" /> -->
   <!-- Load the robot specific controller manager; this sets the moveit_controller_manager ROS parameter -->
   <arg name="moveit_controller_manager" default="motoman_hc10" />
   <include file="$(find hc10_ros)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml" />
 
 </launch>
+
