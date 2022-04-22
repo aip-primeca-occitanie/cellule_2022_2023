@@ -40,7 +40,15 @@ En résumé (pour copier/coller dans un terminal):
           cd ..
           ./launch.sh
  
+Juste faire dans un terminal :
+	 cd ~/Bureau/Cellule_2022_copelia/celluleflexible/catmux config
+Pour lancer le projet:
+ 	catmux_create_session example_session.yaml
+Pour quitter le projet:
+ 	tmux kill-session
  
+Pour revenir au lancement du projet avec les fichiers launchs :
+ 	Décommenter ligne 108-109 du fichier commande_locale.cpp 
+ 	dans Cellule_2022_copelia/celluleflexible/ros_ws/src/Automate/commande_locale/src
           
-          
-          
+         

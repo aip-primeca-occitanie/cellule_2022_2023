@@ -4,17 +4,9 @@ project(hc10_ros)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
-  sensor_msgs
-  geometry_msgs
-  nav_msgs
-  tf
-  gazebo_ros
   rospy
-  message_generation
   commande_locale
 )
-
-find_package(gazebo REQUIRED)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
@@ -23,14 +15,7 @@ catkin_package(
   CATKIN_DEPENDS
   roscpp
   std_msgs
-  sensor_msgs
-  geometry_msgs
-  nav_msgs
-  tf
-  gazebo_ros
-  message_runtime
   rospy
-  DEPENDS GAZEBO
 )
 
 
@@ -45,18 +30,7 @@ if(CATKIN_ENABLE_TESTING)
   roslaunch_add_file_check(launch)
 endif()
 
-install(
-  DIRECTORY
-  #images
-  meshes
-  launch
-  #rviz
-  urdf
-  config
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
 catkin_install_python(
-  PROGRAMS
+  PROGRAMS scripts/execute_trajectory.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

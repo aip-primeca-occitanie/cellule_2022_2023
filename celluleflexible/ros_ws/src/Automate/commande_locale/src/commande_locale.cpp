@@ -105,8 +105,8 @@ int main(int argc, char **argv)
 		loop_rate.sleep();
 	}
 
-	string cmd="roslaunch launcher launch_beta.launch nbRobot:=" + nombreRobotStr + " &";
-	system(cmd.c_str());
+	// string cmd="roslaunch launcher launch_beta.launch nbRobot:=" + nombreRobotStr + " &";
+	// system(cmd.c_str());
 
 	cout << "Pause envoyée" << endl;
 	VREPController.pause();
