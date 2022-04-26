@@ -42,7 +42,7 @@ En résumé (pour copier/coller dans un terminal):
 ```
 Pour lancer le projet avec catmux
 ```
-	  cd ~/Bureau/Cellule_2022_copelia/celluleflexible/catmux config
+	  cd ~/Bureau/Cellule_2022_copelia/celluleflexible/catmux/config/
 ```
 Pour lancer la session du projet:
 ```
