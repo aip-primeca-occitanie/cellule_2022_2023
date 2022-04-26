@@ -52,6 +52,6 @@
 
   <!-- add interferences using python script -->
   <!-- <node name="add_interferences" pkg="hc10_ros" type="add_interferences.py" /> -->
-  <node name="main_yakuza" pkg="hc10_ros" type="main_yakuza" />
-  <node name="execute_trajectory" pkg="hc10_ros" type="execute_trajectory.py" launch-prefix="xterm -geometry '80x20+550+0' -e" args="execute_trajectory"/>
+  <!-- <node name="main_yakuza" pkg="hc10_ros" type="main_yakuza" />
+  <node name="execute_trajectory" pkg="hc10_ros" type="execute_trajectory.py" launch-prefix="xterm -geometry '80x20+550+0' -e" args="execute_trajectory"/> -->
 </launch>

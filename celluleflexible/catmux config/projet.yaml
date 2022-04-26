@@ -4,38 +4,83 @@ common:
   #   - sourcing an environment
   #   - ssh-ing to another machine
   before_commands:
-    - echo "Launching project" # before commands can be specified global and per window
     - cd ~/Bureau/Cellule_2022_copelia/celluleflexible/ros_ws
     - source devel/setup.bash
+    - clear
+    - echo "Launching project" # before commands can be specified global and per window
 
   # The default window will be the one displayed when first connecting to the tmux session
-  default_window: some_other_window
+  default_window: commande
 parameters:
   # Parameters specified here can be used below and they can be overwritten at runtime
-  show_layouts: false # This parameter is used together with the if flag below
-  replacement_param: world\! # Parameters can also be used as replacement templates
+  # show_layouts: false # This parameter is used together with the if flag below
+  # replacement_param: world\! # Parameters can also be used as replacement templates
+  nb_robots: "4" #nb_robots 4 par défaut
 
 # Everything will be opened in windows. Windows can have multiple splits.
 windows:
   - name: roscore
-    unless: show_layouts # This window will only be displayed if 'show_layouts' is false
     commands:
       - roscore
   - name: commande
-    unless: show_layouts
-    layout: even-vertical
+    layout: even-horizontal
+    splits: 
+      - commands:
+        - sleep 2
+        - rosrun commande_locale simulation ${nb_robots}
+      - commands:
+        - sleep 15
+        - rosrun commande run ${nb_robots}
+      # - commands:
+      #   - echo "Terminal vierge"
+  - name: Yaskawa
+    layout: tiled
     splits:
       - commands:
         - sleep 2
-        - rosrun commande_locale simulation "4"
+        - roslaunch hc10_ros simulation_moveit_rviz.launch
+      - commands:
+        - sleep 5
+        - rosrun hc10_ros main_yakuza
+      - commands:
+        - sleep 5
+        - rosrun hc10_ros execute_trajectory.py
+  - name: robots_coppelia1
+    # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
+    if: "1"
+    layout: tiled # One can use the default layouts specified by tmux
+    splits:
       - commands:
         - sleep 15
-        - rosrun commande run "4"
-      - commands:
-        - echo "Terminal vierge"
-  - name: robots_copelia
-    unless: show_layouts # This window will only be displayed if 'show_layouts' is false
+        - rosrun robots robot "1"
+  - name: robots_coppelia2
     # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
+    if: "2"
+    layout: tiled # One can use the default layouts specified by tmux
+    splits:
+      - commands:
+        - sleep 15
+        - rosrun robots robot "1"
+      - commands:
+         - sleep 15
+         - rosrun robots robot "2"
+  - name: robots_coppelia3
+    # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
+    if: "3"
+    layout: tiled # One can use the default layouts specified by tmux
+    splits:
+      - commands:
+        - sleep 15
+        - rosrun robots robot "1"
+      - commands:
+         - sleep 15
+         - rosrun robots robot "2"
+      - commands:
+         - sleep 15
+         - rosrun robots robot "3"
+  - name: robots_coppelia4
+    # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
+    if: "4"
     layout: tiled # One can use the default layouts specified by tmux
     splits:
       - commands:
@@ -51,7 +96,6 @@ windows:
          - sleep 15
          - rosrun robots robot "4"
   - name: aiguillages_log_shuttle
-    unless: show_layouts # This window will only be displayed if 'show_layouts' is false
     layout: tiled
     splits:
       - commands:
@@ -63,9 +107,30 @@ windows:
       - commands:
         - sleep 15
         - rosrun commande_locale log_manager
-      # - commands:
-      #   - sleep 15
-      #   - rosrun hc10_ros main_yakuza
+  - name: schneider_24
+    layout: tiled    
+    splits:
+      - commands:
+        - sleep 5
+        - rosrun schneider app_cellule
+      - commands:
+        - sleep 5
+        - rosrun schneider client_cellule_tp.py
+      - commands:
+        - sleep 25
+        - rosrun schneider_104 app_cellule104
+      - commands:
+        - sleep 25
+        - rosrun schneider_104 client_cellule_tp_104.py
+  - name: schneider_3
+    layout: tiled    
+    splits:
+      - commands:
+        - sleep 15
+        - rosrun schneider_103 app_cellule103
+      - commands:
+        - sleep 15
+        - rosrun schneider_103 client_cellule_tp_103.py
   # - name: top-bottom
   #   if: show_layouts
   #   layout: even-vertical
@@ -85,3 +150,4 @@ windows:
 #       - rosrun commande_locale simulation "4"
       
 #  #if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
+    # unless: show_layouts # This window will only be displayed if 'show_layouts' is false
