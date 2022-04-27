@@ -55,7 +55,7 @@ Si on veut spécifier le nombre de robots (remplacer ? par le nombre de robots s
 Pour quitter la session:
 ```
  	tmux kill-session
- 	raccourci (ctrl b shit k y)
+ 	raccourci (ctrl+b -> shift+k -> y)
 ```
 Pour revenir au lancement du projet avec launchs :
 ```
