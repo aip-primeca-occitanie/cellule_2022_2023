@@ -2,43 +2,51 @@
 
 Petit guide pour lancer le projet sur votre machine : (Ubuntu 20.04, ROS Noetic)
 
-- 0) Il est toujours bon de faire un 
+Il est toujours bon de faire un:
+```
+		sudo apt-get update
+```
+Installer la librairie modbus avec: 
+```
+		sudo apt-get install libmodbus-dev
+```
+Cloner la branche master de ce repository :
+(si git n'est pas installé, vous pouvez toujours télécharger le projet en zip et en extraire le code)
+```
+		git clone https://gitlab.enseeiht.fr/sandra/TERcelluleflexible.git
+```
+Compiler les packages ros en se plaçant dans le dossier ros_ws et en effectuant :
+```
+		catkin_make
+```
+Pour lancer le projet avec les fichiers launch (ancienne version):
+Sourcez les fichiers compilés (depuis le dossier ros_ws):
+```
+		source devel/setup.bash
+```
+Exécuter le launch.sh à la racine du projet :
+```
+		cd ..
+		./launch.sh
+```
+Si cela ne marche pas, essayer clic droit sur le fichier launch.sh -> Propriétés, onglet Permissions et cocher la case "Autoriser l'exécution du fichier comme un programme".
 
-          sudo apt-get update
-
-- 1) Installer la librairie modbus avec 
-
-          sudo apt-get install libmodbus-dev
-          
-- 2) Cloner la branche master de ce repository :
-    (si git n'est pas installé, vous pouvez toujours télécharger le projet en zip et en extraire le code)
-    
-          git clone https://gitlab.enseeiht.fr/sandra/TERcelluleflexible.git
-        
-          
-- 3) Compiler les packages ros en se plaçant dans ros_ws et en effectuant :
-
-          catkin_make
-          
-- 4) Sourcez les fichiers compilés (depuis le dossier ros_ws):
-
-          source devel/setup.bash
-          
-- 5) Exécuter le launch.sh à la racine du projet :
-
-          ./launch.sh
-       
-  Si cela ne marche pas, essayer clic droit sur le fichier launch.sh -> Propriétés, onglet Permissions
-  et cocher la case "Autoriser l'exécution du fichier comme un programme"
-  
 En résumé (pour copier/coller dans un terminal):
 ```
-          git clone https://gitlab.enseeiht.fr/sandra/TERcelluleflexible.git
-          cd ros_ws
-          source devel/setup.bash
-          catkin_make
-          cd ..
-          ./launch.sh
+		git clone https://gitlab.enseeiht.fr/sandra/TERcelluleflexible.git
+		cd ros_ws
+		source devel/setup.bash
+		catkin_make
+		cd ..
+		./launch.sh
+```
+Pour lancer le projet avec la nouvelle interface :
+Pour installer catmux :
+```
+	  sudo apt-get install tmux
+	  pip3 install --user catmux
+	  mv Bureau/Cellule_2022_copelia/celluleflexible/catmux/session.py .local/lib/python3.8/site-packages/catmux/session.py
+
 ```
 Pour lancer le projet avec catmux
 ```
