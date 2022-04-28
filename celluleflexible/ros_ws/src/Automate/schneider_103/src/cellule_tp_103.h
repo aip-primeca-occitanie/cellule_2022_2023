@@ -10,12 +10,10 @@
 #include <std_msgs/Int32.h>
 #include <unistd.h>
 #include <std_msgs/Byte.h>
+
 using namespace std;
 
-
-
-class Cellule_tp
-{
+class Cellule_tp{
 
 private:
 	ros::Publisher pub_103;
@@ -30,6 +28,30 @@ private:
 	schneider_103::Msg_SensorState SensorState;
 	ros::Subscriber choixMode;
 	int mode;
+	enum Actionneur_{ST6 = 0,
+					 ST7 = 1,
+					 ST18 = 2,
+					 ST19 = 3,
+					 R3D = 4,
+					 R4D = 5,
+					 R9D = 6,
+					 R10D = 7,
+					 R3G = 8,
+					 R4G = 9,
+					 R9G = 10,
+					 R10G = 11,
+					 D3 = 12,
+					 D4 = 13,
+					 D9 = 14,
+					 D10 = 15,
+					 V3 = 16,
+					 V4 = 17,
+					 V9 = 18,
+					 V10 = 19};
+	enum Aiguillage_{A3 = 3,
+					 A4 = 4,
+					 A9 = 9,
+					 A10 = 10};
 	
 public:
 	Cellule_tp(ros::NodeHandle noeud);
@@ -40,41 +62,7 @@ public:
 	void AigDroiteCallback(const std_msgs::Int32::ConstPtr& msg_aigs);
 	void CmdPSCallback(const commande_locale::Msg_StopControl actionneurs_simulation_Stop);
 	void TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1);
-	bool ST6;
-	bool ST7;
-	bool ST18;
-	bool ST19;
-	bool R3D;
-	bool R4D;
-	bool R9D;
-	bool R10D;
-	bool R3G;
-	bool R4G;
-	bool R9G;
-	bool R10G;
-	bool D3;
-	bool D4;
-	bool D9;
-	bool D10;
-	bool V3;
-	bool V4;
-	bool V9;
-	bool V10;
-	bool PS7;
-	bool PS18;
-	bool PS19;
-	bool D3D;
-	bool D4D;
-	bool D9D;
-	bool D10D;
-	bool D3G;
-	bool D4G;
-	bool D9G;
-	bool D10G;
-	bool CP3;
-	bool CP8;
 
 	
 };
-
 #endif

@@ -11,12 +11,10 @@
 #include <std_msgs/Int32.h>
 #include <unistd.h>
 #include <std_msgs/Byte.h>
+
 using namespace std;
 
-
-
-class Cellule_tp
-{
+class Cellule_tp{
 
 private:
 	ros::Publisher pub_104;
@@ -33,7 +31,42 @@ private:
 	ros::Subscriber choixMode;
 	int mode;
 	int isKukaPhysical;
-	
+	enum Actionneur_{ST8 = 0,
+					 ST9 = 1,
+					 ST10 = 2,
+					 ST11 = 3,
+					 ST12 = 4,
+					 ST13 = 5,
+					 ST14 = 6,
+					 ST15 = 7,
+					 ST16 = 8,
+					 ST17 = 9,
+					 R5D = 10,
+					 R6D = 11,
+					 R7D = 12,
+					 R8D = 13,
+					 R5G = 14,
+					 R6G = 15,
+					 R7G = 16,
+					 R8G = 17,
+					 PI3 = 18,
+					 PI4 = 19,
+					 PI5 = 20,
+					 PI6 = 21,
+					 D5 = 22,
+					 D6 = 23,
+					 D7 = 24,
+					 D8 = 25,
+					 V5 = 26,
+					 V6 = 27,
+					 V7 = 28,
+					 V8 = 29,
+					 OUTR10 = 34,
+					 OUTR11 = 35};
+	enum Aiguillage_{A5 = 5,
+					 A6 = 6,
+					 A7 = 7,
+					 A8 = 8};
 public:
 	Cellule_tp(ros::NodeHandle noeud);
 	~Cellule_tp();
@@ -44,63 +77,6 @@ public:
 	void CmdPSCallback(const commande_locale::Msg_StopControl actionneurs_simulation_Stop);
 	void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
 	void TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1);
-	bool ST8;
-	bool ST9;
-	bool ST10;
-	bool ST11;
-	bool ST12;
-	bool ST13;
-	bool ST14;
-	bool ST15;
-	bool ST16;
-	bool ST17;
-	bool R5D;
-	bool R6D;
-	bool R7D;
-	bool R8D;
-	bool R5G;
-	bool R6G;
-	bool R7G;
-	bool R8G;
-	bool PI3;
-	bool PI4;
-	bool PI5;
-	bool PI6;
-	bool D5;
-	bool D6;
-	bool D7;
-	bool D8;
-	bool V5;
-	bool V6;
-	bool V7;
-	bool V8;
-	bool PS8;
-	bool PS9;
-	bool PS10;
-	bool PS11;
-	bool PS12;
-	bool PS13;
-	bool PS14;
-	bool PS15;
-	bool PS16;
-	bool PS17;
-	bool D5D;
-	bool D6D;
-	bool D7D;
-	bool D8D;
-	bool D5G;
-	bool D6G;
-	bool D7G;
-	bool D8G;
-	bool CPI3;
-	bool CPI4;
-	bool CPI5;
-	bool CPI6;
-	bool CP4;
-	bool CP5;
-	bool CP6;
-	bool CP7;
-	
 	
 };
 

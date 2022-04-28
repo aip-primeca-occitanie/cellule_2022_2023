@@ -15,6 +15,7 @@
 using namespace std;
 
 class Cellule_tp{
+
 private:
 	ros::Publisher pub;
 	ros::Publisher pub_fintache;
@@ -80,6 +81,6 @@ public:
 	void CmdPSCallback(const commande_locale::Msg_StopControl actionneurs_simulation_Stop);
 	void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
 	void TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1);
-};
 
+};
 #endif

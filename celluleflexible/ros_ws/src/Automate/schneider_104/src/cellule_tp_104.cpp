@@ -39,48 +39,36 @@ void Cellule_tp::read()
 {	
 	srv.request.memoire = 1;
 	std::this_thread::sleep_for (std::chrono::milliseconds(200));
-	if (client.call(srv))
-	{
-		
-
-		SensorState.id = 104;
-		SensorState.PS[8] = srv.response.PS8;
-		SensorState.PS[9] = srv.response.PS9;
-		SensorState.PS[10] = srv.response.PS10;
-		SensorState.PS[11] = srv.response.PS11;
-		SensorState.PS[12] = srv.response.PS12;
-		SensorState.PS[13] = srv.response.PS13;
-		SensorState.PS[14] = srv.response.PS14;
-		SensorState.PS[15] = srv.response.PS15;
-		SensorState.PS[16] = srv.response.PS16;
-		SensorState.PS[17] = srv.response.PS17;
-		SensorState.DD[5] = srv.response.D5D;
-		SensorState.DD[6]= srv.response.D6D;
-		SensorState.DD[7] = srv.response.D7D;
-		SensorState.DD[8] = srv.response.D8D;
-		SensorState.DG[5] = srv.response.D5G;
-		SensorState.DG[6] = srv.response.D6G;
-		SensorState.DG[7] = srv.response.D7G;
-		SensorState.DG[8] = srv.response.D8G;
-		SensorState.CPI[3] = srv.response.CPI3;
-		SensorState.CPI[4] = srv.response.CPI4;
-		SensorState.CPI[5] = srv.response.CPI5;
-		SensorState.CPI[6] = srv.response.CPI6;
-		SensorState.CP[4] = srv.response.CP4;
-		SensorState.CP[5] = srv.response.CP5;
-		SensorState.CP[6] = srv.response.CP6;
-		SensorState.CP[7] = srv.response.CP7;
-		
-		if(mode==1){
-			cap_104.publish(SensorState);
-		}
-
-
-
-	}
-	else
-	{
-		read();
+	while(client.call(srv));
+	SensorState.id = 104;
+	SensorState.PS[8] = srv.response.PS8;
+	SensorState.PS[9] = srv.response.PS9;
+	SensorState.PS[10] = srv.response.PS10;
+	SensorState.PS[11] = srv.response.PS11;
+	SensorState.PS[12] = srv.response.PS12;
+	SensorState.PS[13] = srv.response.PS13;
+	SensorState.PS[14] = srv.response.PS14;
+	SensorState.PS[15] = srv.response.PS15;
+	SensorState.PS[16] = srv.response.PS16;
+	SensorState.PS[17] = srv.response.PS17;
+	SensorState.DD[5] = srv.response.D5D;
+	SensorState.DD[6]= srv.response.D6D;
+	SensorState.DD[7] = srv.response.D7D;
+	SensorState.DD[8] = srv.response.D8D;
+	SensorState.DG[5] = srv.response.D5G;
+	SensorState.DG[6] = srv.response.D6G;
+	SensorState.DG[7] = srv.response.D7G;
+	SensorState.DG[8] = srv.response.D8G;
+	SensorState.CPI[3] = srv.response.CPI3;
+	SensorState.CPI[4] = srv.response.CPI4;
+	SensorState.CPI[5] = srv.response.CPI5;
+	SensorState.CPI[6] = srv.response.CPI6;
+	SensorState.CP[4] = srv.response.CP4;
+	SensorState.CP[5] = srv.response.CP5;
+	SensorState.CP[6] = srv.response.CP6;
+	SensorState.CP[7] = srv.response.CP7;
+	if(mode==1){
+		cap_104.publish(SensorState);
 	}
 }
 
@@ -103,29 +91,29 @@ void Cellule_tp::AigGaucheCallback(const std_msgs::Int32::ConstPtr& msg_aigs)
 	if(mode==1){
 		ROS_INFO("On bouge a gauche, aig numero %d", msg_aigs->data);
 		//commande type {Dx, Vx, RxD, RxG}
-		if (msg_aigs->data==5)
+		if (msg_aigs->data==Aiguillage_::A5)
 		{	
-			this->write({{22, 1}, {26, 0},{10, 0},{14, 1}});
+			this->write({{Actionneur_::D5, 1}, {Actionneur_::V5, 0},{Actionneur_::R5D, 0},{Actionneur_::R5G, 1}});
 			ros::Duration(2).sleep();
-				this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
-		if (msg_aigs->data==6)
+		if (msg_aigs->data==Aiguillage_::A6)
 		{	
-			this->write({{23, 1}, {27, 0},{11, 0},{15, 1}});
+			this->write({{Actionneur_::D6, 1}, {Actionneur_::V6, 0},{Actionneur_::R6D, 0},{Actionneur_::R6G, 1}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
-		if (msg_aigs->data==7)
+		if (msg_aigs->data==Aiguillage_::A7)
 		{	
-			this->write({{24, 1}, {28, 0},{12, 0},{16, 1}});
+			this->write({{Actionneur_::D7, 1}, {Actionneur_::V7, 0},{Actionneur_::R7D, 0},{Actionneur_::R7G, 1}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
-		if (msg_aigs->data==8)
+		if (msg_aigs->data==Aiguillage_::A8)
 		{	
-			this->write({{25, 1}, {29, 0},{13, 0},{17, 1}});
+			this->write({{Actionneur_::D8, 1}, {Actionneur_::V8, 0},{Actionneur_::R8D, 0},{Actionneur_::R8G, 1}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
 	}
 }
@@ -135,29 +123,29 @@ void Cellule_tp::AigDroiteCallback(const std_msgs::Int32::ConstPtr& msg_aigs)
 	if(mode==1){	
 		ROS_INFO("On bouge a droite, aig numero %d", msg_aigs->data);
 		//commande type {Dx, Vx, RxD, RxG}
-		if (msg_aigs->data==5)
+		if (msg_aigs->data==Aiguillage_::A5)
 		{	
-			this->write({{22, 1}, {26, 0},{10, 1},{14, 0}});
+			this->write({{Actionneur_::D5, 1}, {Actionneur_::V5, 0},{Actionneur_::R5D, 1},{Actionneur_::R5G, 0}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+				this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
-		if (msg_aigs->data==6)
+		if (msg_aigs->data==Aiguillage_::A6)
 		{	
-			this->write({{23, 1}, {27, 0},{11, 1},{15, 0}});
+			this->write({{Actionneur_::D6, 1}, {Actionneur_::V6, 0},{Actionneur_::R6D, 1},{Actionneur_::R6G, 0}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
-		if (msg_aigs->data==7)
+		if (msg_aigs->data==Aiguillage_::A7)
 		{	
-			this->write({{24, 1}, {28, 0},{12, 1},{16, 0}});
+			this->write({{Actionneur_::D7, 1}, {Actionneur_::V7, 0},{Actionneur_::R7D, 1},{Actionneur_::R7G, 0}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
-		if (msg_aigs->data==8)
+		if (msg_aigs->data==Aiguillage_::A8)
 		{	
-			this->write({{25, 1}, {29, 0},{13, 1},{17, 0}});
+			this->write({{Actionneur_::D8, 1}, {Actionneur_::V8, 0},{Actionneur_::R8D, 1},{Actionneur_::R8G, 0}});
 			ros::Duration(2).sleep();
-			this->write({{26, 1}, {27, 1}, {28, 1}, {29, 1}, {22, 0}, {23, 0}, {24, 0}, {25, 0} });
+			this->write({{Actionneur_::V5, 1}, {Actionneur_::V6, 1}, {Actionneur_::V7, 1}, {Actionneur_::V8, 1}, {Actionneur_::D5, 0}, {Actionneur_::D6, 0}, {Actionneur_::D7, 0}, {Actionneur_::D8, 0} });
 		}
 	}
 }
@@ -170,7 +158,7 @@ void Cellule_tp::CmdPSCallback(const commande_locale::Msg_StopControl actionneur
 		const int tabPS[10]={8,9,10,11,12,13,14,15,16,17};
 		for(i=0;i<10;i++){
 			if(actionneurs_simulation_Stop.STOP[tabPS[i]]==1){
-				this->write({{i, 0}});
+				this->write({{i, 0}}); // Les actionneurs STi sont mis à 0
 			}
 			else
 			{
@@ -197,15 +185,15 @@ void Cellule_tp::RobCallabck(const commande_locale::DeplacerPieceMsg msg)
 		
 		if(msg.positionA==1 || msg.positionB==1 )
 		{
-			this->write({{34,1}});
+			this->write({{Actionneur_::OUTR10,1}});
 			ros::Duration(2).sleep();
-			this->write({{34,0}});
+			this->write({{Actionneur_::OUTR10,0}});
 		}
 		else if(msg.positionA==4 || msg.positionB==4)
 		{
-			this->write({{35,1}});
+			this->write({{Actionneur_::OUTR11,1}});
 			ros::Duration(2).sleep();
-			this->write({{35,0}});
+			this->write({{Actionneur_::OUTR11,0}});
 		}
 		
 
