@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 
-<robot name="robotic_platform" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot name="motoman_hc10" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <!-- loading urdf -->
     <xacro:include filename="$(find hc10_ros)/urdf/materials.xacro" />
     <xacro:include filename="$(find hc10_ros)/urdf/table.xacro" />
     <xacro:include filename="$(find hc10_ros)/urdf/hc10_for_env.urdf" />
     <xacro:include filename="$(find hc10_ros)/urdf/walls.xacro" />
-
+    <xacro:yaska prefix="yaska4" />
     <!-- linking every robots to world and workspaces -->
     <link name="world" />
 
@@ -21,10 +21,10 @@
         <child link="table_link" />
     </joint>
 
-    <joint name="table_yaska_base_link" type="fixed">
+    <joint name="link_base" type="fixed">
         <origin rpy="0 0 0" xyz="0 0 0.6376" />
         <parent link="table_link" />
-        <child link="base_link" />
+        <child link="yaska4_base_link" />
     </joint>
 
 </robot>
