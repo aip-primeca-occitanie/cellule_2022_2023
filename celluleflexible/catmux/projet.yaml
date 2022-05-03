@@ -38,23 +38,14 @@ windows:
     splits:
       - commands:
         - sleep 2
-        - roslaunch hc10_ros simulation_moveit_rviz.launch
+        - roslaunch robotic_platform_moveit demo.launch
       - commands:
         - sleep 5
         - rosrun hc10_ros main_yakuza
       - commands:
         - sleep 5
         - rosrun hc10_ros execute_trajectory.py
-  - name: robots_coppelia1
-    # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
-    if: "1"
-    layout: tiled # One can use the default layouts specified by tmux
-    splits:
-      - commands:
-        - sleep 15
-        - rosrun robots robot "1"
   - name: robots_coppelia2
-    # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
     if: "2"
     layout: tiled # One can use the default layouts specified by tmux
     splits:
@@ -64,20 +55,6 @@ windows:
       - commands:
          - sleep 15
          - rosrun robots robot "2"
-  - name: robots_coppelia3
-    # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
-    if: "3"
-    layout: tiled # One can use the default layouts specified by tmux
-    splits:
-      - commands:
-        - sleep 15
-        - rosrun robots robot "1"
-      - commands:
-         - sleep 15
-         - rosrun robots robot "2"
-      - commands:
-         - sleep 15
-         - rosrun robots robot "3"
   - name: robots_coppelia4
     # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
     if: "4"

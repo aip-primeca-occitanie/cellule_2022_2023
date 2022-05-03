@@ -42,13 +42,13 @@ def ErrorTrajectoryExecution():
 
 def ControlCallback(pub_yaku):
 	if pub_yaku.data == 1:
-		group = moveit_commander.MoveGroupCommander("DN1P")
+		group = moveit_commander.MoveGroupCommander("yaska4_DN1P")
 	elif pub_yaku.data == 2:
-		group = moveit_commander.MoveGroupCommander("DN2P")
+		group = moveit_commander.MoveGroupCommander("yaska4_DN2P")
 	elif pub_yaku.data == 3:
-		group = moveit_commander.MoveGroupCommander("DPN1")
+		group = moveit_commander.MoveGroupCommander("yaska4_DPN1")
 	elif pub_yaku.data == 4:
-		group = moveit_commander.MoveGroupCommander("DPN2")
+		group = moveit_commander.MoveGroupCommander("yaska4_DPN2")
 	else :
 		print("Error callback control yakuza \n")
 		return

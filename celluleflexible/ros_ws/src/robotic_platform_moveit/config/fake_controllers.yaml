@@ -36,7 +36,7 @@ controller_list:
       - staubli_joint5
       - staubli_joint6
 initial:  # Define initial robot poses per group
-  - group: yaska4_arm
+  - group: yaska4_DN1P
     pose: home
   - group: yaska3_arm
     pose: home
