@@ -2,7 +2,7 @@
 <package>
   <name>rx60b_support</name>
   <version>0.1.1</version>
-  <description>The rx60b_description package</description>
+  <description>The rx60b_support package</description>
 
   <maintainer email="chma0038@stud.hs-kl.de">Christopher</maintainer>
   <author email="chma0038@stud.hs-kl.de">Christopher</author>

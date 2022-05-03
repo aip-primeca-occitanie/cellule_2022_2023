@@ -11,7 +11,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/base_link.STL" />
+          <mesh filename="package://rx60b_support/meshes/base_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.79216 0.81961 0.93333 1" />
@@ -20,7 +20,7 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://rx60b_description/meshes/base_link.STL" />
+            <mesh filename="package://rx60b_support/meshes/base_link.STL" />
           </geometry>
         </collision>
     </link>
@@ -36,7 +36,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 1.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 1.STL" />
         </geometry>
         <material name="">
           <color rgba="0.79216 0.81961 0.93333 1" />
@@ -45,7 +45,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 1.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 1.STL" />
         </geometry>
       </collision>
     </link>
@@ -67,7 +67,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 2.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 2.STL" />
         </geometry>
         <material name="">
           <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -76,7 +76,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 2.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 2.STL" />
         </geometry>
       </collision>
     </link>
@@ -98,7 +98,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 3.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 3.STL" />
         </geometry>
         <material name="">
           <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -107,7 +107,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 3.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 3.STL" />
         </geometry>
       </collision>
     </link>
@@ -129,7 +129,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 4.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 4.STL" />
         </geometry>
         <material name="">
           <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -138,7 +138,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 4.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 4.STL" />
         </geometry>
       </collision>
     </link>
@@ -160,7 +160,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 5.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 5.STL" />
         </geometry>
         <material name="">
           <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -169,7 +169,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 5.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 5.STL" />
         </geometry>
       </collision>
     </link>
@@ -191,7 +191,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 6.STL" />
+          <mesh filename="package://rx60b_support/meshes/link 6.STL" />
         </geometry>
         <material name="">
           <color rgba="0.79216 0.81961 0.93333 1" />
@@ -200,7 +200,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/link 6.STL" />    
+          <mesh filename="package://rx60b_support/meshes/link 6.STL" />    
         </geometry>
       </collision>
     </link>

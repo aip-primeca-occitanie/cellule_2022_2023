@@ -8,7 +8,7 @@
     <xacro:include filename="$(find hc10_ros)/urdf/hc10_for_env.urdf" />
     <xacro:include filename="$(find hc10_ros)/urdf/walls.xacro" />
     <xacro:include filename="$(find kuka_kr6_support)/urdf/kr6r700sixx.urdf"/>
-    <xacro:include filename="$(find rx60b_description)/urdf/rx60.urdf.xacro"/>
+    <xacro:include filename="$(find rx60b_support)/urdf/rx60.urdf.xacro"/>
     <!-- define prefix to avoid name conflict between joints -->
     <xacro:yaska prefix="yaska4" />
     <xacro:yaska prefix="yaska3" />

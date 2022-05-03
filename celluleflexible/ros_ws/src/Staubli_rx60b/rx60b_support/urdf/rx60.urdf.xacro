@@ -3,7 +3,7 @@
 
 
   <!-- Import transmission and gazebo elements -->
-  <xacro:include filename="$(find rx60b_description)/urdf/rx60.transmission.xacro"/>
+  <xacro:include filename="$(find rx60b_support)/urdf/rx60.transmission.xacro"/>
 
 
   <!-- Links -->
@@ -22,7 +22,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/base.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/base.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
@@ -54,7 +54,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/shoulder.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/shoulder.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
@@ -92,7 +92,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 1.5707963"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/arm.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/arm.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
@@ -118,7 +118,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="3.1415926 0 1.5707963"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/elbow.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/elbow.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
@@ -144,7 +144,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/forearm.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/forearm.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
@@ -182,7 +182,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="3.1415926 0 1.5707963"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/wrist.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/wrist.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
@@ -208,7 +208,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rx60b_description/meshes/tool.dae" scale="1 1 1"/>
+          <mesh filename="package://rx60b_support/meshes/tool.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
