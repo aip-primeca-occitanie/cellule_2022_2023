@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+
+<robot name="robotic_platform" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <!-- loading urdf -->
+    <xacro:include filename="$(find hc10_ros)/urdf/materials.xacro" />
+    <xacro:include filename="$(find hc10_ros)/urdf/table.xacro" />
+    <xacro:include filename="$(find hc10_ros)/urdf/hc10_for_env.urdf" />
+    <xacro:include filename="$(find hc10_ros)/urdf/walls.xacro" />
+    <xacro:include filename="$(find kuka_kr6_support)/urdf/kr6r700sixx.urdf"/>
+    <xacro:include filename="$(find rx60b_description)/urdf/rx60.urdf.xacro"/>
+    <!-- define prefix to avoid name conflict between joints -->
+    <xacro:yaska prefix="yaska4" />
+    <xacro:yaska prefix="yaska3" />
+    <xacro:kuka prefix="kuka" />
+    <xacro:staubli prefix="staubli" />
+    <!-- linking every robots to world and workspaces -->
+    <link name="world" />
+
+    <joint name="world_walls_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 1 0" />
+        <parent link="world" />
+        <child link="walls_link" />
+    </joint>
+
+    <joint name="wolrd_table_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 1 0" />
+        <parent link="world" />
+        <child link="table_link" />
+    </joint>
+
+    <joint name="table_yaska4_base_link" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.6376" />
+        <parent link="table_link" />
+        <child link="yaska4_base_link" />
+    </joint>
+
+    <joint name="world_yaska3_base_link" type="fixed">
+        <origin rpy="0 0 0" xyz="-3 1 0" />
+        <parent link="world" />
+        <child link="yaska3_base_link" />
+    </joint>
+
+    <joint name="world_kuka_base_link" type="fixed">
+        <origin rpy="0 0 0" xyz="-3 -3 0" />
+        <parent link="world" />
+        <child link="kuka_base_link" />
+    </joint>
+
+    <joint name="world_staubli_base_link" type="fixed">
+        <origin rpy="0 0 0" xyz="0 -3 0" />
+        <parent link="world" />
+        <child link="staubli_base_link" />
+    </joint>
+</robot>

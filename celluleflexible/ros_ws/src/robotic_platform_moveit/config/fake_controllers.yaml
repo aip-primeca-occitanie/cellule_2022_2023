@@ -1,0 +1,46 @@
+controller_list:
+  - name: fake_yaska4_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - yaska4_joint_1_s
+      - yaska4_joint_2_l
+      - yaska4_joint_3_u
+      - yaska4_joint_4_r
+      - yaska4_joint_5_b
+      - yaska4_joint_6_t
+  - name: fake_yaska3_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - yaska3_joint_1_s
+      - yaska3_joint_2_l
+      - yaska3_joint_3_u
+      - yaska3_joint_4_r
+      - yaska3_joint_5_b
+      - yaska3_joint_6_t
+  - name: fake_kuka_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - kuka_joint_a1
+      - kuka_joint_a2
+      - kuka_joint_a3
+      - kuka_joint_a4
+      - kuka_joint_a5
+      - kuka_joint_a6
+  - name: fake_staubli_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - staubli_joint1
+      - staubli_joint2
+      - staubli_joint3
+      - staubli_joint4
+      - staubli_joint5
+      - staubli_joint6
+initial:  # Define initial robot poses per group
+  - group: yaska4_arm
+    pose: home
+  - group: yaska3_arm
+    pose: home
+  - group: kuka_arm
+    pose: home
+  - group: staubli_arm
+    pose: home
