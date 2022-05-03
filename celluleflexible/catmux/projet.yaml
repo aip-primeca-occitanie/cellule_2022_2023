@@ -13,7 +13,7 @@ common:
   default_window: commande
 parameters:
   # Parameters specified here can be used below and they can be overwritten at runtime
-  # show_layouts: false # This parameter is used together with the if flag below
+  show_layouts: false # This parameter is used together with the if flag below
   # replacement_param: world\! # Parameters can also be used as replacement templates
   nb_robots: "4" #nb_robots 4 par défaut
 
@@ -107,6 +107,8 @@ windows:
       - commands:
         - sleep 15
         - rosrun commande_locale log_manager
+      - commands:
+        - echo "Terminal"
   - name: schneider_24
     layout: tiled    
     splits:
