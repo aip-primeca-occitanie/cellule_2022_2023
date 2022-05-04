@@ -32,7 +32,6 @@ import catmux.tmux_wrapper as tmux
 
 
 def check_boolean_field(boolean):
-    print("test" + boolean)
     if isinstance(boolean, bool):
         return boolean
     return boolean.lower() in ("yes", "true", "t", "1", True)
