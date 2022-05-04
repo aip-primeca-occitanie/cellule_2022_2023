@@ -15,14 +15,14 @@ Cellule_tp::Cellule_tp(ros::NodeHandle noeud)
 	cmd_aigGauche_cell=noeud.subscribe("/commande/Simulation/AiguillageGauche",100,&Cellule_tp::AigGaucheCallback,this);
 	cmd_aigDroite_cell=noeud.subscribe("/commande/Simulation/AiguillageDroite",100,&Cellule_tp::AigDroiteCallback,this);
 	cmd_PS=noeud.subscribe("/commande/Simulation/Actionneurs_stops", 100,&Cellule_tp::CmdPSCallback,this);
-	robot=noeud.subscribe("/commande/Simulation/DeplacerPiece",10,&Cellule_tp::RobCallabck,this);
+	//robot=noeud.subscribe("/commande/Simulation/DeplacerPiece",10,&Cellule_tp::RobCallabck,this);
 	choixMode = noeud.subscribe("/commande_locale/ChoixMode", 10,&Cellule_tp::TypeMode,this);
-	pub_fintache = noeud.advertise<robots::FinDeplacerPiece_Msg>("/commande/Simulation/finTache", 1);
+	//pub_fintache = noeud.advertise<robots::FinDeplacerPiece_Msg>("/commande/Simulation/finTache", 1);
 	pub = noeud.advertise<std_msgs::String>("/control_cellule", 1);
 	cap = noeud.advertise<schneider::Msg_SensorState>("/commande/Simulation/Capteurs", 1);
 	client = noeud.serviceClient<schneider::Retour_cellule>("retour_cellule");
 	mode = 0;
-	isKukaPhysical = 0;
+	//isKukaPhysical = 0;
 }
 
 Cellule_tp::~Cellule_tp()
@@ -32,7 +32,7 @@ Cellule_tp::~Cellule_tp()
 void Cellule_tp::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 {
 	mode = msg1->mode;
-	isKukaPhysical = msg1->kuka;
+	//isKukaPhysical = msg1->kuka;
 
 }
 
@@ -70,10 +70,10 @@ void Cellule_tp::read()
 	SensorState.CP[2] = srv.response.CP2;
 	SensorState.CP[9] = srv.response.CP9;
 	SensorState.CP[10] = srv.response.CP10;
-	SensorRobots.FinDeplacerR1 = srv.response.INR1;
+	//SensorRobots.FinDeplacerR1 = srv.response.INR1;
 	if(mode==1){
 		cap.publish(SensorState);
-		pub_fintache.publish(SensorRobots);
+		//pub_fintache.publish(SensorRobots);
 	}	
 
 }
@@ -191,48 +191,49 @@ void Cellule_tp::CmdPSCallback(const commande_locale::Msg_StopControl actionneur
 	}
 
 }
+// Pour contrôler le kuka en mode atelier à partir des capteurs automates
 
-void Cellule_tp::RobCallabck(const commande_locale::DeplacerPieceMsg msg)
-{
+// void Cellule_tp::RobCallabck(const commande_locale::DeplacerPieceMsg msg)
+// {
 	
-	if (mode == 1 && msg.num_robot==1 && isKukaPhysical==1)
-	{
-		if (msg.positionA==3 || msg.positionB==3)
-		{
-			this->write({{Actionneur_::PI8,1}});
-		}
-		if (msg.positionA==2 || msg.positionB==2)
-		{
-			this->write({{Actionneur_::PI7,1}});
-		}
-		if(msg.positionA==3)
-		{
-			this->write({{Actionneur_::OUTR3,1},{Actionneur_::OUTR1,1}});
-			ros::Duration(2).sleep();
-			this->write({{Actionneur_::OUTR3,0},{Actionneur_::OUTR1,0}});
-		}
-		else if(msg.positionA==2)
-		{
-			this->write({{Actionneur_::OUTR3,1},{Actionneur_::OUTR2,1}});
-			ros::Duration(2).sleep();
-			this->write({{Actionneur_::OUTR3,0},{Actionneur_::OUTR2,0}});
-		}
-		else if (msg.positionB==3)
-		{
-			this->write({{Actionneur_::OUTR4,1},{Actionneur_::OUTR1,1}});
-			ros::Duration(2).sleep();
-			this->write({{Actionneur_::OUTR4,0},{Actionneur_::OUTR1,0}});
-		}
-		else if (msg.positionB==2)
-		{
-			this->write({{Actionneur_::OUTR4,1},{Actionneur_::OUTR2,1}});
-			ros::Duration(2).sleep();
-			this->write({{Actionneur_::OUTR4,0},{Actionneur_::OUTR2,0}});
-		}
+// 	if (mode == 1 && msg.num_robot==1 && isKukaPhysical==1)
+// 	{
+// 		if (msg.positionA==3 || msg.positionB==3)
+// 		{
+// 			this->write({{Actionneur_::PI8,1}});
+// 		}
+// 		if (msg.positionA==2 || msg.positionB==2)
+// 		{
+// 			this->write({{Actionneur_::PI7,1}});
+// 		}
+// 		if(msg.positionA==3)
+// 		{
+// 			this->write({{Actionneur_::OUTR3,1},{Actionneur_::OUTR1,1}});
+// 			ros::Duration(2).sleep();
+// 			this->write({{Actionneur_::OUTR3,0},{Actionneur_::OUTR1,0}});
+// 		}
+// 		else if(msg.positionA==2)
+// 		{
+// 			this->write({{Actionneur_::OUTR3,1},{Actionneur_::OUTR2,1}});
+// 			ros::Duration(2).sleep();
+// 			this->write({{Actionneur_::OUTR3,0},{Actionneur_::OUTR2,0}});
+// 		}
+// 		else if (msg.positionB==3)
+// 		{
+// 			this->write({{Actionneur_::OUTR4,1},{Actionneur_::OUTR1,1}});
+// 			ros::Duration(2).sleep();
+// 			this->write({{Actionneur_::OUTR4,0},{Actionneur_::OUTR1,0}});
+// 		}
+// 		else if (msg.positionB==2)
+// 		{
+// 			this->write({{Actionneur_::OUTR4,1},{Actionneur_::OUTR2,1}});
+// 			ros::Duration(2).sleep();
+// 			this->write({{Actionneur_::OUTR4,0},{Actionneur_::OUTR2,0}});
+// 		}
 
-	}
+// 	}
 
-}
+// }
 
 
 

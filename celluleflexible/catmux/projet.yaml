@@ -18,12 +18,16 @@ parameters:
   nb_robots: "4" #nb_robots 4 par défaut
 
 # Everything will be opened in windows. Windows can have multiple splits.
+
 windows:
+  #launching roscore to allow running nodes
   - name: roscore
     commands:
       - roscore
+  #launching CoppeliaSim, and main_commande
   - name: commande
-    layout: even-horizontal
+    unless: show_layouts
+    layout: tiled
     splits: 
       - commands:
         - sleep 2
@@ -31,17 +35,18 @@ windows:
       - commands:
         - sleep 15
         - rosrun commande run ${nb_robots}
-      # - commands:
-      #   - echo "Terminal vierge"
-  - name: Yaskawa
-    layout: tiled
-    splits:
+      - commands:
+        - echo "Terminal vierge"
       - commands:
         - sleep 2
         - roslaunch robotic_platform_moveit demo.launch
+  #launching Yaskawa4 nodes
+  - name: Yaskawa4
+    layout: tiled
+    splits:
       - commands:
         - sleep 5
-        - rosrun hc10_ros main_yakuza
+        - rosrun robotic_platform_moveit main_robotic_platform "yaska4"
       - commands:
         - sleep 5
         - rosrun hc10_ros execute_trajectory.py

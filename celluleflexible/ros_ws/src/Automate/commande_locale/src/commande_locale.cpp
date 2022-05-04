@@ -128,7 +128,9 @@ int main(int argc, char **argv)
 	int choixProduit=0;
 	int choixPoste=0;
 	int choixMode=0;
-	int choixYaska =0;
+	int choixYaska4 =0;
+	int choixYaska3 =0;
+	int choixStaubli =0;
 	int choixParam=0;
 	int choixKuka=0;
 	while(ros::ok())
@@ -209,16 +211,18 @@ int main(int argc, char **argv)
 					ros::Duration(1).sleep();
 					break;
 				case 5:
-				        choixParam=0;
-					while(choixParam!=4){
+				    choixParam=0;
+					while(choixParam!=6){
 						cout << "Modification des paramètres" 	<< endl <<
 							"	1- Automates" << endl <<
 							"	2- Robot Kuka" 	<< endl <<
-							"	3- Robot Yaskawa" 	<< endl <<
-							"	4- Config terminée" 	<< endl;
+							"	3- Robot Yaskawa4" 	<< endl <<
+							"	4- Robot Staubli"	<< endl <<
+							"	5- Robot Yaskawa3"	<< endl <<
+							"	6- Config terminée" 	<< endl;
 						cout << "paramètre à modifier : ";
 						cin >> choixParam;
-						if( choixParam<0 || choixParam>4){
+						if( choixParam<0 || choixParam>6){
 							cout << endl << " [Erreur mauvais choix ..]" << endl;
 							cin.clear();
 							cin.ignore(256,'\n');
@@ -228,26 +232,42 @@ int main(int argc, char **argv)
 							cout <<"Choix du mode" << endl <<
 							       "	0- Simulation"<< endl <<
 							       "	1- Atelier"<<endl;
-						cout << "mode : ";
+							cout << "mode : ";
 							cin >> choixMode;	
 						}
 						if (choixParam==2){
 							cout <<"robot Kuka" << endl <<
 							       "	0- robot coppelia"<< endl <<
-							       "	1- robot atelier"<<endl;
-						cout << "type robot (kuka) : ";
+							       "	1- robot rviz"<<endl <<
+								   "	2- robot atelier"<<endl;
+							cout << "type robot (Kuka) : ";
 							cin >> choixKuka;
 						}
 						if (choixParam==3){
-							cout <<"Robot Yaskawa" << endl <<
+							cout <<"robot Yaskawa4" << endl <<
 							       "	0- robot coppelia"<< endl <<
 							       "	1- robot rviz"<< endl <<
 							       "	2- robot atelier"<<endl;
-						cout << "type robot (yaskawa) : ";
-							cin >> choixYaska;
-					
+							cout << "type robot (Yaskawa4) : ";
+							cin >> choixYaska4;
 						}
-						if(cin.fail() || choixMode<0 || choixMode>1 || choixYaska<0 || choixYaska>2 || choixKuka<0 || choixKuka>1)
+						if (choixParam==4){
+							cout <<"robot Staubli" << endl <<
+							       "	0- robot coppelia"<< endl <<
+							       "	1- robot rviz"<< endl <<
+							       "	2- robot atelier"<<endl;
+							cout << "type robot (Staubli) : ";
+							cin >> choixStaubli;
+						}
+						if (choixParam==5){
+							cout <<"Robot Yaskawa3" << endl <<
+							       "	0- robot coppelia"<< endl <<
+							       "	1- robot rviz"<< endl <<
+							       "	2- robot atelier"<<endl;
+							cout << "type robot (Yaskawa3) : ";
+							cin >> choixYaska4;
+						}
+						if(cin.fail() || choixMode<0 || choixMode>1 || choixYaska4<0 || choixYaska4>2 || choixKuka<0 || choixKuka>2 || choixStaubli<0 || choixStaubli>2 || choixYaska3<0 || choixYaska3>2)
 						{
 							cout << endl << " [Erreur mauvais choix ..]" << endl;
 							cin.clear();
@@ -256,7 +276,9 @@ int main(int argc, char **argv)
 						}
 					}
 					msg1.mode = choixMode;
-					msg1.yaska = choixYaska;
+					msg1.yaska4 = choixYaska4;
+					msg1.yaska3 = choixYaska3;
+					msg1.staubli = choixStaubli;
 					msg1.kuka = choixKuka;
 					pubModeType.publish(msg1);
 					break;

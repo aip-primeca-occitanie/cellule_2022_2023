@@ -84,9 +84,13 @@ private:
 	int robotTask[4][2];
 	int robotMacroDeplacement[4];
 	int FinTacheAtelierR1;
+	int FinTacheAtelierR2;
+	int FinTacheAtelierR3;
 	int FinTacheAtelierR4;
 	int mode;
-	int yaskaType;
+	int yaska3Type;
+	int yaska4Type;
+	int staubliType;
 	int kukaType;
 
 	// std::vector<int> produit_a_ajouter; SUN todelete

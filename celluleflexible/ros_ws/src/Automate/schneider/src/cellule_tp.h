@@ -18,7 +18,7 @@ class Cellule_tp{
 
 private:
 	ros::Publisher pub;
-	ros::Publisher pub_fintache;
+	//ros::Publisher pub_fintache;
 	ros::Publisher cap;
 	ros::Subscriber choixMode;
 	std_msgs::String msg;
@@ -28,11 +28,11 @@ private:
 	ros::Subscriber cmd_aigGauche_cell;
 	ros::Subscriber cmd_aigDroite_cell;
 	ros::Subscriber cmd_PS;
-	ros::Subscriber robot;
+	//ros::Subscriber robot;
 	schneider::Msg_SensorState SensorState;
-	robots::FinDeplacerPiece_Msg SensorRobots;
+	//robots::FinDeplacerPiece_Msg SensorRobots;
 	int mode;
-	int isKukaPhysical;
+	//int isKukaPhysical;
 	enum Actionneur_{ST1 = 0,
 					 ST2 = 1,
 					 ST3 = 2,
@@ -79,7 +79,7 @@ public:
 	void AigGaucheCallback(const std_msgs::Int32::ConstPtr& msg_aigs);
 	void AigDroiteCallback(const std_msgs::Int32::ConstPtr& msg_aigs);
 	void CmdPSCallback(const commande_locale::Msg_StopControl actionneurs_simulation_Stop);
-	void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
+	//void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
 	void TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1);
 
 };

@@ -24,7 +24,7 @@ Yakuza_tp::~Yakuza_tp()
 
 void Yakuza_tp::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 {
-	yaskaType_ = msg1->yaska;
+	yaskaType_ = msg1->yaska4;
 }
 
 void Yakuza_tp::RobCallabck(const commande_locale::DeplacerPieceMsg msg)

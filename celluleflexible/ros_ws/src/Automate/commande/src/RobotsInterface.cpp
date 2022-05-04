@@ -48,10 +48,14 @@ RobotsInterface::RobotsInterface(ros::NodeHandle noeud, int nombre_robot)
 	pubProductAdd= noeud.advertise<commande_locale::Msg_AddProduct>("/commande_locale/AddProduct",10);
 	pub_deplacer_piece= noeud.advertise<commande_locale::DeplacerPieceMsg>("/commande/Simulation/DeplacerPiece",10);
 	FinTacheAtelierR1 = 0;
+	FinTacheAtelierR2 = 0;
+	FinTacheAtelierR3 = 0;
 	FinTacheAtelierR4 = 0;
 	mode = 0;
 	kukaType = 0;
-	yaskaType = 0;
+	yaska4Type = 0;
+	yaska3Type = 0;
+	staubliType = 0;
 
 	//Retour des robots vers la commande
 	sub_retourRobot = noeud.subscribe("/commande/Simulation/retourCommande", 100, &RobotsInterface::RetourRobotCallback,this);
@@ -70,8 +74,10 @@ RobotsInterface::~RobotsInterface()
 void RobotsInterface::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 {
 	mode = msg1->mode;
-	yaskaType =msg1->yaska;
-	kukaType =msg1->kuka;
+	yaska3Type = msg1->yaska3;
+	yaska4Type = msg1->yaska4;
+	kukaType = msg1->kuka;
+	staubliType = msg1->staubli;
 
 }
 
@@ -373,46 +379,82 @@ int RobotsInterface::TacheFinie(int num_poste)
 
 void RobotsInterface::VerifFinDeplacerPiece(const robots::FinDeplacerPiece_Msg::ConstPtr& msg2){
 	FinTacheAtelierR1 = msg2->FinDeplacerR1;
+	FinTacheAtelierR2 = msg2->FinDeplacerR2;
+	FinTacheAtelierR3 = msg2->FinDeplacerR3;
 	FinTacheAtelierR4 = msg2->FinDeplacerR4;
 }
 
-int RobotsInterface::FinDeplacerPiece(int numRobot)
-{
-	if(mode==0){
-		int Etat;
-		if (yaskaType != 0){
-			if (numRobot==4){
-				return FinTacheAtelierR4;
+int RobotsInterface::FinDeplacerPiece(int numRobot){
+	switch(numRobot){
+		case 1:
+			if(mode==0){
+				int Etat;
+				if(staubliType != 0){
+					return FinTacheAtelierR1;
+				}
+				else return robotMacroDeplacement[numRobot-1];
 			}
-			else{
-				Etat=robotMacroDeplacement[numRobot-1];
-
-			return Etat;
+			else if (mode==1){
+				if(staubliType != 0){
+					return FinTacheAtelierR1;
+				}
+				else return robotMacroDeplacement[numRobot-1];
 			}
-		}
-		else{
-			if(numRobot<1 || numRobot>nbRobot)
-			{
-				cout <<  BOLDMAGENTA << "Le numero du robot doit etre compris entre 1 et " << nbRobot << "." << RESET << endl;
-				return 1;
+			else return 1;
+			break;
+		case 2:
+			if(mode==0){
+				int Etat;
+				if(kukaType != 0){
+					return FinTacheAtelierR2;
+				}
+				else return robotMacroDeplacement[numRobot-1];
 			}
-			else{
-				Etat=robotMacroDeplacement[numRobot-1];
-
-			return Etat;
+			else if (mode==1){
+				if(kukaType != 0){
+					return FinTacheAtelierR2;
+				}
+				else return robotMacroDeplacement[numRobot-1];
 			}
-		}
+			else return 1;
+			break;
+		case 3:
+			if(mode==0){
+				int Etat;
+				if(yaska3Type != 0){
+					return FinTacheAtelierR3;
+				}
+				else return robotMacroDeplacement[numRobot-1];
+			}
+			else if (mode==1){
+				if(yaska3Type != 0){
+					return FinTacheAtelierR3;
+				}
+				else return robotMacroDeplacement[numRobot-1];
+			}
+			else return 1;
+			break;
+		case 4:
+			if(mode==0){
+				int Etat;
+				if(yaska4Type != 0){
+					return FinTacheAtelierR4;
+				}
+				else return robotMacroDeplacement[numRobot-1];
+			}
+			else if (mode==1){
+				if(yaska4Type != 0){
+					return FinTacheAtelierR4;
+				}
+				else return robotMacroDeplacement[numRobot-1];
+			}
+			else return 1;
+			break;
+		default:
+			cout <<  BOLDMAGENTA << "Le numero du robot doit etre compris entre 1 et " << nbRobot << "." << RESET << endl;
+			return 1;
+			break;
 	}
-	else if (mode==1)
-	{
-		if (numRobot==1 && kukaType ==1){
-			return FinTacheAtelierR1;
-		}
-		if (numRobot==4 && yaskaType != 0){
-			return FinTacheAtelierR4;
-		}
-	}
-	return 1;
 }
 
 

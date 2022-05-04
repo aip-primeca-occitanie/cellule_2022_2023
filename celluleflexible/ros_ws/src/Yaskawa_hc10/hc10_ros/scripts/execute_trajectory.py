@@ -97,7 +97,7 @@ def ControlCallback(pub_yaku):
 	pub_fintache.publish(mymsg)
 
 if __name__ == "__main__":
-	rospy.Subscriber('/control_yakuza',Int32, ControlCallback)
+	rospy.Subscriber('/control_robot',Int32, ControlCallback)
 	rospy.Subscriber('/move_group/result', MoveGroupActionResult, TrajectoryResultCallback)
 	# display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
     #                                            moveit_msgs.msg.DisplayTrajectory,

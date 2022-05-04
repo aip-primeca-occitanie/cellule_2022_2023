@@ -26,11 +26,11 @@ private:
 	ros::Subscriber cmd_aigGauche_cell_104;
 	ros::Subscriber cmd_aigDroite_cell_104;
 	ros::Subscriber cmd_PS_104;
-	ros::Subscriber robot;
+	//ros::Subscriber robot;
 	schneider_104::Msg_SensorState SensorState;
 	ros::Subscriber choixMode;
 	int mode;
-	int isKukaPhysical;
+	//int isKukaPhysical;
 	enum Actionneur_{ST8 = 0,
 					 ST9 = 1,
 					 ST10 = 2,
@@ -75,7 +75,7 @@ public:
 	void AigGaucheCallback(const std_msgs::Int32::ConstPtr& msg_aigs);
 	void AigDroiteCallback(const std_msgs::Int32::ConstPtr& msg_aigs);
 	void CmdPSCallback(const commande_locale::Msg_StopControl actionneurs_simulation_Stop);
-	void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
+	//void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
 	void TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1);
 	
 };
