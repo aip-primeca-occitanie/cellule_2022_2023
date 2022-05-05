@@ -18,8 +18,7 @@
         <joint name="yaska4_joint_6_t"/>
     </group>
     <group name="yaska4_DN1P">
-        <joint name="yaska4_joint_1_s"/>
-        <joint name="yaska4_joint_2_l"/>
+        <joint name="yaska4_joint_1_s"/>3        <joint name="yaska4_joint_2_l"/>
         <joint name="yaska4_joint_3_u"/>
         <joint name="yaska4_joint_4_r"/>
         <joint name="yaska4_joint_5_b"/>
@@ -41,7 +40,31 @@
         <joint name="yaska4_joint_5_b"/>
         <joint name="yaska4_joint_6_t"/>
     </group>
-    <group name="yaska3_arm">
+    <group name="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s"/>
+        <joint name="yaska3_joint_2_l"/>
+        <joint name="yaska3_joint_3_u"/>
+        <joint name="yaska3_joint_4_r"/>
+        <joint name="yaska3_joint_5_b"/>
+        <joint name="yaska3_joint_6_t"/>
+    </group>
+    <group name="yaska3_DN1P">
+        <joint name="yaska3_joint_1_s"/>
+        <joint name="yaska3_joint_2_l"/>
+        <joint name="yaska3_joint_3_u"/>
+        <joint name="yaska3_joint_4_r"/>
+        <joint name="yaska3_joint_5_b"/>
+        <joint name="yaska3_joint_6_t"/>
+    </group>
+    <group name="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s"/>
+        <joint name="yaska3_joint_2_l"/>
+        <joint name="yaska3_joint_3_u"/>
+        <joint name="yaska3_joint_4_r"/>
+        <joint name="yaska3_joint_5_b"/>
+        <joint name="yaska3_joint_6_t"/>
+    </group>
+    <group name="yaska3_DPN1">
         <joint name="yaska3_joint_1_s"/>
         <joint name="yaska3_joint_2_l"/>
         <joint name="yaska3_joint_3_u"/>
@@ -349,14 +372,290 @@
         <joint name="yaska4_joint_6_t" value="0" />
     </group_state>
     <!-- End Group yaska4_DPN1 -->
-    <group_state name="home" group="yaska3_arm">
-        <joint name="yaska3_joint_1_s" value="0"/>
-        <joint name="yaska3_joint_2_l" value="0"/>
-        <joint name="yaska3_joint_3_u" value="0"/>
-        <joint name="yaska3_joint_4_r" value="0"/>
-        <joint name="yaska3_joint_5_b" value="0"/>
-        <joint name="yaska3_joint_6_t" value="0"/>
+
+   <!--GROUP STATES YASKA3: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <!-- Start Group yaska3_DN2P -->
+    <group_state name="home" group="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
     </group_state>
+    <group_state name="Above_shuttle_2" group="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s" value="-0.785403" />
+        <joint name="yaska3_joint_2_l" value="0.593412" />
+        <joint name="yaska3_joint_3_u" value="2.60054" />
+        <joint name="yaska3_joint_4_r" value="0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-1.95477" />
+        <joint name="yaska3_joint_6_t" value="0.820305" />
+    </group_state>
+    <group_state name="On_shuttle_2" group="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s" value="-0.837763" />
+        <joint name="yaska3_joint_2_l" value="0.610865" />
+        <joint name="yaska3_joint_3_u" value="2.3911" />
+        <joint name="yaska3_joint_4_r" value="-0.0523599" />
+        <joint name="yaska3_joint_5_b" value="-1.81514" />
+        <joint name="yaska3_joint_6_t" value="0.715585" />
+    </group_state>
+    <group_state name="Above_shuttle_2" group="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s" value="-0.785403" />
+        <joint name="yaska3_joint_2_l" value="0.593412" />
+        <joint name="yaska3_joint_3_u" value="2.60054" />
+        <joint name="yaska3_joint_4_r" value="0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-1.95477" />
+        <joint name="yaska3_joint_6_t" value="0.820305" />
+    </group_state>
+    <group_state name="Middle" group="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s" value="-1.641595" />
+        <joint name="yaska3_joint_2_l" value="0.25" />
+        <joint name="yaska3_joint_3_u" value="2.2" />
+        <joint name="yaska3_joint_4_r" value="0.0" />
+        <joint name="yaska3_joint_5_b" value="-1.93" />
+        <joint name="yaska3_joint_6_t" value="0.78" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DN2P">
+	 <joint name="yaska3_joint_1_s" value="-2.530725" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="On_working_space" group="yaska3_DN2P">
+         <joint name="yaska3_joint_1_s" value="-2.54818" />
+        <joint name="yaska3_joint_2_l" value="0.820305" />
+        <joint name="yaska3_joint_3_u" value="1.46608" />
+        <joint name="yaska3_joint_4_r" value="-0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-0.610865" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DN2P">
+	 <joint name="yaska3_joint_1_s" value="-2.530725" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="home" group="yaska3_DN2P">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <!-- End Group yaska3_DN2P -->
+    <!-- Stat Group yaska3_DN1P -->
+    <group_state name="home" group="yaska3_DN1P">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <group_state name="Above_shuttle_1" group="yaska3_DN1P">
+        <joint name="yaska3_joint_1_s" value="-0.383975" />
+        <joint name="yaska3_joint_2_l" value="0.541052" />
+        <joint name="yaska3_joint_3_u" value="2.89725" />
+        <joint name="yaska3_joint_4_r" value="-0.0523599" />
+        <joint name="yaska3_joint_5_b" value="-2.35619" />
+        <joint name="yaska3_joint_6_t" value="0.349066" />
+    </group_state>
+    <group_state name="On_shuttle_1" group="yaska3_DN1P">
+        <joint name="yaska3_joint_1_s" value="-0.383975" />
+        <joint name="yaska3_joint_2_l" value="0.314159" />
+        <joint name="yaska3_joint_3_u" value="1.90241" />
+        <joint name="yaska3_joint_4_r" value="-0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-1.62316" />
+        <joint name="yaska3_joint_6_t" value="0.366519" />
+    </group_state>
+    <group_state name="Above_shuttle_1" group="yaska3_DN1P">
+        <joint name="yaska3_joint_1_s" value="-0.383975" />
+        <joint name="yaska3_joint_2_l" value="0.541052" />
+        <joint name="yaska3_joint_3_u" value="2.89725" />
+        <joint name="yaska3_joint_4_r" value="-0.0523599" />
+        <joint name="yaska3_joint_5_b" value="-2.35619" />
+        <joint name="yaska3_joint_6_t" value="0.349066" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DN1P">
+	 <joint name="yaska3_joint_1_s" value="-2.530725" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="On_working_space" group="yaska3_DN1P">
+         <joint name="yaska3_joint_1_s" value="-2.54818" />
+        <joint name="yaska3_joint_2_l" value="0.820305" />
+        <joint name="yaska3_joint_3_u" value="1.46608" />
+        <joint name="yaska3_joint_4_r" value="-0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-0.610865" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DN1P">
+	 <joint name="yaska3_joint_1_s" value="-2.530725" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="home" group="yaska3_DN1P">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <!-- End Group yaska3_DN1P -->
+
+    <!-- Start Group yaska3_DPN2 -->
+    <group_state name="home" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DPN2">
+	 <joint name="yaska3_joint_1_s" value="-2.530725" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="On_working_space" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="-2.54818" />
+        <joint name="yaska3_joint_2_l" value="0.820305" />
+        <joint name="yaska3_joint_3_u" value="1.46608" />
+        <joint name="yaska3_joint_4_r" value="-0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-0.610865" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DPN2">
+	    <joint name="yaska3_joint_1_s" value="-2.530725" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Middle" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="-1.641595" />
+        <joint name="yaska3_joint_2_l" value="0.25" />
+        <joint name="yaska3_joint_3_u" value="2.2" />
+        <joint name="yaska3_joint_4_r" value="0.0" />
+        <joint name="yaska3_joint_5_b" value="-1.93" />
+        <joint name="yaska3_joint_6_t" value="0.78" />
+    </group_state>
+    <group_state name="Above_shuttle_2" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="-0.785405" />
+        <joint name="yaska3_joint_2_l" value="0.593412" />
+        <joint name="yaska3_joint_3_u" value="2.60054" />
+        <joint name="yaska3_joint_4_r" value="0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-1.95477" />
+        <joint name="yaska3_joint_6_t" value="0.820305" />
+    </group_state>
+    <group_state name="On_shuttle_2" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="-0.837765" />
+        <joint name="yaska3_joint_2_l" value="0.610865" />
+        <joint name="yaska3_joint_3_u" value="2.3911" />
+        <joint name="yaska3_joint_4_r" value="-0.0523599" />
+        <joint name="yaska3_joint_5_b" value="-1.81514" />
+        <joint name="yaska3_joint_6_t" value="0.715585" />
+    </group_state>
+    <group_state name="Above_shuttle_2" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="-0.785405" />
+        <joint name="yaska3_joint_2_l" value="0.593412" />
+        <joint name="yaska3_joint_3_u" value="2.60054" />
+        <joint name="yaska3_joint_4_r" value="0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-1.95477" />
+        <joint name="yaska3_joint_6_t" value="0.820305" />
+    </group_state>
+    <group_state name="home" group="yaska3_DPN2">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <!-- End Group yaska3_DPN2 -->
+
+    <!-- Start Group yaska3_DPN1 -->
+    <group_state name="home" group="yaska3_DPN1">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DPN1">
+	 <joint name="yaska3_joint_1_s" value="-2.530728" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="On_working_space" group="yaska3_DPN1">
+        <joint name="yaska3_joint_1_s" value="-2.548181" />
+        <joint name="yaska3_joint_2_l" value="0.820305" />
+        <joint name="yaska3_joint_3_u" value="1.46608" />
+        <joint name="yaska3_joint_4_r" value="-0.0174533" />
+        <joint name="yaska3_joint_5_b" value="-0.610865" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Above_working_space" group="yaska3_DPN1">
+	 <joint name="yaska3_joint_1_s" value="-2.530728" />
+        <joint name="yaska3_joint_2_l" value="0.663225" />
+        <joint name="yaska3_joint_3_u" value="1.55334" />
+        <joint name="yaska3_joint_4_r" value="0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-0.872665" />
+        <joint name="yaska3_joint_6_t" value="2.19911" />
+    </group_state>
+    <group_state name="Above_shuttle_1" group="yaska3_DPN1">
+        <joint name="yaska3_joint_1_s" value="-0.383975" />
+        <joint name="yaska3_joint_2_l" value="0.541052" />
+        <joint name="yaska3_joint_3_u" value="2.89725" />
+        <joint name="yaska3_joint_4_r" value="-0.0523599" />
+        <joint name="yaska3_joint_5_b" value="-2.35619" />
+        <joint name="yaska3_joint_6_t" value="0.349066" />
+    </group_state>
+    <group_state name="On_shuttle_1" group="yaska3_DPN1">
+        <joint name="yaska3_joint_1_s" value="-0.383972" />
+        <joint name="yaska3_joint_2_l" value="0.314159" />
+        <joint name="yaska3_joint_3_u" value="1.90241" />
+        <joint name="yaska3_joint_4_r" value="-0.0349066" />
+        <joint name="yaska3_joint_5_b" value="-1.62316" />
+        <joint name="yaska3_joint_6_t" value="0.366519" />
+    </group_state>
+    <group_state name="Above_shuttle_1" group="yaska3_DPN1">
+        <joint name="yaska3_joint_1_s" value="-0.383972" />
+        <joint name="yaska3_joint_2_l" value="0.541052" />
+        <joint name="yaska3_joint_3_u" value="2.89725" />
+        <joint name="yaska3_joint_4_r" value="-0.0523599" />
+        <joint name="yaska3_joint_5_b" value="-2.35619" />
+        <joint name="yaska3_joint_6_t" value="0.349066" />
+    </group_state>
+    <group_state name="home" group="yaska3_DPN1">
+        <joint name="yaska3_joint_1_s" value="0" />
+        <joint name="yaska3_joint_2_l" value="0" />
+        <joint name="yaska3_joint_3_u" value="0" />
+        <joint name="yaska3_joint_4_r" value="0" />
+        <joint name="yaska3_joint_5_b" value="0" />
+        <joint name="yaska3_joint_6_t" value="0" />
+    </group_state>
+    <!-- End Group yaska3_DPN1 -->
     <group_state name="home" group="kuka_arm">
         <joint name="kuka_joint_a1" value="0"/>
         <joint name="kuka_joint_a2" value="0"/>

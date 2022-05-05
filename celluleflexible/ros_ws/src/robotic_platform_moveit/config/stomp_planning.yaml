@@ -38,7 +38,7 @@ stomp/yaska4_arm:
         marker_topic: stomp_trajectory
         marker_namespace: optimized
 stomp/yaska3_arm:
-  group_name: yaska3_arm
+  group_name: yaska3_DN1P
   optimization:
     num_timesteps: 60
     num_iterations: 40

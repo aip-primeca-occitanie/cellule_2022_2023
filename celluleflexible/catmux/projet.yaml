@@ -49,7 +49,18 @@ windows:
         - rosrun robotic_platform_moveit main_robotic_platform "yaska4"
       - commands:
         - sleep 5
-        - rosrun hc10_ros execute_trajectory.py
+        - rosrun hc10_ros execute_trajectory_yaska4.py
+  #launching Yaskawa4 nodes
+  - name: Yaskawa3
+    layout: tiled
+    splits:
+      - commands:
+        - sleep 5
+        - rosrun robotic_platform_moveit main_robotic_platform "yaska3"
+      - commands:
+        - sleep 5
+        - rosrun hc10_ros execute_trajectory_yaska3.py
+  #launching 2 Robots coppelia
   - name: robots_coppelia2
     if: "2"
     layout: tiled # One can use the default layouts specified by tmux
@@ -60,6 +71,7 @@ windows:
       - commands:
          - sleep 15
          - rosrun robots robot "2"
+  #launching 4 Robots coppelia
   - name: robots_coppelia4
     # if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
     if: "4"
@@ -77,6 +89,7 @@ windows:
       - commands:
          - sleep 15
          - rosrun robots robot "4"
+  #launching aiguillage, log and shuttles
   - name: aiguillages_log_shuttle
     layout: tiled
     splits:
@@ -91,6 +104,7 @@ windows:
         - rosrun commande_locale log_manager
       - commands:
         - echo "Terminal"
+  #launching schneider 102 and 104
   - name: schneider_24
     layout: tiled    
     splits:
@@ -106,6 +120,7 @@ windows:
       - commands:
         - sleep 25
         - rosrun schneider_104 client_cellule_tp_104.py
+  #launching schneider 103
   - name: schneider_3
     layout: tiled    
     splits:

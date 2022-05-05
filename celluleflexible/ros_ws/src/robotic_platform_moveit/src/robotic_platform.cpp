@@ -14,7 +14,7 @@ robotic_platform::robotic_platform(ros::NodeHandle noeud, std::string name):yask
 	name_ = name;
 	choixMode_ = noeud.subscribe("/commande_locale/ChoixMode", 10,&robotic_platform::TypeMode,this);
 	robot_ = noeud.subscribe("/commande/Simulation/DeplacerPiece",10,&robotic_platform::RobCallabck,this);
-	pub_robot_ = noeud.advertise<std_msgs::Int32>("/control_robot", 1);
+	pub_robot_ = noeud.advertise<std_msgs::Int32>("/control_robot_"+name_, 1);
 
 }
 

@@ -31,6 +31,6 @@ if(CATKIN_ENABLE_TESTING)
 endif()
 
 catkin_install_python(
-  PROGRAMS scripts/execute_trajectory.py
+  PROGRAMS scripts/execute_trajectory_yaska3.py scripts/execute_trajectory_yaska4.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

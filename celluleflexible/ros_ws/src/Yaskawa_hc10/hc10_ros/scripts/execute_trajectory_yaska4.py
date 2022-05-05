@@ -12,7 +12,7 @@ from robots.msg import FinDeplacerPiece_Msg
 from moveit_msgs.msg import MoveGroupActionResult
 
 moveit_commander.roscpp_initialize(sys.argv)
-rospy.init_node('execute_trajectory',anonymous=True)
+rospy.init_node('execute_trajectory_yaska4',anonymous=True)
 #Misc variables
 robot = moveit_commander.RobotCommander()
 scene = moveit_commander.PlanningSceneInterface()
@@ -97,7 +97,7 @@ def ControlCallback(pub_yaku):
 	pub_fintache.publish(mymsg)
 
 if __name__ == "__main__":
-	rospy.Subscriber('/control_robot',Int32, ControlCallback)
+	rospy.Subscriber('/control_robot_yaska4',Int32, ControlCallback)
 	rospy.Subscriber('/move_group/result', MoveGroupActionResult, TrajectoryResultCallback)
 	# display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
     #                                            moveit_msgs.msg.DisplayTrajectory,

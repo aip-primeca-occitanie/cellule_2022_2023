@@ -239,7 +239,91 @@ yaska4_DPN2:
     - SPARStwo
   projection_evaluator: joints(yaska4_joint_1_s,yaska4_joint_2_l)
   longest_valid_segment_fraction: 0.005
-yaska3_arm:
+yaska3_DN1P:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska3_joint_1_s,yaska3_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+yaska3_DN2P:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska3_joint_1_s,yaska3_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+yaska3_DPN1:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska3_joint_1_s,yaska3_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+yaska3_DPN2:
   planner_configs:
     - AnytimePathShortening
     - SBL

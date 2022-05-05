@@ -265,7 +265,7 @@ int main(int argc, char **argv)
 							       "	1- robot rviz"<< endl <<
 							       "	2- robot atelier"<<endl;
 							cout << "type robot (Yaskawa3) : ";
-							cin >> choixYaska4;
+							cin >> choixYaska3;
 						}
 						if(cin.fail() || choixMode<0 || choixMode>1 || choixYaska4<0 || choixYaska4>2 || choixKuka<0 || choixKuka>2 || choixStaubli<0 || choixStaubli>2 || choixYaska3<0 || choixYaska3>2)
 						{
