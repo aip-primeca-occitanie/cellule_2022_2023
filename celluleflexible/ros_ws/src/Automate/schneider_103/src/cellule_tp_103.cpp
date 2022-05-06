@@ -34,24 +34,24 @@ void Cellule_tp::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 
 void Cellule_tp::read()
 {	
-	srv.request.memoire = 1;
-	std::this_thread::sleep_for (std::chrono::milliseconds(200));
-	while(client.call(srv));
-	SensorState.id = 103;
-	SensorState.PS[7] = srv.response.PS7;
-	SensorState.PS[18] = srv.response.PS18;
-	SensorState.PS[19] = srv.response.PS19;
-	SensorState.DD[3] = srv.response.D3D;
-	SensorState.DD[4]= srv.response.D4D;
-	SensorState.DD[9] = srv.response.D9D;
-	SensorState.DD[10] = srv.response.D10D;
-	SensorState.DG[3] = srv.response.D3G;
-	SensorState.DG[4] = srv.response.D4G;
-	SensorState.DG[9] = srv.response.D9G;
-	SensorState.DG[10] = srv.response.D10G;
-	SensorState.CP[3] = srv.response.CP3;
-	SensorState.CP[8] = srv.response.CP8;	
 	if(mode==1){
+		srv.request.memoire = 1;
+		std::this_thread::sleep_for (std::chrono::milliseconds(200));
+		while(client.call(srv));
+		SensorState.id = 103;
+		SensorState.PS[7] = srv.response.PS7;
+		SensorState.PS[18] = srv.response.PS18;
+		SensorState.PS[19] = srv.response.PS19;
+		SensorState.DD[3] = srv.response.D3D;
+		SensorState.DD[4]= srv.response.D4D;
+		SensorState.DD[9] = srv.response.D9D;
+		SensorState.DD[10] = srv.response.D10D;
+		SensorState.DG[3] = srv.response.D3G;
+		SensorState.DG[4] = srv.response.D4G;
+		SensorState.DG[9] = srv.response.D9G;
+		SensorState.DG[10] = srv.response.D10G;
+		SensorState.CP[3] = srv.response.CP3;
+		SensorState.CP[8] = srv.response.CP8;	
 		cap_103.publish(SensorState);
 	}
 }

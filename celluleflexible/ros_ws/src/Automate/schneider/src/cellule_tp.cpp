@@ -39,39 +39,39 @@ void Cellule_tp::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 
 void Cellule_tp::read()
 {	
-	srv.request.memoire = 1;
-	std::this_thread::sleep_for (std::chrono::milliseconds(200));
-	while(!client.call(srv)); //Attente de la connexion automate
-	SensorState.id = 102;
-	SensorState.PS[1] = srv.response.PS1;
-	SensorState.PS[2] = srv.response.PS2;
-	SensorState.PS[3] = srv.response.PS3;
-	SensorState.PS[4] = srv.response.PS4;
-	SensorState.PS[5] = srv.response.PS5;
-	SensorState.PS[6] = srv.response.PS6;
-	SensorState.PS[20] = srv.response.PS20;
-	SensorState.PS[21] = srv.response.PS21;
-	SensorState.PS[22] = srv.response.PS22;
-	SensorState.PS[23] = srv.response.PS23;
-	SensorState.PS[24] = srv.response.PS24;
-	SensorState.DD[1] = srv.response.D1D;
-	SensorState.DD[2]= srv.response.D2D;
-	SensorState.DD[11] = srv.response.D11D;
-	SensorState.DD[12] = srv.response.D12D;
-	SensorState.DG[1] = srv.response.D1G;
-	SensorState.DG[2] = srv.response.D2G;
-	SensorState.DG[11] = srv.response.D11G;
-	SensorState.DG[12] = srv.response.D12G;
-	SensorState.CPI[1] = srv.response.CPI1;
-	SensorState.CPI[2] = srv.response.CPI2;
-	SensorState.CPI[7] = srv.response.CPI7;
-	SensorState.CPI[8] = srv.response.CPI8;
-	SensorState.CP[1] = srv.response.CP1;
-	SensorState.CP[2] = srv.response.CP2;
-	SensorState.CP[9] = srv.response.CP9;
-	SensorState.CP[10] = srv.response.CP10;
-	//SensorRobots.FinDeplacerR1 = srv.response.INR1;
 	if(mode==1){
+		srv.request.memoire = 1;
+		std::this_thread::sleep_for (std::chrono::milliseconds(200));
+		while(!client.call(srv)); //Attente de la connexion automate
+		SensorState.id = 102;
+		SensorState.PS[1] = srv.response.PS1;
+		SensorState.PS[2] = srv.response.PS2;
+		SensorState.PS[3] = srv.response.PS3;
+		SensorState.PS[4] = srv.response.PS4;
+		SensorState.PS[5] = srv.response.PS5;
+		SensorState.PS[6] = srv.response.PS6;
+		SensorState.PS[20] = srv.response.PS20;
+		SensorState.PS[21] = srv.response.PS21;
+		SensorState.PS[22] = srv.response.PS22;
+		SensorState.PS[23] = srv.response.PS23;
+		SensorState.PS[24] = srv.response.PS24;
+		SensorState.DD[1] = srv.response.D1D;
+		SensorState.DD[2]= srv.response.D2D;
+		SensorState.DD[11] = srv.response.D11D;
+		SensorState.DD[12] = srv.response.D12D;
+		SensorState.DG[1] = srv.response.D1G;
+		SensorState.DG[2] = srv.response.D2G;
+		SensorState.DG[11] = srv.response.D11G;
+		SensorState.DG[12] = srv.response.D12G;
+		SensorState.CPI[1] = srv.response.CPI1;
+		SensorState.CPI[2] = srv.response.CPI2;
+		SensorState.CPI[7] = srv.response.CPI7;
+		SensorState.CPI[8] = srv.response.CPI8;
+		SensorState.CP[1] = srv.response.CP1;
+		SensorState.CP[2] = srv.response.CP2;
+		SensorState.CP[9] = srv.response.CP9;
+		SensorState.CP[10] = srv.response.CP10;
+		//SensorRobots.FinDeplacerR1 = srv.response.INR1;
 		cap.publish(SensorState);
 		//pub_fintache.publish(SensorRobots);
 	}	

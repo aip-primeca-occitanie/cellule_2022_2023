@@ -51,9 +51,10 @@ int main(int argc, char **argv)
 		printf("ros ok\n");
 	else
 		printf("ros non ok\n");
-	
+	std::cout<<"En attente du mode atelier"<<std::endl;
 	while (ros::ok())
 	{
+
 		cellule.read();
 
 		ros::spinOnce();

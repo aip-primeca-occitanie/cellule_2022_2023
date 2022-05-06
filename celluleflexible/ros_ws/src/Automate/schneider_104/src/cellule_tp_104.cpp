@@ -37,37 +37,37 @@ void Cellule_tp::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 
 void Cellule_tp::read()
 {	
-	srv.request.memoire = 1;
-	std::this_thread::sleep_for (std::chrono::milliseconds(200));
-	while(client.call(srv));
-	SensorState.id = 104;
-	SensorState.PS[8] = srv.response.PS8;
-	SensorState.PS[9] = srv.response.PS9;
-	SensorState.PS[10] = srv.response.PS10;
-	SensorState.PS[11] = srv.response.PS11;
-	SensorState.PS[12] = srv.response.PS12;
-	SensorState.PS[13] = srv.response.PS13;
-	SensorState.PS[14] = srv.response.PS14;
-	SensorState.PS[15] = srv.response.PS15;
-	SensorState.PS[16] = srv.response.PS16;
-	SensorState.PS[17] = srv.response.PS17;
-	SensorState.DD[5] = srv.response.D5D;
-	SensorState.DD[6]= srv.response.D6D;
-	SensorState.DD[7] = srv.response.D7D;
-	SensorState.DD[8] = srv.response.D8D;
-	SensorState.DG[5] = srv.response.D5G;
-	SensorState.DG[6] = srv.response.D6G;
-	SensorState.DG[7] = srv.response.D7G;
-	SensorState.DG[8] = srv.response.D8G;
-	SensorState.CPI[3] = srv.response.CPI3;
-	SensorState.CPI[4] = srv.response.CPI4;
-	SensorState.CPI[5] = srv.response.CPI5;
-	SensorState.CPI[6] = srv.response.CPI6;
-	SensorState.CP[4] = srv.response.CP4;
-	SensorState.CP[5] = srv.response.CP5;
-	SensorState.CP[6] = srv.response.CP6;
-	SensorState.CP[7] = srv.response.CP7;
 	if(mode==1){
+		srv.request.memoire = 1;
+		std::this_thread::sleep_for (std::chrono::milliseconds(200));
+		while(client.call(srv));
+		SensorState.id = 104;
+		SensorState.PS[8] = srv.response.PS8;
+		SensorState.PS[9] = srv.response.PS9;
+		SensorState.PS[10] = srv.response.PS10;
+		SensorState.PS[11] = srv.response.PS11;
+		SensorState.PS[12] = srv.response.PS12;
+		SensorState.PS[13] = srv.response.PS13;
+		SensorState.PS[14] = srv.response.PS14;
+		SensorState.PS[15] = srv.response.PS15;
+		SensorState.PS[16] = srv.response.PS16;
+		SensorState.PS[17] = srv.response.PS17;
+		SensorState.DD[5] = srv.response.D5D;
+		SensorState.DD[6]= srv.response.D6D;
+		SensorState.DD[7] = srv.response.D7D;
+		SensorState.DD[8] = srv.response.D8D;
+		SensorState.DG[5] = srv.response.D5G;
+		SensorState.DG[6] = srv.response.D6G;
+		SensorState.DG[7] = srv.response.D7G;
+		SensorState.DG[8] = srv.response.D8G;
+		SensorState.CPI[3] = srv.response.CPI3;
+		SensorState.CPI[4] = srv.response.CPI4;
+		SensorState.CPI[5] = srv.response.CPI5;
+		SensorState.CPI[6] = srv.response.CPI6;
+		SensorState.CP[4] = srv.response.CP4;
+		SensorState.CP[5] = srv.response.CP5;
+		SensorState.CP[6] = srv.response.CP6;
+		SensorState.CP[7] = srv.response.CP7;
 		cap_104.publish(SensorState);
 	}
 }
