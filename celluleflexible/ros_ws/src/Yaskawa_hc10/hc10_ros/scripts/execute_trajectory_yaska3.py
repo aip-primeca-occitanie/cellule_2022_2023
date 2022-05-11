@@ -17,8 +17,8 @@ moveit_commander.roscpp_initialize(sys.argv)
 rospy.init_node('execute_trajectory_yaska3',anonymous=True)
 
 #Misc variables
-robotyaska3 = moveit_commander.RobotCommander()
-scene = moveit_commander.PlanningSceneInterface()
+# robotyaska3 = moveit_commander.RobotCommander()
+# scene = moveit_commander.PlanningSceneInterface()
 mymsgYaska3 = FinDeplacerPiece_Msg()
 trajectoryState = 3 # SUCCEEDED = 3 in status
 trajectoryErrorCode = 1 #Succes = 1 in error_code

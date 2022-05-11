@@ -145,7 +145,7 @@ DN1P:
     - LazyPRMstar
     - SPARS
     - SPARStwo
-  projection_evaluator: joints(joint_1_s,joint_2_l)
+  projection_evaluator: joints(yaska4_joint_1_s,yaska4_joint_2_l)
   longest_valid_segment_fraction: 0.005
 DN2P:
   planner_configs:
@@ -172,7 +172,7 @@ DN2P:
     - LazyPRMstar
     - SPARS
     - SPARStwo
-  projection_evaluator: joints(joint_1_s,joint_2_l)
+  projection_evaluator: joints(yaska4_joint_1_s,yaska4_joint_2_l)
   longest_valid_segment_fraction: 0.005
 DPN1:
   planner_configs:
@@ -199,7 +199,7 @@ DPN1:
     - LazyPRMstar
     - SPARS
     - SPARStwo
-  projection_evaluator: joints(joint_1_s,joint_2_l)
+  projection_evaluator: joints(yaska4_joint_1_s,yaska4_joint_2_l)
   longest_valid_segment_fraction: 0.005
 DPN2:
   planner_configs:
@@ -226,5 +226,5 @@ DPN2:
     - LazyPRMstar
     - SPARS
     - SPARStwo
-  projection_evaluator: joints(joint_1_s,joint_2_l)
+  projection_evaluator: joints(yaska4_joint_1_s,yaska4_joint_2_l)
   longest_valid_segment_fraction: 0.005

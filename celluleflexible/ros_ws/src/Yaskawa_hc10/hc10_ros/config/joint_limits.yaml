@@ -2,32 +2,32 @@
 # Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
 # Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
 joint_limits:
-  joint_1_s:
+  yaska4_joint_1_s:
     has_velocity_limits: true
     max_velocity: 2.26892802759
     has_acceleration_limits: true
     max_acceleration: 1
-  joint_2_l:
+  yaska4_joint_2_l:
     has_velocity_limits: true
     max_velocity: 2.26892802759
     has_acceleration_limits: true
     max_acceleration: 1
-  joint_3_u:
+  yaska4_joint_3_u:
     has_velocity_limits: true
     max_velocity: 3.14159265359
     has_acceleration_limits: true
     max_acceleration: 1
-  joint_4_r:
+  yaska4_joint_4_r:
     has_velocity_limits: true
     max_velocity: 3.14159265359
     has_acceleration_limits: true
     max_acceleration: 1
-  joint_5_b:
+  yaska4_joint_5_b:
     has_velocity_limits: true
     max_velocity: 4.36332312999
     has_acceleration_limits: true
     max_acceleration: 1
-  joint_6_t:
+  yaska4_joint_6_t:
     has_velocity_limits: true
     max_velocity: 4.36332312999
     has_acceleration_limits: true

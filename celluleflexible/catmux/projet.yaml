@@ -39,7 +39,7 @@ windows:
         - echo "Terminal vierge"
       - commands:
         - sleep 2
-        - roslaunch robotic_platform_moveit demo.launch
+        - roslaunch hc10_ros yaska4_rviz.launch 
   #launching Yaskawa4 nodes
   - name: Yaskawa4
     layout: tiled
