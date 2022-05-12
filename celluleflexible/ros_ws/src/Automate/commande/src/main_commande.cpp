@@ -188,16 +188,14 @@ int main(int argc, char **argv)
 		if(M[0])
 		{		
 			M[0]--;
-			robot.DeplacerPiece(ROBOT_4,4,2);
+			robot.DeplacerPiece(ROBOT_4,1,2);
+			robot.DeplacerPiece(ROBOT_3,4,2);
 			M[9]++;
 			display();
 		}
 		// Si deux tâche R4 a la suite
 		if(M[9]){ 
-			if(robot.FinDeplacerPiece(ROBOT_4)){
-				cpt ++; // compteur pour gérer plusieurs tâches R4 successives
-			}
-			if(!robot.FinDeplacerPiece(ROBOT_3) && cpt != 0){
+			if(robot.FinDeplacerPiece(ROBOT_4) && robot.FinDeplacerPiece(ROBOT_3)){
 				M[9]--;
 				cpt = 0; // fin deplacierpiece remis a zero, on peut passer a l'action suivante
 				robot.DeplacerPiece(ROBOT_3,2,4);

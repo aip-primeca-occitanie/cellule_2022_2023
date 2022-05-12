@@ -37,29 +37,32 @@ windows:
         - rosrun commande run ${nb_robots}
       - commands:
         - echo "Terminal vierge"
-      - commands:
-        - sleep 2
-        - roslaunch hc10_ros yaska4_rviz.launch 
   #launching Yaskawa4 nodes
   - name: Yaskawa4
     layout: tiled
     splits:
       - commands:
+        - sleep 2
+        - roslaunch yaskawa4 yaska4_rviz.launch 
+      - commands:
         - sleep 5
         - rosrun robotic_platform_moveit main_robotic_platform "yaska4"
       - commands:
         - sleep 5
-        - rosrun hc10_ros execute_trajectory_yaska4.py
-  #launching Yaskawa4 nodes
+        - rosrun yaskawa4 execute_trajectory_yaska4.py
+  #launching Yaskawa3 nodes
   - name: Yaskawa3
     layout: tiled
     splits:
+      - commands:
+        - sleep 2
+        - roslaunch yaskawa3 yaska3_rviz.launch 
       - commands:
         - sleep 5
         - rosrun robotic_platform_moveit main_robotic_platform "yaska3"
       - commands:
         - sleep 5
-        - rosrun hc10_ros execute_trajectory_yaska3.py
+        - rosrun yaskawa3 execute_trajectory_yaska3.py
   #launching 2 Robots coppelia
   - name: robots_coppelia2
     if: "2"
