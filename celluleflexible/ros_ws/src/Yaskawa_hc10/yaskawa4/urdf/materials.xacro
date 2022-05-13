@@ -4,5 +4,7 @@
 <material name="silver">
   <color rgba="0.700 0.700 0.700 1.000"/>
 </material>
-
+<material name="dark_gray">
+  <color rgba="0.3 0.3 0.3 1.000"/>
+</material>
 </robot>
