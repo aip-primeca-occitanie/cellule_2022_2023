@@ -7,7 +7,7 @@
     <!-- By default, we will load or override the robot_description -->
     <arg name="load_robot_description" default="true"/>
     <!-- Choose controller manager: fake, simple, or ros_control -->
-    <arg name="moveit_controller_manager" default="motoman_hc10" />
+    <arg name="moveit_controller_manager" default="simple" />
     <!-- Set execution mode for fake execution controllers -->
     <arg name="fake_execution_type" default="false" />
     <!-- By default, hide joint_state_publisher's GUI in 'fake' controller_manager mode -->
@@ -22,7 +22,7 @@
         controller_joint_names: [joint_1, joint_2, ... joint_N] 
     - Update with joint names for your robot (in order expected by rbt controller)
     - and uncomment the following line: -->
-    <rosparam command="load" file="$(find yaskawa4)/config/joint_names.yaml"/>
+    <!-- <rosparam command="load" file="$(find yaskawa4)/config/joint_names.yaml"/> -->
     <!-- If needed, broadcast static tf for robot root -->
     <group if="$(eval arg('moveit_controller_manager') == 'fake')">
         <!-- We do not have a real robot connected, so publish fake joint states via a joint_state_publisher
@@ -40,7 +40,7 @@
         <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
     </group>
     <!-- Given the published joint states, publish tf for the robot links -->
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" /> -->
     <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
     <include file="$(dirname)/move_group.launch">
         <arg name="allow_trajectory_execution" value="true"/>
@@ -58,9 +58,9 @@
         <arg name="debug" value="$(arg debug)"/>
     </include>
     <!-- run the robot simulator and action interface nodes -->
-    <group if="$(arg sim)">
+    <!-- <group if="$(arg sim)">
         <include file="$(find industrial_robot_simulator)/launch/robot_interface_simulator.launch" />
-    </group>
+    </group> -->
     <!-- run the "real robot" interface nodes -->
     <!--   - this typically includes: robot_state, motion_interface, and joint_trajectory_action nodes -->
     <!--   - replace these calls with appropriate robot-specific calls or launch files -->

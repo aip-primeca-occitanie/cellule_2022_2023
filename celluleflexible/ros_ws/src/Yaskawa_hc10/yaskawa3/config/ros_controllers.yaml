@@ -22,7 +22,7 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 controller_list:
-  - name: ""
-    action_ns: yaska3/joint_trajectory_action
+  - name: "/yaska3"
+    action_ns: joint_trajectory_action
     type: FollowJointTrajectory
     joints: [yaska3_joint_1_s, yaska3_joint_2_l, yaska3_joint_3_u, yaska3_joint_4_r, yaska3_joint_5_b, yaska3_joint_6_t]

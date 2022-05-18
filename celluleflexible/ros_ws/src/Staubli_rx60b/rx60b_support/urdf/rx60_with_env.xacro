@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<robot name="staubli_rx60" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <!-- loading urdf -->
+    <xacro:include filename="$(find rx60b_support)/urdf/rx60.urdf.xacro"/>
+    <!-- define prefix to avoid name conflict between joints -->
+    <xacro:staubli prefix="staubli" />
+    <!-- linking every robots to world and workspaces -->
+    <link name="world" />
+
+    <joint name="world_staubli_base_link" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <parent link="world" />
+        <child link="staubli_base_link" />
+    </joint>
+</robot>

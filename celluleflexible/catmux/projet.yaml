@@ -43,7 +43,7 @@ windows:
     splits:
       - commands:
         - sleep 2
-        - roslaunch yaskawa4 yaska4_rviz.launch 
+        - roslaunch yaskawa4 demo.launch
       - commands:
         - sleep 5
         - rosrun robotic_platform_moveit main_robotic_platform "yaska4"

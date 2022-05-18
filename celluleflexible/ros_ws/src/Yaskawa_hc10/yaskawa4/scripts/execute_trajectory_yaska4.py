@@ -99,6 +99,27 @@ def BuildSequenceRequest(pub_yaska4):
 		motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
 	# la ligne ci-dessous permet de tester si les types de message que l'on ajoute à la séquence sont bons
 	# motionSequenceRequest._check_types()
+
+	motionPlanGripper = MotionSequenceItem()
+	constraintsg_ = Constraints()
+	motionPlanGripper.req.pipeline_id = "pilz_industrial_motion_planner"
+	motionPlanGripper.req.planner_id = "PTP"
+	motionPlanGripper.req.max_velocity_scaling_factor = 1
+	motionPlanGripper.req.max_acceleration_scaling_factor = 1
+	motionPlanGripper.blend_radius = 0
+	motionPlanGripper.req.group_name = "yaskawa4_hand"
+	goalJointTemp1_ = JointConstraint()
+	goalJointTemp2_ = JointConstraint()
+	goalJointTemp1_.joint_name = "end_effector_adaptater_mors1"
+	goalJointTemp1_.position = 0.03
+	goalJointTemp2_.joint_name = "end_effector_adaptater_mors2"
+	goalJointTemp2_.position = 0.03
+	constraintsg_.joint_constraints.append(goalJointTemp1_)
+	constraintsg_.joint_constraints.append(goalJointTemp2_)
+	motionPlanGripper.req.goal_constraints.append(constraintsg_)
+	motionSequenceRequest.items.append(copy.deepcopy(motionPlanGripper))	
+
+	# motionSequenceRequest._check_types()
 	return motionSequenceRequest
 
 def ControlCallback(pub_yaska4):

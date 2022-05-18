@@ -1,0 +1,40 @@
+DN1P_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - staubli_joint1
+    - staubli_joint2
+    - staubli_joint3
+    - staubli_joint4
+    - staubli_joint5
+    - staubli_joint6
+  gains:
+    staubli_joint1:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    staubli_joint2:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    staubli_joint3:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    staubli_joint4:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    staubli_joint5:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    staubli_joint6:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1

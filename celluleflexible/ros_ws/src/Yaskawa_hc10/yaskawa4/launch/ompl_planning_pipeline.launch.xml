@@ -22,4 +22,5 @@
   <!-- <param name="capabilities" value="" /> -->
 
   <rosparam command="load" file="$(find yaskawa4)/config/ompl_planning.yaml"/>
+
 </launch>

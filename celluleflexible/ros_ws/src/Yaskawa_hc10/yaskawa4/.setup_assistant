@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: yaskawa4
+    relative_path: urdf/hc10_with_env.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/yaskawa_4.srdf
+  CONFIG:
+    author_name: Alexandre Belveze
+    author_email: alexandre.belveze@gmail.com
+    generated_timestamp: 1652877691
