@@ -4,7 +4,8 @@ common:
   #   - sourcing an environment
   #   - ssh-ing to another machine
   before_commands:
-    - cd ~/Bureau/Cellule_2022_copelia/celluleflexible/ros_ws
+  # Replace Desktop with your path to your cloned repo
+    - cd ~/Desktop/Cellule_2022_copelia/celluleflexible/ros_ws
     - source devel/setup.bash
     - clear
     - echo "Launching project" # before commands can be specified global and per window
