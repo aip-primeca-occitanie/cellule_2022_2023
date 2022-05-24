@@ -89,7 +89,7 @@ def BuildSequenceRequest(group):
 		motionPlanItem.req.max_acceleration_scaling_factor = 1.0
 		motionPlanItem.blend_radius = 0.0
 		motionPlanItem.req.allowed_planning_time = 5.0
-		if(n==3 and bool):
+		if(n==2 and bool):
 			bool = False
 			motionPlanItem.req.group_name = "yaskawa4_hand"
 			jointName1_ = "end_effector_adaptater_mors1"
@@ -103,7 +103,7 @@ def BuildSequenceRequest(group):
 			constraints2_.joint_constraints.append(goalJointTemp2_)
 			motionPlanItem.req.goal_constraints.append(constraints2_)
 			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
-		elif(n==7 and bool):
+		elif(n==6 and bool):
 			bool = False
 			motionPlanItem.req.group_name = "yaskawa4_hand"
 			jointName1_ = "end_effector_adaptater_mors1"
