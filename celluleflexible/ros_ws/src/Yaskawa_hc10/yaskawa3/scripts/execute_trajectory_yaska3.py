@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-from ntpath import join
-from os import wait
 import sys
 import copy
 import rospy
@@ -8,58 +6,59 @@ import actionlib
 import moveit_commander
 from std_msgs.msg import Int32
 from robots.msg import FinDeplacerPiece_Msg
-from moveit_msgs.msg import MoveGroupSequenceActionResult, MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint, MoveGroupSequenceActionGoal, MoveGroupSequenceAction
+from moveit_msgs.msg import MoveGroupSequenceActionResult, MoveGroupSequenceActionGoal, MoveGroupSequenceAction, MoveGroupActionResult
+from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint
 from sensor_msgs.msg import JointState
 
 trajectoryErrorCode3 = 1 #Succes = 1 in error_code
 
+#Callback de fin de la trajectoire de pick and place
 def TrajectoryResultCallback(errormsg):
 	global trajectoryErrorCode3
 	trajectoryErrorCode3 = errormsg.result.response.error_code.val
 
-def ErrorTrajectoryExecution():
-	choice = 0
-	while ((choice != 1) & (choice != 2)):
-		print("Error during execution of trajectory :")
-		print("""What would you like to do? 
-		1. Finish trajectory 
-		2. Abort trajectory """)
-		try:
-			choice = int(input('Choice:'))
-		except ValueError:
-			print("Not a number")
-		if((choice!=1) & (choice !=2)):
-			print("Invalid choice, try again")
-	return choice
+#Callback de fin de trajectoire d'initialisation
+def InitializationCallback(errormsg):
+	global trajectoryErrorCode3
+	trajectoryErrorCode3 = errormsg.result.error_code.val
 
-# cette fonction permet de construire un séquence de points dont pilz plannifiera la trajectoire
-def BuildSequenceRequest(pub_yaska3):
+#Interface de gestion de l'erreur par l'utilisateur
+def ErrorTrajectoryExecution():
+	print("""What would you like to do? 
+	1. Finish trajectory 
+	2. Abort trajectory """)
+	while(True):
+		choice = input('Choice:')
+		if(choice.isdigit() and int(choice) in range(1,3)):
+			return int(choice)
+		print("Invalid choice, try again")
+
+#Cette fonction permet de faire revenir le robot en position home peut importe sa position actuelle en utilisant le planner ompl
+def Initialize(group):
+	print("Initiating ...")
+	group.set_planning_pipeline_id("ompl")
+	group.set_start_state_to_current_state()
+	group.set_joint_value_target(group.get_named_target_values("home"))
+	group.plan()
+	rospy.sleep(1)
+	group.go(wait=True)
+	group.stop()
+	rospy.sleep(1)
+
+# cette fonction permet de construire un séquence de points dont le plannifieur pilz calculera la trajectoire
+def BuildSequenceRequest(group):
 	motionPlanItemInitialize = MotionSequenceItem()
 	motionSequenceRequest = MotionSequenceRequest()
-	constraints_ = Constraints()
-	#on récupère la trajectoire a réaliser définie dans les groupe du fichier config/.srdf
-	if pub_yaska3.data == 1:
-		group = moveit_commander.MoveGroupCommander("DN1P", robot_description="/yaska3/robot_description", ns="/yaska3")
-		motionPlanItemInitialize.req.group_name = "DN1P"
-	elif pub_yaska3.data == 2:
-		group = moveit_commander.MoveGroupCommander("DN2P", robot_description="/yaska3/robot_description", ns="/yaska3")
-		motionPlanItemInitialize.req.group_name = "DN2P"
-	elif pub_yaska3.data == 3:
-		group = moveit_commander.MoveGroupCommander("DPN1", robot_description="/yaska3/robot_description", ns="/yaska3")
-		motionPlanItemInitialize.req.group_name = "DPN1"
-	elif pub_yaska3.data == 4:
-		group = moveit_commander.MoveGroupCommander("DPN2", robot_description="/yaska3/robot_description", ns="/yaska3")
-		motionPlanItemInitialize.req.group_name = "DPN2"
-	else :
-		print("Error callback control yakuza \n")
-		return
-	print ("Value of deplacement %d" %pub_yaska3.data)
+	constraints1_ = Constraints()	
 	#le premier planning a besoin d'un start_state, les autres démarrent automatiquement au goal précédent
 	motionPlanItemInitialize.req.pipeline_id = "pilz_industrial_motion_planner"
+	# PTP, CIR, LIN
 	motionPlanItemInitialize.req.planner_id = "PTP"
-	motionPlanItemInitialize.req.max_velocity_scaling_factor = 1
-	motionPlanItemInitialize.req.max_acceleration_scaling_factor = 1
-	motionPlanItemInitialize.blend_radius = 0
+	motionPlanItemInitialize.req.max_velocity_scaling_factor = 1.0
+	motionPlanItemInitialize.req.max_acceleration_scaling_factor = 1.0
+	motionPlanItemInitialize.blend_radius = 0.0
+	motionPlanItemInitialize.req.allowed_planning_time = 5.0
+	motionPlanItemInitialize.req.group_name = group.get_name()
 	#initialise start_state à la position dans laquelle se trouve le robot
 	jointName_ = group.get_active_joints()
 	jointPosition_ = group.get_current_joint_values()
@@ -74,21 +73,20 @@ def BuildSequenceRequest(pub_yaska3):
 		goalJointTemp_ = JointConstraint()
 		goalJointTemp_.joint_name = jointName_[i]
 		goalJointTemp_.position = dict_.get(jointName_[i])
-		constraints_.joint_constraints.append(goalJointTemp_)
-
-	motionPlanItemInitialize.req.goal_constraints.append(constraints_)
+		constraints1_.joint_constraints.append(goalJointTemp_)
+	motionPlanItemInitialize.req.goal_constraints.append(constraints1_)
 	motionSequenceRequest.items.append(motionPlanItemInitialize)
-
 	#on ajoute les autres items a la sequence
 	for n in range(1,len(group_name)):
 		motionPlanItem = MotionSequenceItem()
 		constraints2_ = Constraints()
 		motionPlanItem.req.pipeline_id = "pilz_industrial_motion_planner"
 		motionPlanItem.req.planner_id = "PTP"
-		motionPlanItem.req.max_velocity_scaling_factor = 1
-		motionPlanItem.req.max_acceleration_scaling_factor = 1
-		motionPlanItem.blend_radius = 0
-		motionPlanItem.req.group_name = motionPlanItemInitialize.req.group_name
+		motionPlanItem.req.max_velocity_scaling_factor = 1.0
+		motionPlanItem.req.max_acceleration_scaling_factor = 1.0
+		motionPlanItem.blend_radius = 0.0
+		motionPlanItem.req.allowed_planning_time = 5.0
+		motionPlanItem.req.group_name = group.get_name()
 		dict_ = group.get_named_target_values(group_name[n])
 		for i in range(0,len(jointName_)):
 			goalJointTemp_ = JointConstraint()
@@ -101,35 +99,65 @@ def BuildSequenceRequest(pub_yaska3):
 	# motionSequenceRequest._check_types()
 	return motionSequenceRequest
 
+#Callback de DeplacerPiece si mode rviz ou atelier
 def ControlCallback(pub_yaska3):
 	#création d'un client actionlib
-	client_ = actionlib.SimpleActionClient('/yaska3/sequence_move_group', MoveGroupSequenceAction)
+	clientSequence_ = actionlib.SimpleActionClient('/yaska3/sequence_move_group', MoveGroupSequenceAction)
 	#attente de connexion
-	client_.wait_for_server()
-	#construction du message a envoyer
-	goal_ = MoveGroupSequenceActionGoal()
-	myPlan_ = BuildSequenceRequest(pub_yaska3)
-	goal_.goal.request = myPlan_
+	clientSequence_.wait_for_server()
 	# pub_motionSequenceRequest.publish(goal_)
+	#on récupère la trajectoire a réaliser définie dans les groupe du fichier config/.srdf
+	if pub_yaska3.data == 1:
+		group = moveit_commander.MoveGroupCommander("DN1P", robot_description="/yaska3/robot_description", ns="/yaska3")
+	elif pub_yaska3.data == 2:
+		group = moveit_commander.MoveGroupCommander("DN2P", robot_description="/yaska3/robot_description", ns="/yaska3")
+	elif pub_yaska3.data == 3:
+		group = moveit_commander.MoveGroupCommander("DPN1", robot_description="/yaska3/robot_description", ns="/yaska3")
+	elif pub_yaska3.data == 4:
+		group = moveit_commander.MoveGroupCommander("DPN2", robot_description="/yaska3/robot_description", ns="/yaska3")
+	else :
+		print("Error callback control yaska4 \n")
+		return
+	print(f"Deplacement is {group.get_name()}")
 	while(True):
-		print("Executing trajectory :")
-		client_.send_goal(goal_.goal)
-		finished_before_timeout = client_.wait_for_result(rospy.Duration(30))
-		rospy.sleep(1)
-		if(finished_before_timeout & (trajectoryErrorCode3 == 1)):
-			rospy.loginfo(client_.get_goal_status_text())
-			# print("Results: %s" %client_.action_client.ActionResult)
-			#si tout s'est bien passé, on averti coppeliaSim de la fin d'execution du movement du robot
-			mymsgYaska3.FinDeplacerR3 = 1
-			rospy.loginfo(mymsgYaska3)
-			pub_fintache.publish(mymsgYaska3)
+		# Initialise la position du robot à "home"
+		Initialize(group)
+		#Si l'initialisation s'est bien passé, on commence le pick and place
+		if((trajectoryErrorCode3 == 1)):
+			#construction de la séquence de point à envoyer
+			group.set_start_state_to_current_state()
+			goal_ = MoveGroupSequenceActionGoal()
+			goal_.goal.request = BuildSequenceRequest(group)
+			clientSequence_.send_goal(goal_.goal)
+			finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(30))
 			rospy.sleep(1)
-			mymsgYaska3.FinDeplacerR3 = 0
-			pub_fintache.publish(mymsgYaska3)
-			break
-		else: 
+			if(finished_before_timeout & (trajectoryErrorCode3 == 1)):
+				rospy.loginfo(clientSequence_.get_goal_status_text())
+				# print("Results: %s" %client_.action_client.ActionResult)
+				#si tout s'est bien passé, on averti coppeliaSim de la fin d'execution du movement du robot
+				mymsgYaska3.FinDeplacerR3 = 1
+				rospy.loginfo(mymsgYaska3)
+				pub_fintache.publish(mymsgYaska3)
+				rospy.sleep(1)
+				mymsgYaska3.FinDeplacerR3 = 0
+				pub_fintache.publish(mymsgYaska3)
+				break
+			else:
+				print("Error during trajectory execution")
+				choice = ErrorTrajectoryExecution()
+				if(choice == 2):
+					print("Aborting trajectory")
+					mymsgYaska3.FinDeplacerR3 = 1
+					rospy.loginfo(mymsgYaska3)
+					pub_fintache.publish(mymsgYaska3)
+					rospy.sleep(1)
+					mymsgYaska3.FinDeplacerR3 = 0
+					pub_fintache.publish(mymsgYaska3)
+					break
+		else:
+			print("Error during initialization")
 			choice = ErrorTrajectoryExecution()
-			if(choice == 2): 
+			if(choice == 2):
 				print("Aborting trajectory")
 				mymsgYaska3.FinDeplacerR3 = 1
 				rospy.loginfo(mymsgYaska3)
@@ -138,8 +166,6 @@ def ControlCallback(pub_yaska3):
 				mymsgYaska3.FinDeplacerR3 = 0
 				pub_fintache.publish(mymsgYaska3)
 				break
-		
-		
 
 if __name__ == "__main__":
 	moveit_commander.roscpp_initialize(sys.argv)
@@ -147,7 +173,8 @@ if __name__ == "__main__":
 	mymsgYaska3 = FinDeplacerPiece_Msg()
 	rospy.Subscriber('/control_robot_yaska3',Int32, ControlCallback)
 	rospy.Subscriber('/yaska3/sequence_move_group/result', MoveGroupSequenceActionResult, TrajectoryResultCallback)
+	rospy.Subscriber('/yaska3/move_group/result', MoveGroupActionResult, InitializationCallback)
 	pub_fintache = rospy.Publisher("/commande/Simulation/finTache", FinDeplacerPiece_Msg,  queue_size=1)
 	# pub_motionSequenceRequest = rospy.Publisher( "/sequence_move_group/goal", MoveGroupSequenceActionGoal, queue_size=1)
-	rospy.spin()	
+	rospy.spin()
 	moveit_commander.roscpp_shutdown()

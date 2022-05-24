@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<robot name="hand" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <link name="end_effector_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-1372735 EGP 40-N-N-IOL, 00ohne.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <!-- <material name="silver"/> -->
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-1372735 EGP 40-N-N-IOL, 00ohne.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- <joint name="table_link-base" type="fixed">
+      <parent link="table_link" />
+      <child link="base_table" />
+  </joint> -->
+
+</robot>
