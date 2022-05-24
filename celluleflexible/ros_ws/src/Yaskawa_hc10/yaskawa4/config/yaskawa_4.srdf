@@ -18,19 +18,27 @@
         <link name="mors_link1"/>
         <link name="mors_link2"/>
     </group>
+        <group_state name="Open" group="yaskawa4_hand">
+        <joint name="end_effector_adaptater_mors1" value="0.00" />
+        <joint name="end_effector_adaptater_mors2" value="0.00" />
+    </group_state>
+        <group_state name="Close" group="yaskawa4_hand">
+        <joint name="end_effector_adaptater_mors1" value="0.035" />
+        <joint name="end_effector_adaptater_mors2" value="0.035" />
+    </group_state>
     <group name="DN2P">
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="home" group="DN2P">
+    <!-- <group_state name="home" group="DN2P">
         <joint name="yaska4_joint_1_s" value="0" />
         <joint name="yaska4_joint_2_l" value="0" />
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
         <joint name="yaska4_joint_6_t" value="0" />
-    </group_state>
-    <group_state name="Above_shuttle_2" group="DN2P">
+    </group_state> -->
+    <group_state name="Above_shuttle" group="DN2P">
         <joint name="yaska4_joint_1_s" value="2.35619" />
         <joint name="yaska4_joint_2_l" value="0.593412" />
         <joint name="yaska4_joint_3_u" value="2.60054" />
@@ -38,7 +46,7 @@
         <joint name="yaska4_joint_5_b" value="-1.95477" />
         <joint name="yaska4_joint_6_t" value="0.820305" />
     </group_state>
-    <group_state name="On_shuttle_2" group="DN2P">
+    <group_state name="On_shuttle" group="DN2P">
         <joint name="yaska4_joint_1_s" value="2.30383" />
         <joint name="yaska4_joint_2_l" value="0.610865" />
         <joint name="yaska4_joint_3_u" value="2.3911" />
@@ -46,7 +54,7 @@
         <joint name="yaska4_joint_5_b" value="-1.81514" />
         <joint name="yaska4_joint_6_t" value="0.715585" />
     </group_state>
-    <group_state name="Above_shuttle_2" group="DN2P">
+    <group_state name="Above_shuttle" group="DN2P">
         <joint name="yaska4_joint_1_s" value="2.35619" />
         <joint name="yaska4_joint_2_l" value="0.593412" />
         <joint name="yaska4_joint_3_u" value="2.60054" />
@@ -102,15 +110,15 @@
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="home" group="DN1P">
+    <!-- <group_state name="home" group="DN1P">
         <joint name="yaska4_joint_1_s" value="0" />
         <joint name="yaska4_joint_2_l" value="0" />
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
         <joint name="yaska4_joint_6_t" value="0" />
-    </group_state>
-    <group_state name="Above_shuttle_1" group="DN1P">
+    </group_state> -->
+    <group_state name="Above_shuttle" group="DN1P">
         <joint name="yaska4_joint_1_s" value="2.75762" />
         <joint name="yaska4_joint_2_l" value="0.541052" />
         <joint name="yaska4_joint_3_u" value="2.89725" />
@@ -118,7 +126,7 @@
         <joint name="yaska4_joint_5_b" value="-2.35619" />
         <joint name="yaska4_joint_6_t" value="0.349066" />
     </group_state>
-    <group_state name="On_shuttle_1" group="DN1P">
+    <group_state name="On_shuttle" group="DN1P">
         <joint name="yaska4_joint_1_s" value="2.75762" />
         <joint name="yaska4_joint_2_l" value="0.314159" />
         <joint name="yaska4_joint_3_u" value="1.90241" />
@@ -126,13 +134,21 @@
         <joint name="yaska4_joint_5_b" value="-1.62316" />
         <joint name="yaska4_joint_6_t" value="0.366519" />
     </group_state>
-    <group_state name="Above_shuttle_1" group="DN1P">
+    <group_state name="Above_shuttle" group="DN1P">
         <joint name="yaska4_joint_1_s" value="2.75762" />
         <joint name="yaska4_joint_2_l" value="0.541052" />
         <joint name="yaska4_joint_3_u" value="2.89725" />
         <joint name="yaska4_joint_4_r" value="-0.0523599" />
         <joint name="yaska4_joint_5_b" value="-2.35619" />
         <joint name="yaska4_joint_6_t" value="0.349066" />
+    </group_state>
+        <group_state name="Middle" group="DN1P">
+        <joint name="yaska4_joint_1_s" value="1.5" />
+        <joint name="yaska4_joint_2_l" value="0.25" />
+        <joint name="yaska4_joint_3_u" value="2.2" />
+        <joint name="yaska4_joint_4_r" value="0.0" />
+        <joint name="yaska4_joint_5_b" value="-1.93" />
+        <joint name="yaska4_joint_6_t" value="0.78" />
     </group_state>
     <group_state name="Above_working_space" group="DN1P">
 	 <joint name="yaska4_joint_1_s" value="0.610865" />
@@ -174,14 +190,14 @@
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="home" group="DPN2">
+    <!-- <group_state name="home" group="DPN2">
         <joint name="yaska4_joint_1_s" value="0" />
         <joint name="yaska4_joint_2_l" value="0" />
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
         <joint name="yaska4_joint_6_t" value="0" />
-    </group_state>
+    </group_state> -->
     <group_state name="Above_working_space" group="DPN2">
 	 <joint name="yaska4_joint_1_s" value="0.610865" />
         <joint name="yaska4_joint_2_l" value="0.663225" />
@@ -214,7 +230,7 @@
         <joint name="yaska4_joint_5_b" value="-1.93" />
         <joint name="yaska4_joint_6_t" value="0.78" />
     </group_state>
-    <group_state name="Above_shuttle_2" group="DPN2">
+    <group_state name="Above_shuttle" group="DPN2">
         <joint name="yaska4_joint_1_s" value="2.35619" />
         <joint name="yaska4_joint_2_l" value="0.593412" />
         <joint name="yaska4_joint_3_u" value="2.60054" />
@@ -222,7 +238,7 @@
         <joint name="yaska4_joint_5_b" value="-1.95477" />
         <joint name="yaska4_joint_6_t" value="0.820305" />
     </group_state>
-    <group_state name="On_shuttle_2" group="DPN2">
+    <group_state name="On_shuttle" group="DPN2">
         <joint name="yaska4_joint_1_s" value="2.30383" />
         <joint name="yaska4_joint_2_l" value="0.610865" />
         <joint name="yaska4_joint_3_u" value="2.3911" />
@@ -230,7 +246,7 @@
         <joint name="yaska4_joint_5_b" value="-1.81514" />
         <joint name="yaska4_joint_6_t" value="0.715585" />
     </group_state>
-    <group_state name="Above_shuttle_2" group="DPN2">
+    <group_state name="Above_shuttle" group="DPN2">
         <joint name="yaska4_joint_1_s" value="2.35619" />
         <joint name="yaska4_joint_2_l" value="0.593412" />
         <joint name="yaska4_joint_3_u" value="2.60054" />
@@ -255,14 +271,14 @@
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="home" group="DPN1">
+    <!-- <group_state name="home" group="DPN1">
         <joint name="yaska4_joint_1_s" value="0" />
         <joint name="yaska4_joint_2_l" value="0" />
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
         <joint name="yaska4_joint_6_t" value="0" />
-    </group_state>
+    </group_state> -->
     <group_state name="Above_working_space" group="DPN1">
 	 <joint name="yaska4_joint_1_s" value="0.610865" />
         <joint name="yaska4_joint_2_l" value="0.663225" />
@@ -280,14 +296,22 @@
         <joint name="yaska4_joint_6_t" value="2.19911" />
     </group_state>
     <group_state name="Above_working_space" group="DPN1">
-	 <joint name="yaska4_joint_1_s" value="0.610865" />
+        <joint name="yaska4_joint_1_s" value="0.610865" />
         <joint name="yaska4_joint_2_l" value="0.663225" />
         <joint name="yaska4_joint_3_u" value="1.55334" />
         <joint name="yaska4_joint_4_r" value="0.0349066" />
         <joint name="yaska4_joint_5_b" value="-0.872665" />
         <joint name="yaska4_joint_6_t" value="2.19911" />
     </group_state>
-    <group_state name="Above_shuttle_1" group="DPN1">
+        <group_state name="Middle" group="DPN1">
+        <joint name="yaska4_joint_1_s" value="1.5" />
+        <joint name="yaska4_joint_2_l" value="0.25" />
+        <joint name="yaska4_joint_3_u" value="2.2" />
+        <joint name="yaska4_joint_4_r" value="0.0" />
+        <joint name="yaska4_joint_5_b" value="-1.93" />
+        <joint name="yaska4_joint_6_t" value="0.78" />
+    </group_state>
+    <group_state name="Above_shuttle" group="DPN1">
         <joint name="yaska4_joint_1_s" value="2.75762" />
         <joint name="yaska4_joint_2_l" value="0.541052" />
         <joint name="yaska4_joint_3_u" value="2.89725" />
@@ -295,7 +319,7 @@
         <joint name="yaska4_joint_5_b" value="-2.35619" />
         <joint name="yaska4_joint_6_t" value="0.349066" />
     </group_state>
-    <group_state name="On_shuttle_1" group="DPN1">
+    <group_state name="On_shuttle" group="DPN1">
         <joint name="yaska4_joint_1_s" value="2.75762" />
         <joint name="yaska4_joint_2_l" value="0.314159" />
         <joint name="yaska4_joint_3_u" value="1.90241" />
@@ -303,7 +327,7 @@
         <joint name="yaska4_joint_5_b" value="-1.62316" />
         <joint name="yaska4_joint_6_t" value="0.366519" />
     </group_state>
-    <group_state name="Above_shuttle_1" group="DPN1">
+    <group_state name="Above_shuttle" group="DPN1">
         <joint name="yaska4_joint_1_s" value="2.75762" />
         <joint name="yaska4_joint_2_l" value="0.541052" />
         <joint name="yaska4_joint_3_u" value="2.89725" />

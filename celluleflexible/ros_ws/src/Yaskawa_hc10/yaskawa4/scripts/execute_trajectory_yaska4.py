@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import copy
+from turtle import position
 import rospy
 import actionlib
 import moveit_commander
@@ -77,7 +78,9 @@ def BuildSequenceRequest(group):
 	motionPlanItemInitialize.req.goal_constraints.append(constraints1_)
 	motionSequenceRequest.items.append(motionPlanItemInitialize)
 	#on ajoute les autres items a la sequence
-	for n in range(1,len(group_name)):
+	bool = True
+	n = 0
+	while(n<len(group_name)):
 		motionPlanItem = MotionSequenceItem()
 		constraints2_ = Constraints()
 		motionPlanItem.req.pipeline_id = "pilz_industrial_motion_planner"
@@ -86,15 +89,46 @@ def BuildSequenceRequest(group):
 		motionPlanItem.req.max_acceleration_scaling_factor = 1.0
 		motionPlanItem.blend_radius = 0.0
 		motionPlanItem.req.allowed_planning_time = 5.0
-		motionPlanItem.req.group_name = group.get_name()
-		dict_ = group.get_named_target_values(group_name[n])
-		for i in range(0,len(jointName_)):
-			goalJointTemp_ = JointConstraint()
-			goalJointTemp_.joint_name = jointName_[i]
-			goalJointTemp_.position = dict_.get(jointName_[i])
-			constraints2_.joint_constraints.append(goalJointTemp_)
-		motionPlanItem.req.goal_constraints.append(constraints2_)
-		motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
+		if(n==3 and bool):
+			bool = False
+			motionPlanItem.req.group_name = "yaskawa4_hand"
+			jointName1_ = "end_effector_adaptater_mors1"
+			jointPosition1_ = 0.03
+			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
+			jointName2_ = "end_effector_adaptater_mors2"
+			jointPosition2_ = 0.03
+			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
+			goalJointTemp2_ = JointConstraint(joint_name=jointName2_,position=jointPosition2_)
+			constraints2_.joint_constraints.append(goalJointTemp1_)
+			constraints2_.joint_constraints.append(goalJointTemp2_)
+			motionPlanItem.req.goal_constraints.append(constraints2_)
+			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
+		elif(n==7 and bool):
+			bool = False
+			motionPlanItem.req.group_name = "yaskawa4_hand"
+			jointName1_ = "end_effector_adaptater_mors1"
+			jointPosition1_ = 0.0
+			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
+			jointName2_ = "end_effector_adaptater_mors2"
+			jointPosition2_ = 0.0
+			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
+			goalJointTemp2_ = JointConstraint(joint_name=jointName2_,position=jointPosition2_)
+			constraints2_.joint_constraints.append(goalJointTemp1_)
+			constraints2_.joint_constraints.append(goalJointTemp2_)
+			motionPlanItem.req.goal_constraints.append(constraints2_)
+			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
+		else:
+			motionPlanItem.req.group_name = group.get_name()
+			dict_ = group.get_named_target_values(group_name[n])
+			for i in range(0,len(jointName_)):
+				goalJointTemp_ = JointConstraint()
+				goalJointTemp_.joint_name = jointName_[i]
+				goalJointTemp_.position = dict_.get(jointName_[i])
+				constraints2_.joint_constraints.append(goalJointTemp_)
+			motionPlanItem.req.goal_constraints.append(constraints2_)
+			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
+			bool = True
+			n = n+1
 	# la ligne ci-dessous permet de tester si les types de message que l'on ajoute à la séquence sont bons
 	# motionSequenceRequest._check_types()
 	return motionSequenceRequest
