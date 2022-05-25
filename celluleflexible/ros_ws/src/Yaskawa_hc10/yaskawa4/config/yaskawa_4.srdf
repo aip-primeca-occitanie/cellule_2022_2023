@@ -9,6 +9,8 @@
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    
+    <!-- groupe de la pince du yaskawa -->
     <group name="yaskawa4_hand">
         <link name="cylinder_link"/>
         <link name="adaptater_plate_link"/>
@@ -23,8 +25,8 @@
         <joint name="end_effector_adaptater_mors2" value="0.00" />
     </group_state>
         <group_state name="Close" group="yaskawa4_hand">
-        <joint name="end_effector_adaptater_mors1" value="0.035" />
-        <joint name="end_effector_adaptater_mors2" value="0.035" />
+        <joint name="end_effector_adaptater_mors1" value="0.03" />
+        <joint name="end_effector_adaptater_mors2" value="0.03" />
     </group_state>
     <group name="DN2P">
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />

@@ -19,9 +19,9 @@ def TrajectoryResultCallback(errormsg):
 	trajectoryErrorCode4 = errormsg.result.response.error_code.val
 
 #Callback de fin de trajectoire d'initialisation
-def InitializationCallback(errormsg):
-	global trajectoryErrorCode4
-	trajectoryErrorCode4 = errormsg.result.error_code.val
+# def InitializationCallback(errormsg):
+# 	global trajectoryErrorCode4
+# 	trajectoryErrorCode4 = errormsg.result.error_code.val
 
 #Interface de gestion de l'erreur par l'utilisateur
 def ErrorTrajectoryExecution():
@@ -35,103 +35,174 @@ def ErrorTrajectoryExecution():
 		print("Invalid choice, try again")
 
 #Cette fonction permet de faire revenir le robot en position home peut importe sa position actuelle en utilisant le planner ompl
-def Initialize(group):
-	print("Initiating ...")
-	group.set_planning_pipeline_id("ompl")
-	group.set_start_state_to_current_state()
-	group.set_joint_value_target(group.get_named_target_values("home"))
-	group.plan()
-	rospy.sleep(1)
-	group.go(wait=True)
-	group.stop()
-	rospy.sleep(1)
+def Initialize(armgroup,handgroup):
+	# print("Initiating ...")
+	# group.set_planning_pipeline_id("ompl")
+	# group.set_start_state_to_current_state()
+	# group.set_joint_value_target(group.get_named_target_values("home"))
+	# group.plan()
+	# rospy.sleep(1)
+	# group.go(wait=True)
+	# group.stop()
+	# rospy.sleep(1)
+
+	motionSequenceRequest_ = MotionSequenceRequest()
+	for i in range(0,2):
+		motionPlanItemInitialize_ = MotionSequenceItem()
+		constraints_ = Constraints()	
+		#le premier planning a besoin d'un start_state, les autres démarrent automatiquement au goal précédent
+		motionPlanItemInitialize_.req.pipeline_id = "ompl"
+		motionPlanItemInitialize_.req.max_velocity_scaling_factor = 1.0
+		motionPlanItemInitialize_.blend_radius = 0.0
+		motionPlanItemInitialize_.req.allowed_planning_time = 5.0
+		if(i==0):
+			motionPlanItemInitialize_.req.group_name = armgroup.get_name()
+			#initialise start_state à la position dans laquelle se trouve le robot
+			jointName_ = armgroup.get_active_joints()
+			jointPosition_ = armgroup.get_current_joint_values()
+			motionPlanItemInitialize_.req.start_state.joint_state = JointState(name=jointName_,position=jointPosition_)
+			#on récupère le goal
+			dict_ = armgroup.get_named_target_values("home")
+			for i in range(0,len(jointName_)):
+				goalJointTemp_ = JointConstraint()
+				goalJointTemp_.joint_name = jointName_[i]
+				goalJointTemp_.position = dict_.get(jointName_[i])
+				goalJointTemp_.tolerance_above = 1e-6
+				goalJointTemp_.tolerance_below = 1e-6
+				goalJointTemp_.weight = 1.0
+				constraints_.joint_constraints.append(goalJointTemp_)
+			#on ajoute notre premier item a la sequence request
+			motionPlanItemInitialize_.req.goal_constraints.append(constraints_)
+			motionSequenceRequest_.items.append(motionPlanItemInitialize_)
+		else:
+			motionPlanItemInitialize_.req.group_name = handgroup.get_name()
+			#initialise start_state à la position dans laquelle se trouve la pince
+			jointName_ = handgroup.get_active_joints()
+			jointPosition_ = handgroup.get_current_joint_values()
+			motionPlanItemInitialize_.req.start_state.joint_state = JointState(name=jointName_,position=jointPosition_)
+			#on récupère le goal
+			dict_ = handgroup.get_named_target_values("Open")
+			for i in range(0,len(jointName_)):
+				goalJointTemp_ = JointConstraint()
+				goalJointTemp_.joint_name = jointName_[i]
+				goalJointTemp_.position = dict_.get(jointName_[i])
+				goalJointTemp_.tolerance_above = 1e-6
+				goalJointTemp_.tolerance_below = 1e-6
+				goalJointTemp_.weight = 1.0
+				constraints_.joint_constraints.append(goalJointTemp_)
+			#on ajoute notre second item a la sequence request
+			motionPlanItemInitialize_.req.goal_constraints.append(constraints_)
+			motionSequenceRequest_.items.append(motionPlanItemInitialize_)
+	return motionSequenceRequest_
+
 
 # cette fonction permet de construire un séquence de points dont le plannifieur pilz calculera la trajectoire
-def BuildSequenceRequest(group):
-	motionPlanItemInitialize = MotionSequenceItem()
-	motionSequenceRequest = MotionSequenceRequest()
+def BuildSequenceRequest(armgroup,handgroup):
+	motionPlanItemInitialize_ = MotionSequenceItem()
+	motionSequenceRequest_ = MotionSequenceRequest()
 	constraints1_ = Constraints()	
 	#le premier planning a besoin d'un start_state, les autres démarrent automatiquement au goal précédent
-	motionPlanItemInitialize.req.pipeline_id = "pilz_industrial_motion_planner"
+	motionPlanItemInitialize_.req.pipeline_id = "pilz_industrial_motion_planner"
 	# PTP, CIR, LIN
-	motionPlanItemInitialize.req.planner_id = "PTP"
-	motionPlanItemInitialize.req.max_velocity_scaling_factor = 1.0
-	motionPlanItemInitialize.req.max_acceleration_scaling_factor = 1.0
-	motionPlanItemInitialize.blend_radius = 0.0
-	motionPlanItemInitialize.req.allowed_planning_time = 5.0
-	motionPlanItemInitialize.req.group_name = group.get_name()
+	motionPlanItemInitialize_.req.planner_id = "PTP"
+	motionPlanItemInitialize_.req.max_velocity_scaling_factor = 1.0
+	motionPlanItemInitialize_.req.max_acceleration_scaling_factor = 1.0
+	motionPlanItemInitialize_.blend_radius = 0.0
+	motionPlanItemInitialize_.req.allowed_planning_time = 5.0
+	motionPlanItemInitialize_.req.group_name = armgroup.get_name()
 	#initialise start_state à la position dans laquelle se trouve le robot
-	jointName_ = group.get_active_joints()
-	jointPosition_ = group.get_current_joint_values()
-	motionPlanItemInitialize.req.start_state.joint_state = JointState(name=jointName_,position=jointPosition_)
+	jointName_ = armgroup.get_active_joints()
+	jointPosition_ = armgroup.get_current_joint_values()
+	motionPlanItemInitialize_.req.start_state.joint_state = JointState(name=jointName_,position=jointPosition_)
 	#on récupère le premier goal
 	#récupère le nom des différentes positions définie dans le groupe du fichier srdf
-	group_name = group.get_named_targets()
+	armgroup_name = armgroup.get_named_targets()
 	#on récupère les noms et valeurs des joints de la première postion du groupe sous forme de dictionnaire
-	dict_ = group.get_named_target_values(group_name[0])
+	dict_ = armgroup.get_named_target_values(armgroup_name[0])
 	#on ajoute notre premier item a la sequence request
 	for i in range(0,len(jointName_)):
 		goalJointTemp_ = JointConstraint()
 		goalJointTemp_.joint_name = jointName_[i]
 		goalJointTemp_.position = dict_.get(jointName_[i])
+		goalJointTemp_.tolerance_above = 1e-6
+		goalJointTemp_.tolerance_below = 1e-6
+		goalJointTemp_.weight = 1.0
 		constraints1_.joint_constraints.append(goalJointTemp_)
-	motionPlanItemInitialize.req.goal_constraints.append(constraints1_)
-	motionSequenceRequest.items.append(motionPlanItemInitialize)
-	#on ajoute les autres items a la sequence
+	motionPlanItemInitialize_.req.goal_constraints.append(constraints1_)
+	motionSequenceRequest_.items.append(motionPlanItemInitialize_)
+	# #on ajoute les autres items a la sequence
 	bool = True
-	n = 0
-	while(n<len(group_name)):
-		motionPlanItem = MotionSequenceItem()
+	iter = 0
+	while(iter<len(armgroup_name)):
+		motionPlanItem_ = MotionSequenceItem()
 		constraints2_ = Constraints()
-		motionPlanItem.req.pipeline_id = "pilz_industrial_motion_planner"
-		motionPlanItem.req.planner_id = "PTP"
-		motionPlanItem.req.max_velocity_scaling_factor = 1.0
-		motionPlanItem.req.max_acceleration_scaling_factor = 1.0
-		motionPlanItem.blend_radius = 0.0
-		motionPlanItem.req.allowed_planning_time = 5.0
-		if(n==2 and bool):
+		motionPlanItem_.req.pipeline_id = "pilz_industrial_motion_planner"
+		motionPlanItem_.req.planner_id = "PTP"
+		motionPlanItem_.req.max_velocity_scaling_factor = 1.0
+		motionPlanItem_.req.max_acceleration_scaling_factor = 1.0
+		motionPlanItem_.blend_radius = 0.0
+		motionPlanItem_.req.allowed_planning_time = 5.0
+		#on est au dessus d'une navette ou d'un poste de travail on récupère une instuction pince
+		if(iter==2 and bool):
 			bool = False
-			motionPlanItem.req.group_name = "yaskawa4_hand"
-			jointName1_ = "end_effector_adaptater_mors1"
-			jointPosition1_ = 0.03
-			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
-			jointName2_ = "end_effector_adaptater_mors2"
-			jointPosition2_ = 0.03
-			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
-			goalJointTemp2_ = JointConstraint(joint_name=jointName2_,position=jointPosition2_)
-			constraints2_.joint_constraints.append(goalJointTemp1_)
-			constraints2_.joint_constraints.append(goalJointTemp2_)
-			motionPlanItem.req.goal_constraints.append(constraints2_)
-			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
-		elif(n==6 and bool):
-			bool = False
-			motionPlanItem.req.group_name = "yaskawa4_hand"
-			jointName1_ = "end_effector_adaptater_mors1"
-			jointPosition1_ = 0.0
-			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
-			jointName2_ = "end_effector_adaptater_mors2"
-			jointPosition2_ = 0.0
-			goalJointTemp1_ = JointConstraint(joint_name=jointName1_,position=jointPosition1_)
-			goalJointTemp2_ = JointConstraint(joint_name=jointName2_,position=jointPosition2_)
-			constraints2_.joint_constraints.append(goalJointTemp1_)
-			constraints2_.joint_constraints.append(goalJointTemp2_)
-			motionPlanItem.req.goal_constraints.append(constraints2_)
-			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
-		else:
-			motionPlanItem.req.group_name = group.get_name()
-			dict_ = group.get_named_target_values(group_name[n])
+			motionPlanItem_.req.group_name = handgroup.get_name()
+			#initialise start_state à la position dans laquelle se trouve la pince du srdf
+			jointName_ = handgroup.get_active_joints()
+			jointPosition_ = handgroup.get_current_joint_values()
+			motionPlanItem_.req.start_state.joint_state = JointState(name=jointName_,position=jointPosition_)
+			#on récupère le goal
+			dict_ = handgroup.get_named_target_values("Close")
 			for i in range(0,len(jointName_)):
 				goalJointTemp_ = JointConstraint()
 				goalJointTemp_.joint_name = jointName_[i]
 				goalJointTemp_.position = dict_.get(jointName_[i])
+				goalJointTemp_.tolerance_above = 1e-6
+				goalJointTemp_.tolerance_below = 1e-6
+				goalJointTemp_.weight = 1.0
 				constraints2_.joint_constraints.append(goalJointTemp_)
-			motionPlanItem.req.goal_constraints.append(constraints2_)
-			motionSequenceRequest.items.append(copy.deepcopy(motionPlanItem))
+			#on ajoute notre item a la sequence request
+			motionPlanItem_.req.goal_constraints.append(constraints2_)
+			motionSequenceRequest_.items.append(motionPlanItem_)
+		#on est au dessus d'une navette ou d'un poste de travail on récupère une instuction pince du srdf
+		elif(iter==6 and bool):
+			bool = False
+			motionPlanItem_.req.group_name = handgroup.get_name()
+			jointName_ = handgroup.get_active_joints()
+			#on récupère le goal
+			dict_ = handgroup.get_named_target_values("Open")
+			for i in range(0,len(jointName_)):
+				goalJointTemp_ = JointConstraint()
+				goalJointTemp_.joint_name = jointName_[i]
+				goalJointTemp_.position = dict_.get(jointName_[i])
+				goalJointTemp_.tolerance_above = 1e-6
+				goalJointTemp_.tolerance_below = 1e-6
+				goalJointTemp_.weight = 1.0
+				constraints2_.joint_constraints.append(goalJointTemp_)
+			#on ajoute notre item a la sequence request
+			motionPlanItem_.req.goal_constraints.append(constraints2_)
+			motionSequenceRequest_.items.append(motionPlanItem_)
+		#on récupère les instructions de la trajectoire de pick and place dans le fichier srdf
+		else:
+			motionPlanItem_.req.group_name = armgroup.get_name()
+			jointName_ = armgroup.get_active_joints()
+			#on récupère le goal
+			dict_ = armgroup.get_named_target_values(armgroup_name[iter])
+			for i in range(0,len(jointName_)):
+				goalJointTemp_ = JointConstraint()
+				goalJointTemp_.joint_name = jointName_[i]
+				goalJointTemp_.position = dict_.get(jointName_[i])
+				goalJointTemp_.tolerance_above = 1e-6
+				goalJointTemp_.tolerance_below = 1e-6
+				goalJointTemp_.weight = 1.0
+				constraints2_.joint_constraints.append(goalJointTemp_)
+			#on ajoute notre item a la sequence request
+			motionPlanItem_.req.goal_constraints.append(constraints2_)
+			motionSequenceRequest_.items.append(motionPlanItem_)
 			bool = True
-			n = n+1
+			iter = iter+1
 	# la ligne ci-dessous permet de tester si les types de message que l'on ajoute à la séquence sont bons
 	# motionSequenceRequest._check_types()
-	return motionSequenceRequest
+	return motionSequenceRequest_
 
 #Callback de DeplacerPiece si mode rviz ou atelier
 def ControlCallback(pub_yaska4):
@@ -140,32 +211,41 @@ def ControlCallback(pub_yaska4):
 	#attente de connexion
 	clientSequence_.wait_for_server()
 	# pub_motionSequenceRequest.publish(goal_)
-	#on récupère la trajectoire a réaliser définie dans les groupe du fichier config/.srdf
+	#on récupère la trajectoire a réaliser définie dans les groupes du fichier config/.srdf
 	if pub_yaska4.data == 1:
-		group = moveit_commander.MoveGroupCommander("DN1P", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN1P", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 2:
-		group = moveit_commander.MoveGroupCommander("DN2P", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN2P", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 3:
-		group = moveit_commander.MoveGroupCommander("DPN1", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DPN1", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 4:
-		group = moveit_commander.MoveGroupCommander("DPN2", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DPN2", robot_description="/yaska4/robot_description", ns="/yaska4")
 	else :
 		print("Error callback control yaska4 \n")
 		return
-	print(f"Deplacement is {group.get_name()}")
+	# on récupère le groupe associé à la pince du robot
+	handgroup = moveit_commander.MoveGroupCommander("yaskawa4_hand", robot_description="/yaska4/robot_description", ns="/yaska4")
+	print(f"Deplacement is {armgroup.get_name()}")
 	while(True):
 		# Initialise la position du robot à "home"
-		Initialize(group)
+		initialize_ = MoveGroupSequenceActionGoal()
+		initialize_.goal.request = Initialize(armgroup,handgroup)
+		print("Initiating ...")
+		clientSequence_.send_goal(initialize_.goal)
+		finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(30))
 		#Si l'initialisation s'est bien passé, on commence le pick and place
-		if((trajectoryErrorCode4 == 1)):
+		if(finished_before_timeout & (trajectoryErrorCode4 == 1)):
+			print("Initialization succeeded !")
 			#construction de la séquence de point à envoyer
-			group.set_start_state_to_current_state()
+			# armgroup.set_start_state_to_current_state()
 			goal_ = MoveGroupSequenceActionGoal()
-			goal_.goal.request = BuildSequenceRequest(group)
+			goal_.goal.request = BuildSequenceRequest(armgroup,handgroup)
+			print("Executing Trajectory ...")
 			clientSequence_.send_goal(goal_.goal)
 			finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(30))
 			rospy.sleep(1)
 			if(finished_before_timeout & (trajectoryErrorCode4 == 1)):
+				print("Trajectory completed !")
 				rospy.loginfo(clientSequence_.get_goal_status_text())
 				# print("Results: %s" %client_.action_client.ActionResult)
 				#si tout s'est bien passé, on averti coppeliaSim de la fin d'execution du movement du robot
@@ -207,8 +287,8 @@ if __name__ == "__main__":
 	mymsgYaska4 = FinDeplacerPiece_Msg()
 	rospy.Subscriber('/control_robot_yaska4',Int32, ControlCallback)
 	rospy.Subscriber('/yaska4/sequence_move_group/result', MoveGroupSequenceActionResult, TrajectoryResultCallback)
-	rospy.Subscriber('/yaska4/move_group/result', MoveGroupActionResult, InitializationCallback)
 	pub_fintache = rospy.Publisher("/commande/Simulation/finTache", FinDeplacerPiece_Msg,  queue_size=1)
+	# rospy.Subscriber('/yaska4/move_group/result', MoveGroupActionResult, InitializationCallback)
 	# pub_motionSequenceRequest = rospy.Publisher( "/sequence_move_group/goal", MoveGroupSequenceActionGoal, queue_size=1)
 	rospy.spin()
 	moveit_commander.roscpp_shutdown()
