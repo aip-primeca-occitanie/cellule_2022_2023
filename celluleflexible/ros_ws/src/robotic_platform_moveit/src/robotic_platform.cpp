@@ -8,6 +8,8 @@
 #include <math.h>
 using namespace std;
 
+// ERGOTS PI A intégrer dans le déplacement piece et se désactive avec la commande Ouvrir_PS_GO()
+// Pour pouvoir enclencher l'ergot, il faut : que la navette soit en face du PS correspondant, que le PS correspondant soit a stop'
 
 robotic_platform::robotic_platform(ros::NodeHandle noeud, std::string name):yaska4Type_{Robot_::Coppelia},yaska3Type_{Robot_::Coppelia},kukaType_{Robot_::Coppelia},staubliType_{Robot_::Coppelia}
 {	
