@@ -1,25 +1,85 @@
 <?xml version="1.0" ?>
 <robot name="hand" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-  <link name="end_effector_link">
+  <link name="fixation_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-1372735 EGP 40-N-N-IOL, 00ohne.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Fixation_Bride_Robot_CapteurRef.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <!-- <material name="silver"/> -->
+      <material name="silver"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-1372735 EGP 40-N-N-IOL, 00ohne.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Fixation_Bride_Robot_CapteurRef.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
+ <link name="interface_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Interface_PGNPlus40_EGP40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Interface_PGNPlus40_EGP40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="end_effector_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-0318448 PGN-plus-P 40_ 000.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-0318448 PGN-plus-P 40_ 000.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="mors1_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- 
+  <link name="mors2_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link> -->
 
-  <!-- <joint name="table_link-base" type="fixed">
-      <parent link="table_link" />
-      <child link="base_table" />
-  </joint> -->
+  <!-- Création des joints  -->
+  <joint name="fixation_interface" type="fixed">
+      <origin rpy="3.141592 0 0" xyz="0 0.004 0" />
+      <parent link="fixation_link" />
+      <child link="interface_link" />
+  </joint>
+  <joint name="interface_end_effector" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0.015 0" />
+      <parent link="interface_link" />
+      <child link="end_effector_link" />
+  </joint>
+  <joint name="end_effector_mors1" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.1 0.03 0" />
+      <parent link="end_effector_link" />
+      <child link="mors1_link" />
+  </joint>
 
 </robot>

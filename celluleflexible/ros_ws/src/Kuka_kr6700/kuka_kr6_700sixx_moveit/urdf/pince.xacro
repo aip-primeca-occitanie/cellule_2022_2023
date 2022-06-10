@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+
+<robot name="hand" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- Ajout des différentes pièces de la pinces / couleurs définies dans le fichier materials.xacro-->
+    <link name="adaptater_plate_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/adaptater_plate.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/adaptater_plate.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+    <link name="KGG_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/SCHUNK-0303070 KGG 140-60 _011.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="pale_oyster"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/SCHUNK-0303070 KGG 140-60 _011.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+    <link name="mors1_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Mors.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Mors.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+    <link name="mors2_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Mors.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Mors.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+
+  <joint name="adaptater_plate_KGG" type="fixed" >
+    <origin rpy="-1.57079 0 3.141592" xyz="0 0 0.005" />
+    <parent link="adaptater_plate_link" />
+    <child link="KGG_link" />
+  </joint>
+  <joint name="KGG_mors1" type="fixed" >
+    <origin rpy="0 0 -1.57079" xyz="0.011 -0.039 -0.0145" />
+    <parent link="KGG_link" />
+    <child link="mors1_link" />
+  </joint>
+  <joint name="KGG_mors2" type="fixed" >
+    <origin rpy="0 3.141592 1.57079" xyz="-0.011 -0.039 0.0145" />
+    <parent link="KGG_link" />
+    <child link="mors2_link" />
+  </joint>
+
+</robot>

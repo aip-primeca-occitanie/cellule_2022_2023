@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(staubli_tx2_60l_moveit)
+project(kuka_kr6_700sixx_moveit)
 
 find_package(catkin REQUIRED)
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<robot name="kuka_kr6r700sixx" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/kr6r700sixx_macro.xacro"/>
+  <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/pince.xacro" />
+  <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/materials.xacro"/>
+  <xacro:kuka_kr6r700sixx prefix="kuka_"/>
+
+  <!-- linking every robots to world and workspaces -->
+  <joint name="tool_adapater_plate" type="fixed" >
+    <origin rpy="0 0 1.57079" xyz="0 0 0.0045" />
+    <parent link="kuka_tool0" />
+    <child link="adaptater_plate_link" />
+  </joint>
+</robot>
