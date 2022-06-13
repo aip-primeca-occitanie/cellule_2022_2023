@@ -19,6 +19,3 @@ add_dependencies(main_robotic_platform ${${PROJECT_NAME}_gencpp} ${catkin_EXPORT
 
 target_link_libraries(main_robotic_platform ${catkin_LIBRARIES} )
 
-install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-  PATTERN "setup_assistant.launch" EXCLUDE)
-install(DIRECTORY config DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

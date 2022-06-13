@@ -1,0 +1,19 @@
+controller_list:
+  - name: DN1P_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - kuka_joint_a1
+      - kuka_joint_a2
+      - kuka_joint_a3
+      - kuka_joint_a4
+      - kuka_joint_a5
+      - kuka_joint_a6
+  - name: kuka_hand_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - KGG_laison2
+      - KGG_liaison1

@@ -1,13 +1,12 @@
-<?xml version="1.0"?>
 <launch>
-  <group ns="yaska4">
+  <group ns="kuka">
     <!-- specify the planning pipeline -->
     <arg name="pipeline" default="ompl" />
 
     <!-- By default, we do not start a database (it can be large) -->
     <arg name="db" default="false" />
     <!-- Allow user to specify database location -->
-    <arg name="db_path" default="$(find yaskawa4)/default_warehouse_mongo_db" />
+    <arg name="db_path" default="$(find kuka_kr6_700sixx_moveit)/default_warehouse_mongo_db" />
 
     <!-- By default, we are not in debug mode -->
     <arg name="debug" default="false" />
@@ -23,12 +22,9 @@
     <!-- By default, hide joint_state_publisher's GUI in 'fake' controller_manager mode -->
     <arg name="use_gui" default="false" />
     <arg name="use_rviz" default="true" />
-    <arg name="sim" default="true" />
-    <!--Uncomment the lines below if you want to fixate the robot_ip address and its controller-->
-    <arg name="robot_ip" default="192.168.1.40" unless="$(arg sim)" />
-    <arg name="controller" default="yrc1000" unless="$(arg sim)" />
+
     <!-- If needed, broadcast static tf for robot root -->
-    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 virtual world" /> -->
+    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 virtual kuka_base_link" /> -->
 
 
 
@@ -69,11 +65,5 @@
     <include file="$(dirname)/default_warehouse_db.launch" if="$(arg db)">
       <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
     </include>
-    <group unless="$(arg sim)">
-      <include file="$(find motoman_hc10_support)/launch/robot_interface_streaming_hc10.launch" >
-        <arg name="robot_ip" value="$(arg robot_ip)"/>
-        <arg name="controller" value="$(arg controller)"/>
-      </include>
-    </group>
   </group>
 </launch>

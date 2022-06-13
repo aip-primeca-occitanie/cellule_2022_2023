@@ -54,6 +54,32 @@
         </geometry>
       </collision>
     </link>
+    <link name="liaison1_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Piece_liaison.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="pale_oyster"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Piece_liaison.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+    <link name="liaison2_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Piece_liaison.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="pale_oyster"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://kuka_kr6_700sixx_moveit/meshes/hand/Piece_liaison.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
 
 
   <joint name="adaptater_plate_KGG" type="fixed" >
@@ -61,15 +87,26 @@
     <parent link="adaptater_plate_link" />
     <child link="KGG_link" />
   </joint>
-  <joint name="KGG_mors1" type="fixed" >
-    <origin rpy="0 0 -1.57079" xyz="0.011 -0.039 -0.0145" />
+  <joint name="KGG_liaison1" type="prismatic" >
+    <origin rpy="0 0 0" xyz="0 0 0" />
     <parent link="KGG_link" />
+    <child link="liaison1_link" />
+    <limit effort="1000.0" lower="0" upper="0.03" velocity="0.5"/>
+  </joint>
+  <joint name="KGG_laison2" type="prismatic" >
+    <origin rpy="0 3.141592 0" xyz="0 0 0" />
+    <parent link="KGG_link" />
+    <child link="liaison2_link" />
+    <limit effort="1000.0" lower="0" upper="0.03" velocity="0.5"/>
+  </joint>
+  <joint name="liason1_mors1" type="fixed" >
+    <origin rpy="0 0 -1.57079" xyz="0.011 -0.039 -0.0145" />
+    <parent link="liaison1_link" />
     <child link="mors1_link" />
   </joint>
-  <joint name="KGG_mors2" type="fixed" >
-    <origin rpy="0 3.141592 1.57079" xyz="-0.011 -0.039 0.0145" />
-    <parent link="KGG_link" />
+  <joint name="liaison2_mors2" type="fixed" >
+    <origin rpy="0 0 -1.57079" xyz="0.011 -0.039 -0.0145" />
+    <parent link="liaison2_link" />
     <child link="mors2_link" />
   </joint>
-
 </robot>

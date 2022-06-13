@@ -1,0 +1,20 @@
+controller_list:
+  - name: fake_DN1P_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - kuka_joint_a1
+      - kuka_joint_a2
+      - kuka_joint_a3
+      - kuka_joint_a4
+      - kuka_joint_a5
+      - kuka_joint_a6
+  - name: fake_kuka_hand_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - KGG_laison2
+      - KGG_liaison1
+initial:  # Define initial robot poses per group
+  - group: DN1P
+    pose: home
+  - group: kuka_hand
+    pose: Open
