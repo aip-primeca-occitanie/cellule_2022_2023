@@ -52,6 +52,7 @@
     <disable_collisions link1="KGG_link" link2="liaison2_link" reason="Adjacent"/>
     <disable_collisions link1="KGG_link" link2="mors1_link" reason="Never"/>
     <disable_collisions link1="KGG_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="KGG_link" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="adaptater_plate_link" link2="kuka_link_3" reason="Never"/>
     <disable_collisions link1="adaptater_plate_link" link2="kuka_link_5" reason="Never"/>
     <disable_collisions link1="adaptater_plate_link" link2="kuka_link_6" reason="Adjacent"/>
@@ -59,12 +60,50 @@
     <disable_collisions link1="adaptater_plate_link" link2="liaison2_link" reason="Never"/>
     <disable_collisions link1="adaptater_plate_link" link2="mors1_link" reason="Never"/>
     <disable_collisions link1="adaptater_plate_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="adaptater_plate_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="ergots2_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="kuka_base_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="kuka_link_1" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="pieds_cellule_link" reason="Adjacent"/>
+    <disable_collisions link1="ergots1_link" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="plateau_table_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="kuka_base_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="kuka_link_1" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="kuka_link_2" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="kuka_link_3" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="pieds_cellule_link" reason="Adjacent"/>
+    <disable_collisions link1="ergots2_link" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="plateau_table_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_base_link" link2="kuka_link_1" reason="Adjacent"/>
+    <disable_collisions link1="kuka_base_link" link2="pieds_cellule_link" reason="Never"/>
+    <disable_collisions link1="kuka_base_link" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_base_link" link2="plateau_table_link" reason="Adjacent"/>
+    <disable_collisions link1="kuka_base_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="kuka_base_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="kuka_base_link" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_1" link2="kuka_link_2" reason="Adjacent"/>
     <disable_collisions link1="kuka_link_1" link2="kuka_link_3" reason="Never"/>
+    <disable_collisions link1="kuka_link_1" link2="pieds_cellule_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_1" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_1" link2="plateau_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_1" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_1" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_1" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_2" link2="kuka_link_3" reason="Adjacent"/>
     <disable_collisions link1="kuka_link_2" link2="kuka_link_5" reason="Never"/>
     <disable_collisions link1="kuka_link_2" link2="kuka_link_6" reason="Never"/>
+    <disable_collisions link1="kuka_link_2" link2="pieds_cellule_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_2" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_2" link2="plateau_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_2" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_2" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_2" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_3" link2="kuka_link_4" reason="Adjacent"/>
     <disable_collisions link1="kuka_link_3" link2="kuka_link_5" reason="Never"/>
     <disable_collisions link1="kuka_link_3" link2="kuka_link_6" reason="Never"/>
@@ -72,23 +111,50 @@
     <disable_collisions link1="kuka_link_3" link2="liaison2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_3" link2="mors1_link" reason="Never"/>
     <disable_collisions link1="kuka_link_3" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_3" link2="pieds_cellule_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_3" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_3" link2="plateau_table_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_3" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_3" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_3" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_4" link2="kuka_link_5" reason="Adjacent"/>
     <disable_collisions link1="kuka_link_4" link2="kuka_link_6" reason="Never"/>
     <disable_collisions link1="kuka_link_4" link2="mors1_link" reason="Never"/>
-    <disable_collisions link1="kuka_link_4" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_4" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_5" link2="kuka_link_6" reason="Adjacent"/>
     <disable_collisions link1="kuka_link_5" link2="liaison1_link" reason="Never"/>
     <disable_collisions link1="kuka_link_5" link2="liaison2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_5" link2="mors1_link" reason="Never"/>
     <disable_collisions link1="kuka_link_5" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_5" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_6" link2="liaison1_link" reason="Never"/>
     <disable_collisions link1="kuka_link_6" link2="liaison2_link" reason="Never"/>
     <disable_collisions link1="kuka_link_6" link2="mors1_link" reason="Never"/>
     <disable_collisions link1="kuka_link_6" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="kuka_link_6" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="liaison1_link" link2="liaison2_link" reason="Never"/>
     <disable_collisions link1="liaison1_link" link2="mors1_link" reason="Adjacent"/>
     <disable_collisions link1="liaison1_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="liaison1_link" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="liaison2_link" link2="mors1_link" reason="Never"/>
     <disable_collisions link1="liaison2_link" link2="mors2_link" reason="Adjacent"/>
+    <disable_collisions link1="liaison2_link" link2="rail_tournant2_link" reason="Never"/>
     <disable_collisions link1="mors1_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="mors2_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="pieds_table_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_cellule_link" link2="plateau_table_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_milieu_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="plateau_table_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_table_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="plateau_table_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="plateau_table_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="plateau_table_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="rail_tournant1_link" reason="Adjacent"/>
+    <disable_collisions link1="rail_milieu_link" link2="rail_tournant2_link" reason="Adjacent"/>
+    <disable_collisions link1="rail_tournant1_link" link2="rail_tournant2_link" reason="Never"/>
 </robot>

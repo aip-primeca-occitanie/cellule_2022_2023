@@ -6,31 +6,40 @@ import moveit_commander
 from std_msgs.msg import Int32
 from robots.msg import FinDeplacerPiece_Msg
 from moveit_msgs.msg import MoveGroupSequenceActionResult, MoveGroupSequenceActionGoal, MoveGroupSequenceAction, DisplayTrajectory
-from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint
+from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint, MotionSequenceResponse
 from sensor_msgs.msg import JointState
 
 trajectoryErrorCode4 = 1 #Succes = 1 in error_code
 
+#permet de créer des fichiers txt pour visualiser les trajectoires des joints en utilisant le script plot.py
 def DisplayTrajectoryCallback(traj):
 	accel = []
 	vel = []
 	pos = []
+	sec = []
+	nsec = []
 	for points in traj.trajectory[0].joint_trajectory.points:
 		if len(points.accelerations)==6:
 			pos.append(points.positions)
 			accel.append(points.accelerations)
 			vel.append(points.velocities)
+			sec.append(points.time_from_start.secs)
+			nsec.append(points.time_from_start.nsecs)
 	fichierpos = open("./src/Yaskawa_hc10/yaskawa4/scripts/pos.txt","a")
 	fichiervel = open("./src/Yaskawa_hc10/yaskawa4/scripts/vel.txt","a")
 	fichieracc = open("./src/Yaskawa_hc10/yaskawa4/scripts/acc.txt","a")
+	fichiertime = open("./src/Yaskawa_hc10/yaskawa4/scripts/time.txt","a")
 	for i in range(0,len(vel)):
 		fichieracc.write(f"{accel[i][0]} {accel[i][1]} {accel[i][2]} {accel[i][3]} {accel[i][4]} {accel[i][5]}\n")
 		fichiervel.write(f"{vel[i][0]} {vel[i][1]} {vel[i][2]} {vel[i][3]} {vel[i][4]} {vel[i][5]}\n")
 		fichierpos.write(f"{pos[i][0]} {pos[i][1]} {pos[i][2]} {pos[i][3]} {pos[i][4]} {pos[i][5]}\n")
+		fichiertime.write(f"{sec[i]} {nsec[i]}\n")
 	fichierpos.close()
 	fichiervel.close()
 	fichieracc.close()
-#Callback de fin de la trajectoire de pick and place
+	fichiertime.close()
+
+#Callback de fin de trajectoire 
 def TrajectoryResultCallback(errormsg):
 	global trajectoryErrorCode4
 	trajectoryErrorCode4 = errormsg.result.response.error_code.val
@@ -78,6 +87,7 @@ def Initialize(armgroup,handgroup):
 			jointName_ = armgroup.get_active_joints()
 			jointPosition_ = armgroup.get_current_joint_values()
 			motionPlanItemInitialize_.req.start_state.joint_state = JointState(name=jointName_,position=jointPosition_)
+			motionPlanItemInitialize_.req.start_state.joint_state.velocity
 			#on récupère le goal
 			dict_ = armgroup.get_named_target_values("home")
 			for i in range(0,len(jointName_)):
@@ -122,10 +132,11 @@ def BuildSequenceRequest(armgroup,handgroup):
 	while(iter<len(armgroup_name)):
 		motionPlanItem_ = MotionSequenceItem()
 		constraints2_ = Constraints()
+		# motionPlanItem_.req.pipeline_id = "ompl"
 		motionPlanItem_.req.pipeline_id = "pilz_industrial_motion_planner"
 		motionPlanItem_.req.planner_id = "PTP"
 		motionPlanItem_.req.max_velocity_scaling_factor = 1.0
-		motionPlanItem_.req.max_acceleration_scaling_factor = 0.1
+		motionPlanItem_.req.max_acceleration_scaling_factor = 1.0
 		motionPlanItem_.req.allowed_planning_time = 5.0
 		#on est au dessus d'une navette ou d'un poste de travail on récupère une instuction pince
 		if(iter==2 and bool):
@@ -171,8 +182,8 @@ def BuildSequenceRequest(armgroup,handgroup):
 		#on récupère les instructions de la trajectoire de pick and place dans le fichier srdf
 		else:
 			#blend radius doit être égal à 0 pour le dernier point ainsi que lorsqu'on change de planning group
-			if ((iter == len(armgroup_name)-1) or iter == 1 or iter == 5):
-				motionPlanItem_.blend_radius == 0.0
+			if(iter == 0 or iter == 2 or iter == 3 or iter == 4 or iter == 6):
+				motionPlanItem_.blend_radius = 0.0
 			else:
 				motionPlanItem_.blend_radius = 0.0
 			motionPlanItem_.req.group_name = armgroup.get_name()
@@ -260,6 +271,7 @@ def ControlCallback(pub_yaska4):
 					mymsgYaska4.FinDeplacerR4 = 0
 					pub_fintache.publish(mymsgYaska4)
 					break
+		#Si l'initialisation a échouée
 		else:
 			print("Error during initialization")
 			choice = ErrorTrajectoryExecution()

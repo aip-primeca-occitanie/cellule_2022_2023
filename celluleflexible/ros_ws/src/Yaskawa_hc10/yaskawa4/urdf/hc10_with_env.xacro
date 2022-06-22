@@ -9,7 +9,8 @@
     <xacro:include filename="$(find yaskawa4)/urdf/walls.xacro" />
     <xacro:include filename="$(find yaskawa4)/urdf/pince.xacro"/>
     <xacro:yaska prefix="yaska4" />
-    <!-- linking every robots to world and workspaces -->
+
+   <!-- linking robot to world,workspaces and end-effector -->
     <link name="world" />
 
     <joint name="world_walls_joint" type="fixed">
@@ -33,4 +34,5 @@
         <parent link="yaska4_tool0" />
         <child link="cylinder_link" />
     </joint>
+    
 </robot>

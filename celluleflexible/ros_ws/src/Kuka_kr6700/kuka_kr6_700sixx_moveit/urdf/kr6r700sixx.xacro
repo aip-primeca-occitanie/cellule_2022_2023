@@ -4,9 +4,31 @@
   <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/kr6r700sixx_macro.xacro"/>
   <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/pince.xacro" />
   <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/table.xacro" />
+  <xacro:include filename="$(find kuka_kr6_700sixx_moveit)/urdf/cell.xacro" />
   <xacro:kuka_kr6r700sixx prefix="kuka_"/>
 
-  <!-- linking every robots to world and workspaces -->
+  <!-- linking robot to world,workspaces and end-effector -->
+  <link name="world" />
+
+  <joint name="world_cell" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0.5 0.698"/>
+      <parent link="world" />
+      <child link="pieds_cellule_link" />
+  </joint>
+
+  <joint name="world_table" type="fixed">
+      <origin rpy="0 0 0" xyz="0.03 0 0.645" />
+      <parent link="world" />
+      <child link="pieds_table_link" />
+  </joint>
+
+  <joint name="table_kuka" type="fixed">
+      <origin rpy="0 0 1.57079" xyz="0.25 0 0" />
+      <parent link="plateau_table_link" />
+      <child link="kuka_base_link" />
+  </joint>
+
   <joint name="tool_adapater_plate" type="fixed" >
     <origin rpy="0 0 1.57079" xyz="0 0 0.0045" />
     <parent link="kuka_tool0" />
