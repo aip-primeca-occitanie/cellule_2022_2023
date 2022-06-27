@@ -11,20 +11,25 @@ from sensor_msgs.msg import JointState
 
 trajectoryErrorCode4 = 1 #Succes = 1 in error_code
 
+#Callback de fin de trajectoire 
+#permet de vérifier que la trajectoire s'est bien effectuée 
 #permet de créer des fichiers txt pour visualiser les trajectoires des joints en utilisant le script plot.py
-def DisplayTrajectoryCallback(traj):
+def TrajectoryResultCallback(resultmsg):
 	accel = []
 	vel = []
 	pos = []
 	sec = []
 	nsec = []
-	for points in traj.trajectory[0].joint_trajectory.points:
-		if len(points.accelerations)==6:
-			pos.append(points.positions)
-			accel.append(points.accelerations)
-			vel.append(points.velocities)
-			sec.append(points.time_from_start.secs)
-			nsec.append(points.time_from_start.nsecs)
+	global trajectoryErrorCode4
+	trajectoryErrorCode4 = resultmsg.result.response.error_code.val
+	for traj in resultmsg.result.response.planned_trajectories:
+		for points in traj.joint_trajectory.points:
+			if len(points.accelerations)==6:
+				pos.append(points.positions)
+				accel.append(points.accelerations)
+				vel.append(points.velocities)
+				sec.append(points.time_from_start.secs)
+				nsec.append(points.time_from_start.nsecs)
 	fichierpos = open("./src/Yaskawa_hc10/yaskawa4/scripts/pos.txt","a")
 	fichiervel = open("./src/Yaskawa_hc10/yaskawa4/scripts/vel.txt","a")
 	fichieracc = open("./src/Yaskawa_hc10/yaskawa4/scripts/acc.txt","a")
@@ -39,16 +44,6 @@ def DisplayTrajectoryCallback(traj):
 	fichieracc.close()
 	fichiertime.close()
 
-#Callback de fin de trajectoire 
-def TrajectoryResultCallback(errormsg):
-	global trajectoryErrorCode4
-	trajectoryErrorCode4 = errormsg.result.response.error_code.val
-
-#Callback de fin de trajectoire d'initialisation
-# def InitializationCallback(errormsg):
-# 	global trajectoryErrorCode4
-# 	trajectoryErrorCode4 = errormsg.result.error_code.val
-
 #Interface de gestion de l'erreur par l'utilisateur
 def ErrorTrajectoryExecution():
 	print("""What would you like to do? 
@@ -62,16 +57,6 @@ def ErrorTrajectoryExecution():
 
 #Cette fonction permet de faire revenir le robot en position home peut importe sa position actuelle en utilisant le planner ompl
 def Initialize(armgroup,handgroup):
-	# print("Initiating ...")
-	# group.set_planning_pipeline_id("ompl")
-	# group.set_start_state_to_current_state()
-	# group.set_joint_value_target(group.get_named_target_values("home"))
-	# group.plan()
-	# rospy.sleep(1)
-	# group.go(wait=True)
-	# group.stop()
-	# rospy.sleep(1)
-
 	motionSequenceRequest_ = MotionSequenceRequest()
 	for i in range(0,2):
 		motionPlanItemInitialize_ = MotionSequenceItem()
@@ -136,7 +121,7 @@ def BuildSequenceRequest(armgroup,handgroup):
 		motionPlanItem_.req.pipeline_id = "pilz_industrial_motion_planner"
 		motionPlanItem_.req.planner_id = "PTP"
 		motionPlanItem_.req.max_velocity_scaling_factor = 1.0
-		motionPlanItem_.req.max_acceleration_scaling_factor = 1.0
+		motionPlanItem_.req.max_acceleration_scaling_factor = 0.2
 		motionPlanItem_.req.allowed_planning_time = 5.0
 		#on est au dessus d'une navette ou d'un poste de travail on récupère une instuction pince
 		if(iter==2 and bool):
@@ -183,7 +168,7 @@ def BuildSequenceRequest(armgroup,handgroup):
 		else:
 			#blend radius doit être égal à 0 pour le dernier point ainsi que lorsqu'on change de planning group
 			if(iter == 0 or iter == 2 or iter == 3 or iter == 4 or iter == 6):
-				motionPlanItem_.blend_radius = 0.0
+				motionPlanItem_.blend_radius = 0.15
 			else:
 				motionPlanItem_.blend_radius = 0.0
 			motionPlanItem_.req.group_name = armgroup.get_name()
@@ -230,7 +215,7 @@ def ControlCallback(pub_yaska4):
 	handgroup = moveit_commander.MoveGroupCommander("yaskawa4_hand", robot_description="/yaska4/robot_description", ns="/yaska4")
 	print(f"Deplacement is {armgroup.get_name()}")
 	while(True):
-		# Initialise la position du robot à "home"
+		#Initialise la position du robot à "home" avec ompl
 		initialize_ = MoveGroupSequenceActionGoal()
 		initialize_.goal.request = Initialize(armgroup,handgroup)
 		print("Initiating ...")
@@ -292,8 +277,5 @@ if __name__ == "__main__":
 	rospy.Subscriber('/control_robot_yaska4',Int32, ControlCallback)
 	rospy.Subscriber('/yaska4/sequence_move_group/result', MoveGroupSequenceActionResult, TrajectoryResultCallback)
 	pub_fintache = rospy.Publisher("/commande/Simulation/finTache", FinDeplacerPiece_Msg,  queue_size=1)
-	# rospy.Subscriber('/yaska4/move_group/result', MoveGroupActionResult, InitializationCallback)
-	# pub_motionSequenceRequest = rospy.Publisher( "/sequence_move_group/goal", MoveGroupSequenceActionGoal, queue_size=1)
-	rospy.Subscriber('yaska4/move_group/display_planned_path', DisplayTrajectory, DisplayTrajectoryCallback)
 	rospy.spin()
 	moveit_commander.roscpp_shutdown()
