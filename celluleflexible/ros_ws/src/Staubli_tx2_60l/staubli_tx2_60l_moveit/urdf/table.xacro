@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<robot name="env" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <link name="pieds_table_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/env/pieds_table.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/env/pieds_table.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+    <link name="plateau_table_staubli_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/env/plateau_table_staubli.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/env/plateau_table_staubli.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="pieds_plateau_table_staubli" type="fixed">
+    <origin rpy="1.57079 0 3.14" xyz="-0.134 0 0.352" />
+    <parent link="pieds_table_link" />
+    <child link="plateau_table_staubli_link" />
+  </joint>
+
+</robot>

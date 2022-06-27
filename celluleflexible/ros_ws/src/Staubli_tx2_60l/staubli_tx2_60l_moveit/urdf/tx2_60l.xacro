@@ -13,6 +13,24 @@
   <!-- linking robot to world,workspaces and end-effector -->
   <link name="world" />
 
+  <joint name="world_cell" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.2 0.48 0.698"/>
+      <parent link="world" />
+      <child link="pieds_cellule_link" />
+  </joint>
+
+  <joint name="world_table" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0 0.645" />
+      <parent link="world" />
+      <child link="pieds_table_link" />
+  </joint>
+
+  <joint name="table_staubli" type="fixed">
+      <origin rpy="-1.57079 3.14 0" xyz="0.201 0.0075 0.008" />
+      <parent link="plateau_table_staubli_link" />
+      <child link="staubli_base_link" />
+  </joint>
+
   <joint name="tool_fixation" type="fixed" >
     <origin rpy="-1.57079 0 0" xyz="0 0 0.00995" />
     <parent link="staubli_tool0" />

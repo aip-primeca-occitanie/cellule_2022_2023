@@ -1,0 +1,13 @@
+controller_list:
+  - name: fake_DN1P_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - staubli_joint_1
+      - staubli_joint_2
+      - staubli_joint_3
+      - staubli_joint_4
+      - staubli_joint_5
+      - staubli_joint_6
+initial:  # Define initial robot poses per group
+  - group: DN1P
+    pose: home

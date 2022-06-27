@@ -108,12 +108,12 @@
     <child link="rail_milieu_link" />
   </joint>
   <joint name="rail_milieu_rail_tournant1" type="fixed" >
-    <origin rpy="-1.57079 3.14 1.57079" xyz="0.69 0.09 0.003" />
+    <origin rpy="1.57079 0 0" xyz="0.691 -0.09 0.003" />
     <parent link="rail_milieu_link" />
     <child link="rail_tournant1_link" />
   </joint>
   <joint name="rail_milieu_rail_tournant2" type="fixed" >
-    <origin rpy="-1.57079 3.14 0" xyz="-0.651 0.09 0.003" />
+    <origin rpy="1.57079 0 1.57079" xyz="-0.65 -0.09 0.003" />
     <parent link="rail_milieu_link" />
     <child link="rail_tournant2_link" />
   </joint>

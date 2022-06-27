@@ -12,19 +12,19 @@
   <link name="world" />
 
   <joint name="world_cell" type="fixed">
-      <origin rpy="0 0 0" xyz="0 0.5 0.698"/>
+      <origin rpy="0 0 3.14" xyz="0 0.5 0.698"/>
       <parent link="world" />
       <child link="pieds_cellule_link" />
   </joint>
 
   <joint name="world_table" type="fixed">
-      <origin rpy="0 0 0" xyz="0.03 0 0.645" />
+      <origin rpy="0 0 0" xyz="-0.03 0 0.645" />
       <parent link="world" />
       <child link="pieds_table_link" />
   </joint>
 
   <joint name="table_kuka" type="fixed">
-      <origin rpy="0 0 1.57079" xyz="0.25 0 0" />
+      <origin rpy="0 1.57079 1.57079" xyz="0 0 0" />
       <parent link="plateau_table_link" />
       <child link="kuka_base_link" />
   </joint>

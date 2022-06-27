@@ -5,14 +5,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://yaskawa4/meshes/env/table.stl" scale="0.01 0.01 0.01"/>
+        <mesh filename="package://yaskawa4/meshes/env/table_yaskawa.stl" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://yaskawa4/meshes/env/table.stl" scale="0.01 0.01 0.01"/>
+        <mesh filename="package://yaskawa4/meshes/env/table_yaskawa.stl" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>

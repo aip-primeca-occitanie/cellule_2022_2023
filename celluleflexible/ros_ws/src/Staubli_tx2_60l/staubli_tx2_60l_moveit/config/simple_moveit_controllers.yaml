@@ -1,0 +1,12 @@
+controller_list:
+  - name: DN1P_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - staubli_joint_1
+      - staubli_joint_2
+      - staubli_joint_3
+      - staubli_joint_4
+      - staubli_joint_5
+      - staubli_joint_6

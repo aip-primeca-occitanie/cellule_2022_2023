@@ -313,16 +313,53 @@
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="FixedBase" type="fixed" parent_frame="world" child_link="yaska3_base_link" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="yaska3_base_link" link2="yaska3_link_1_s" reason="Adjacent" />
-    <disable_collisions link1="yaska3_base_link" link2="yaska3_link_3_u" reason="Never" />
-    <disable_collisions link1="yaska3_link_1_s" link2="yaska3_link_2_l" reason="Adjacent" />
-    <disable_collisions link1="yaska3_link_1_s" link2="yaska3_link_3_u" reason="Never" />
-    <disable_collisions link1="yaska3_link_2_l" link2="yaska3_link_3_u" reason="Adjacent" />
-    <disable_collisions link1="yaska3_link_2_l" link2="yaska3_link_4_r" reason="Never" />
-    <disable_collisions link1="yaska3_link_3_u" link2="yaska3_link_4_r" reason="Adjacent" />
-    <disable_collisions link1="yaska3_link_3_u" link2="yaska3_link_5_b" reason="Never" />
-    <disable_collisions link1="yaska3_link_3_u" link2="yaska3_link_6_t" reason="Never" />
-    <disable_collisions link1="yaska3_link_4_r" link2="yaska3_link_5_b" reason="Adjacent" />
-    <disable_collisions link1="yaska3_link_4_r" link2="yaska3_link_6_t" reason="Never" />
-    <disable_collisions link1="yaska3_link_5_b" link2="yaska3_link_6_t" reason="Adjacent" />
+    <disable_collisions link1="ergots1_link" link2="ergots2_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="pieds_cellule_link" reason="Adjacent"/>
+    <disable_collisions link1="ergots1_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="table_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="yaska3_base_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="pieds_cellule_link" reason="Adjacent"/>
+    <disable_collisions link1="ergots2_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="table_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="yaska3_base_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_milieu_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="table_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_cellule_link" link2="yaska3_base_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="rail_tournant1_link" reason="Adjacent"/>
+    <disable_collisions link1="rail_milieu_link" link2="rail_tournant2_link" reason="Adjacent"/>
+    <disable_collisions link1="rail_milieu_link" link2="table_link" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="yaska3_base_link" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="table_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="yaska3_base_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="table_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="yaska3_base_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="yaska3_link_2_l" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="yaska3_link_3_u" reason="Never"/>
+    <disable_collisions link1="table_link" link2="yaska3_base_link" reason="Adjacent"/>
+    <disable_collisions link1="table_link" link2="yaska3_link_1_s" reason="Never"/>
+    <disable_collisions link1="yaska3_base_link" link2="yaska3_link_1_s" reason="Adjacent"/>
+    <disable_collisions link1="yaska3_base_link" link2="yaska3_link_3_u" reason="Never"/>
+    <disable_collisions link1="yaska3_link_1_s" link2="yaska3_link_2_l" reason="Adjacent"/>
+    <disable_collisions link1="yaska3_link_1_s" link2="yaska3_link_3_u" reason="Never"/>
+    <disable_collisions link1="yaska3_link_2_l" link2="yaska3_link_3_u" reason="Adjacent"/>
+    <disable_collisions link1="yaska3_link_2_l" link2="yaska3_link_4_r" reason="Never"/>
+    <disable_collisions link1="yaska3_link_3_u" link2="yaska3_link_4_r" reason="Adjacent"/>
+    <disable_collisions link1="yaska3_link_3_u" link2="yaska3_link_5_b" reason="Never"/>
+    <disable_collisions link1="yaska3_link_3_u" link2="yaska3_link_6_t" reason="Never"/>
+    <disable_collisions link1="yaska3_link_4_r" link2="yaska3_link_5_b" reason="Adjacent"/>
+    <disable_collisions link1="yaska3_link_4_r" link2="yaska3_link_6_t" reason="Never"/>
+    <disable_collisions link1="yaska3_link_5_b" link2="yaska3_link_6_t" reason="Adjacent"/>
 </robot>

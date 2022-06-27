@@ -13,19 +13,19 @@
     <link name="world" />
 
     <joint name="world_cell" type="fixed">
-        <origin rpy="1.5708 0 0" xyz="-0.8 0.15 0.44"/>
+        <origin rpy="0 0 -1.57079" xyz="0.72 0.27 0.698"/>
         <parent link="world" />
-        <child link="cellule_link" />
+        <child link="pieds_cellule_link" />
     </joint>
 
     <joint name="world_table" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0" />
+        <origin rpy="1.57079 0 0" xyz="0 0 0.432"/>
         <parent link="world" />
         <child link="table_link" />
     </joint>
 
     <joint name="table_yaska3" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0.6376" />
+        <origin rpy="-1.57079 0 0" xyz="0.171 0.203 0.181" />
         <parent link="table_link" />
         <child link="yaska3_base_link" />
     </joint>
