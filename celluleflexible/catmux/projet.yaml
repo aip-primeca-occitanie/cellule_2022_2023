@@ -17,7 +17,7 @@ parameters:
   show_layouts: false # This parameter is used together with the if flag below
   # replacement_param: world\! # Parameters can also be used as replacement templates
   nb_robots: "4" #nb_robots 4 par défaut
-
+  #yaskawaphysical : ""  utilisé overwrite yaskawaphysical sim:=false robot_ip:= et mettre $(yaskawaphysical) devant demo.launch
 # Everything will be opened in windows. Windows can have multiple splits.
 
 windows:
@@ -52,31 +52,31 @@ windows:
         - sleep 5
         - rosrun yaskawa4 execute_trajectory_yaska4.py
   #launching Yaskawa3 nodes
-  # - name: Yaskawa3
-  #   layout: tiled
-  #   splits:
-  #     - commands:
-  #       - sleep 2
-  #       - roslaunch yaskawa3 yaska3_rviz.launch 
-  #     - commands:
-  #       - sleep 5
-  #       - rosrun robotic_platform_moveit main_robotic_platform "yaska3"
-  #     - commands:
-  #       - sleep 5
-  #       - rosrun yaskawa3 execute_trajectory_yaska3.py
-   #launching kuka nodes
-  - name: Kuka
+  - name: Yaskawa3
     layout: tiled
     splits:
       - commands:
         - sleep 2
-        - roslaunch kuka_kr6_700sixx_moveit demo.launch
+        - roslaunch yaskawa3 yaska3_rviz.launch 
       - commands:
         - sleep 5
-        - rosrun robotic_platform_moveit main_robotic_platform "kuka"
+        - rosrun robotic_platform_moveit main_robotic_platform "yaska3"
       - commands:
         - sleep 5
-        - rosrun kuka_kr6_700sixx_moveit execute_trajectory_kuka.py
+        - rosrun yaskawa3 execute_trajectory_yaska3.py
+   #launching kuka nodes
+  # - name: Kuka
+  #   layout: tiled
+  #   splits:
+  #     - commands:
+  #       - sleep 2
+  #       - roslaunch kuka_kr6_700sixx_moveit demo.launch
+  #     - commands:
+  #       - sleep 5
+  #       - rosrun robotic_platform_moveit main_robotic_platform "kuka"
+  #     - commands:
+  #       - sleep 5
+  #       - rosrun kuka_kr6_700sixx_moveit execute_trajectory_kuka.py
   #launching 2 Robots coppelia
   - name: robots_coppelia2
     if: "2"

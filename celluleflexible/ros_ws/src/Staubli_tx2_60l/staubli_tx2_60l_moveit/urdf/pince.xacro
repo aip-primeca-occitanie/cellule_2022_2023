@@ -6,7 +6,7 @@
       <geometry>
         <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Fixation_Bride_Robot_CapteurRef.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
+      <material name="white"/>
     </visual>
     <collision>
       <geometry>
@@ -19,7 +19,7 @@
       <geometry>
         <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Interface_PGNPlus40_EGP40.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
+      <material name="white"/>
     </visual>
     <collision>
       <geometry>
@@ -30,12 +30,39 @@
   <link name="end_effector_link">
     <visual>
       <geometry>
-        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-0318448 PGN-plus-P 40_ 000.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK_PGN_plus_P_40.stl" scale="0.001 0.001 0.001"/>
       </geometry>
+      <material name="pale_oyster"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK-0318448 PGN-plus-P 40_ 000.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/SCHUNK_PGN_plus_P_40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="adaptater1_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/adaptater_mors_PNG_plus_P_40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="pale_oyster"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/adaptater_mors_PNG_plus_P_40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="adaptater2_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/adaptater_mors_PNG_plus_P_40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="pale_oyster"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/adaptater_mors_PNG_plus_P_40.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -44,6 +71,20 @@
       <geometry>
         <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
       </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link> 
+  <link name="mors2_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
     </visual>
     <collision>
       <geometry>
@@ -51,19 +92,6 @@
       </geometry>
     </collision>
   </link>
-  <!-- 
-  <link name="mors2_link">
-    <visual>
-      <geometry>
-        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://staubli_tx2_60l_moveit/meshes/hand/Outil_Pince_Pneumatique_Mors_PGN-Plus-40.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link> -->
 
   <!-- Création des joints  -->
   <joint name="fixation_interface" type="fixed">
@@ -72,14 +100,28 @@
       <child link="interface_link" />
   </joint>
   <joint name="interface_end_effector" type="fixed">
-      <origin rpy="0 0 0" xyz="0 0.015 0" />
+      <origin rpy="0 0.785398 0" xyz="0 0.014 0" />
       <parent link="interface_link" />
       <child link="end_effector_link" />
   </joint>
-  <joint name="end_effector_mors1" type="fixed">
-      <origin rpy="0 0 0" xyz="-0.1 0.03 0" />
+  <joint name="end_effector_adaptater1" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0 0" />
       <parent link="end_effector_link" />
+      <child link="adaptater1_link" />
+  </joint>
+  <joint name="end_effector_adaptater2" type="fixed">
+      <origin rpy="0 3.1415 0" xyz="0 0 0" />
+      <parent link="end_effector_link" />
+      <child link="adaptater2_link" />
+  </joint>
+  <joint name="adaptater1_mors1" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.0303 0.0247 0.0073" />
+      <parent link="adaptater1_link" />
       <child link="mors1_link" />
   </joint>
-
+  <joint name="adaptater2_mors2" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.0303 0.0247 0.0073" />
+      <parent link="adaptater2_link" />
+      <child link="mors2_link" />
+  </joint>
 </robot>

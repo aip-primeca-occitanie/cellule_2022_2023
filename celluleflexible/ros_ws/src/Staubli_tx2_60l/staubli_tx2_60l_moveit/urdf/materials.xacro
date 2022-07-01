@@ -10,4 +10,10 @@
 <material name="white_smoke">
   <color rgba="0.7607 0.7607 0.7607 1.000"/>
 </material>
+<material name="pale_oyster">
+  <color rgba="0.576 0.553 0.451 1.000"/>
+</material>
+<material name="white">
+  <color rgba="1.00 1.00 1.00 1.00"/>
+</material>
 </robot>
