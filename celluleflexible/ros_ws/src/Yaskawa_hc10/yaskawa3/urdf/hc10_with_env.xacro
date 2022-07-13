@@ -7,6 +7,7 @@
     <xacro:include filename="$(find yaskawa3)/urdf/hc10_for_env.urdf" />
     <xacro:include filename="$(find yaskawa3)/urdf/table.xacro" />
     <xacro:include filename="$(find yaskawa3)/urdf/cell.xacro" />
+    <xacro:include filename="$(find yaskawa3)/urdf/pince.xacro" />
     <xacro:yaska prefix="yaska3" />
 
     <!-- linking robot to world,workspaces and end-effector -->
@@ -28,6 +29,12 @@
         <origin rpy="-1.57079 0 0" xyz="0.171 0.203 0.181" />
         <parent link="table_link" />
         <child link="yaska3_base_link" />
+    </joint>
+
+    <joint name="tool_adaptater" type="fixed">
+        <origin rpy="-1.57079 0 -1.57079" xyz="0 0 0" />
+        <parent link="yaska3_tool0" />
+        <child link="adaptater_plate_link" />
     </joint>
 
 </robot>

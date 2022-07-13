@@ -8,33 +8,43 @@ default_acceleration_scaling_factor: 0.1
 # Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
 # Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
 joint_limits:
+  end_effector_adaptater1:
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 0.5
+  end_effector_adaptater2:
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 0.5
   staubli_joint_1:
     has_velocity_limits: true
     max_velocity: 7.592182246175334
-    has_acceleration_limits: false
-    max_acceleration: 0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
   staubli_joint_2:
     has_velocity_limits: true
     max_velocity: 6.719517620178169
-    has_acceleration_limits: false
-    max_acceleration: 0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
   staubli_joint_3:
     has_velocity_limits: true
     max_velocity: 8.726646259971648
-    has_acceleration_limits: false
-    max_acceleration: 0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
   staubli_joint_4:
     has_velocity_limits: true
     max_velocity: 17.36602605734358
-    has_acceleration_limits: false
-    max_acceleration: 0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
   staubli_joint_5:
     has_velocity_limits: true
     max_velocity: 18.58775653373961
-    has_acceleration_limits: false
-    max_acceleration: 0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
   staubli_joint_6:
     has_velocity_limits: true
     max_velocity: 25.22000769131806
-    has_acceleration_limits: false
-    max_acceleration: 0
+    has_acceleration_limits: true
+    max_acceleration: 1.0

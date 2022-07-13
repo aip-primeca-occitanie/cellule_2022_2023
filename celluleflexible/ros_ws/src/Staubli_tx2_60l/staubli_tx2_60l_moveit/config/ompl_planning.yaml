@@ -155,3 +155,29 @@ DN1P:
     - SPARStwo
   projection_evaluator: joints(staubli_joint_1,staubli_joint_2)
   longest_valid_segment_fraction: 0.005
+staubli_hand:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo

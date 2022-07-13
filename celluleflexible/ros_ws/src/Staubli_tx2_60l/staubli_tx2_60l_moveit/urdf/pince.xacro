@@ -104,23 +104,25 @@
       <parent link="interface_link" />
       <child link="end_effector_link" />
   </joint>
-  <joint name="end_effector_adaptater1" type="fixed">
+  <joint name="end_effector_adaptater1" type="prismatic">
       <origin rpy="0 0 0" xyz="0 0 0" />
       <parent link="end_effector_link" />
       <child link="adaptater1_link" />
+      <limit effort="1000.0" lower="0" upper="0.0099" velocity="0.5"/>
   </joint>
-  <joint name="end_effector_adaptater2" type="fixed">
+  <joint name="end_effector_adaptater2" type="prismatic">
       <origin rpy="0 3.1415 0" xyz="0 0 0" />
       <parent link="end_effector_link" />
       <child link="adaptater2_link" />
+      <limit effort="1000.0" lower="0" upper="0.0099" velocity="0.5"/>
   </joint>
   <joint name="adaptater1_mors1" type="fixed">
-      <origin rpy="0 0 0" xyz="-0.0303 0.0247 0.0073" />
+      <origin rpy="0 3.1415 0" xyz="0.0303 0.0247 -0.0073" />
       <parent link="adaptater1_link" />
       <child link="mors1_link" />
   </joint>
   <joint name="adaptater2_mors2" type="fixed">
-      <origin rpy="0 0 0" xyz="-0.0303 0.0247 0.0073" />
+      <origin rpy="0 3.1415 0" xyz="0.0303 0.0247 -0.0073" />
       <parent link="adaptater2_link" />
       <child link="mors2_link" />
   </joint>

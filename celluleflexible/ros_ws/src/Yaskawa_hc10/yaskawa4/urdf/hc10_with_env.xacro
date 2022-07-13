@@ -32,7 +32,7 @@
     </joint>
 
     <joint name="tool_cylinder" type="fixed" >
-        <origin rpy="0 0 0" xyz="0 0 0" />
+        <origin rpy="0 0 -1.57079" xyz="0 0 0" />
         <parent link="yaska4_tool0" />
         <child link="cylinder_link" />
     </joint>

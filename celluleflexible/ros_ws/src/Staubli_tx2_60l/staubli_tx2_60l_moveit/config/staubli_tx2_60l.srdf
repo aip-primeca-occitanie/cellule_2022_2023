@@ -10,12 +10,16 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="DN1P">
-        <joint name="staubli_joint_1"/>
-        <joint name="staubli_joint_2"/>
-        <joint name="staubli_joint_3"/>
-        <joint name="staubli_joint_4"/>
-        <joint name="staubli_joint_5"/>
-        <joint name="staubli_joint_6"/>
+        <chain base_link="staubli_base_link" tip_link="staubli_tool0"/>
+    </group>
+    <group name="staubli_hand">
+        <link name="fixation_link"/>
+        <link name="interface_link"/>
+        <link name="end_effector_link"/>
+        <link name="adaptater1_link"/>
+        <link name="mors1_link"/>
+        <link name="adaptater2_link"/>
+        <link name="mors2_link"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="home" group="DN1P">
@@ -26,11 +30,129 @@
         <joint name="staubli_joint_5" value="0"/>
         <joint name="staubli_joint_6" value="0"/>
     </group_state>
+    <group_state name="Close" group="staubli_hand">
+        <joint name="end_effector_adaptater1" value="0"/>
+        <joint name="end_effector_adaptater2" value="0"/>
+    </group_state>
+    <group_state name="Open" group="staubli_hand">
+        <joint name="end_effector_adaptater1" value="0.0099"/>
+        <joint name="end_effector_adaptater2" value="0.0099"/>
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="hand" parent_link="staubli_tool0" group="staubli_hand"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="virtual" child_link="world"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="adaptater1_link" link2="adaptater2_link" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="end_effector_link" reason="Adjacent"/>
+    <disable_collisions link1="adaptater1_link" link2="fixation_link" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="interface_link" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="mors1_link" reason="Adjacent"/>
+    <disable_collisions link1="adaptater1_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="staubli_link_4" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="adaptater1_link" link2="staubli_link_6" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="end_effector_link" reason="Adjacent"/>
+    <disable_collisions link1="adaptater2_link" link2="fixation_link" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="interface_link" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="mors1_link" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="mors2_link" reason="Adjacent"/>
+    <disable_collisions link1="adaptater2_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="staubli_link_4" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="adaptater2_link" link2="staubli_link_6" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="fixation_link" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="interface_link" reason="Adjacent"/>
+    <disable_collisions link1="end_effector_link" link2="mors1_link" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="mors2_link" reason="Default"/>
+    <disable_collisions link1="end_effector_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="staubli_link_4" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="end_effector_link" link2="staubli_link_6" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="ergots2_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="pieds_cellule_link" reason="Adjacent"/>
+    <disable_collisions link1="ergots1_link" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="plateau_table_staubli_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="ergots1_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="pieds_cellule_link" reason="Adjacent"/>
+    <disable_collisions link1="ergots2_link" link2="pieds_table_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="plateau_table_staubli_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="ergots2_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="fixation_link" link2="interface_link" reason="Adjacent"/>
+    <disable_collisions link1="fixation_link" link2="mors1_link" reason="Never"/>
+    <disable_collisions link1="fixation_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="fixation_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="fixation_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="fixation_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="fixation_link" link2="staubli_link_6" reason="Adjacent"/>
+    <disable_collisions link1="interface_link" link2="mors1_link" reason="Never"/>
+    <disable_collisions link1="interface_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="interface_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="interface_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="interface_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="interface_link" link2="staubli_link_6" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="mors2_link" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="staubli_link_4" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="mors1_link" link2="staubli_link_6" reason="Never"/>
+    <disable_collisions link1="mors2_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="mors2_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="mors2_link" link2="staubli_link_4" reason="Never"/>
+    <disable_collisions link1="mors2_link" link2="staubli_link_5" reason="Never"/>
+    <disable_collisions link1="mors2_link" link2="staubli_link_6" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="pieds_table_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_cellule_link" link2="plateau_table_staubli_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_milieu_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="pieds_cellule_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="plateau_table_staubli_link" reason="Adjacent"/>
+    <disable_collisions link1="pieds_table_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="pieds_table_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="plateau_table_staubli_link" link2="rail_milieu_link" reason="Never"/>
+    <disable_collisions link1="plateau_table_staubli_link" link2="rail_tournant1_link" reason="Never"/>
+    <disable_collisions link1="plateau_table_staubli_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="plateau_table_staubli_link" link2="staubli_base_link" reason="Adjacent"/>
+    <disable_collisions link1="plateau_table_staubli_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="plateau_table_staubli_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="rail_tournant1_link" reason="Adjacent"/>
+    <disable_collisions link1="rail_milieu_link" link2="rail_tournant2_link" reason="Adjacent"/>
+    <disable_collisions link1="rail_milieu_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="rail_milieu_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="rail_tournant2_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="rail_tournant1_link" link2="staubli_link_3" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="staubli_base_link" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="staubli_link_1" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="rail_tournant2_link" link2="staubli_link_3" reason="Never"/>
     <disable_collisions link1="staubli_base_link" link2="staubli_link_1" reason="Adjacent"/>
     <disable_collisions link1="staubli_base_link" link2="staubli_link_2" reason="Never"/>
+    <disable_collisions link1="staubli_base_link" link2="staubli_link_3" reason="Never"/>
     <disable_collisions link1="staubli_link_1" link2="staubli_link_2" reason="Adjacent"/>
     <disable_collisions link1="staubli_link_1" link2="staubli_link_3" reason="Never"/>
     <disable_collisions link1="staubli_link_2" link2="staubli_link_3" reason="Adjacent"/>

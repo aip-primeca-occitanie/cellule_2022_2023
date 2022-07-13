@@ -1,5 +1,6 @@
 controller_list:
-  - name: fake_manipulator_controller
+  - name: fake_DN1P_controller
+    type: $(arg fake_execution_type)
     joints:
       - yaska3_joint_1_s
       - yaska3_joint_2_l
@@ -7,6 +8,13 @@ controller_list:
       - yaska3_joint_4_r
       - yaska3_joint_5_b
       - yaska3_joint_6_t
-initial:  # Define initial robot poses.
+  - name: fake_yaskawa3_hand_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - end_effector_adaptater_mors2
+      - end_effector_mors1
+initial:  # Define initial robot poses per group
   - group: DN1P
     pose: home
+  - group: yaskawa3_hand
+    pose: Open

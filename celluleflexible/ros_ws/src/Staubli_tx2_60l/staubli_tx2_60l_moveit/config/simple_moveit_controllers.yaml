@@ -10,3 +10,10 @@ controller_list:
       - staubli_joint_4
       - staubli_joint_5
       - staubli_joint_6
+  - name: staubli_hand_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - end_effector_adaptater1
+      - end_effector_adaptater2

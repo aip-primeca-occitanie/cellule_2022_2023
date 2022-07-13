@@ -3,7 +3,7 @@
   <arg name="paused" default="false"/>
   <arg name="gazebo_gui" default="true"/>
   <arg name="initial_joint_positions" doc="Initial joint configuration of the robot"
-       default=" -J end_effector_adaptater1 0 -J end_effector_adaptater2 0 -J staubli_joint_1 0 -J staubli_joint_2 0 -J staubli_joint_3 0 -J staubli_joint_4 0 -J staubli_joint_5 0 -J staubli_joint_6 0"/>
+       default=" -J end_effector_adaptater_mors2 0 -J end_effector_mors1 0 -J yaska3_joint_1_s 0 -J yaska3_joint_2_l 0 -J yaska3_joint_3_u 0 -J yaska3_joint_4_r 0 -J yaska3_joint_5_b 0 -J yaska3_joint_6_t 0"/>
 
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -13,7 +13,7 @@
   </include>
 
   <!-- send robot urdf to param server -->
-  <param name="robot_description" command="xacro  '/home/alex/Desktop/tx2_60l.xacro'" />
+  <param name="robot_description" command="xacro  '$(find yaskawa3)/urdf/hc10_with_env.xacro'" />
 
   <!-- unpause only after loading robot model -->
   <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
@@ -23,7 +23,7 @@
     respawn="false" output="screen" />
 
   <!-- Load joint controller parameters for Gazebo -->
-  <rosparam file="$(find staubli_tx2_60l_moveit)/config/gazebo_controllers.yaml" />
+  <rosparam file="$(find yaskawa3)/config/gazebo_controllers.yaml" />
   <!-- Spawn Gazebo ROS controllers -->
   <node name="gazebo_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
   <!-- Load ROS controllers -->
