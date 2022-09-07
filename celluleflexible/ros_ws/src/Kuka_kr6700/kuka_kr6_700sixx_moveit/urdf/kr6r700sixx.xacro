@@ -24,7 +24,7 @@
   </joint>
 
   <joint name="table_kuka" type="fixed">
-      <origin rpy="0 1.57079 1.57079" xyz="0 0 0" />
+      <origin rpy="1.57079 0 3.1415" xyz="0 0 0" />
       <parent link="plateau_table_link" />
       <child link="kuka_base_link" />
   </joint>

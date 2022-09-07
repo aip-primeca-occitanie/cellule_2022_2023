@@ -153,6 +153,7 @@ int main(int argc, char **argv)
 	////// | MARQUAGE INITIAL | ////////
     ************************************************* */
 	M[0]=1;
+	M[1]=1;
 	display();
     
     ////////////////////////////////////////////////////////////////////
@@ -185,13 +186,20 @@ int main(int argc, char **argv)
 			robot.DeplacerPiece(ROBOT_1,1,3);
 			M[70]--;	
 		}*/
-		if(M[0])
-		{		
-			M[0]--;
-			robot.DeplacerPiece(ROBOT_4,1,2);
-			M[54]++;
-			display();
-		}
+			if(M[0])
+			{		
+				M[0]--;
+				robot.DeplacerPiece(ROBOT_3,1,2);
+				M[2]++;
+				display();
+			}
+			if(M[1])
+			{		
+				M[1]--;
+				robot.DeplacerPiece(ROBOT_2,1,2);
+				M[3]++;
+				display();
+			}
 		// if(M[10]){
 		// 	if(robot.FinDeplacerPiece(ROBOT_3)){
 		// 		M[10]--;
@@ -237,13 +245,26 @@ int main(int argc, char **argv)
 		// 	}
 		// 	display();
 		// }
-		if(M[54]){ 
-			if(robot.FinDeplacerPiece(ROBOT_4)){
-				M[54]--;
-				M[PlaceFin]++;
+			if(M[2]){ 
+				if(robot.FinDeplacerPiece(ROBOT_4)){
+					M[2]--;
+					M[4]++;
+				}
+				display();
 			}
-			display();
-		}
+			if(M[3]){ 
+				if(robot.FinDeplacerPiece(ROBOT_2)){
+					M[3]--;
+					M[5]++;
+				}
+				display();
+			}
+			if(M[4]&M[5]){
+				M[4]--;
+				M[5]--;
+				M[PlaceFin]++;
+				display();
+			}
 				
             
             
@@ -254,19 +275,16 @@ int main(int argc, char **argv)
             //////////////////////////////////// | Place de fin de Petri ETU | //////////////////////////////////////
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			if(M[PlaceFin])
-			{
+			if(M[PlaceFin]){
 				display();
 				cout << endl << BOLDCYAN << " --[PETRI TERMINE]--" << RESET << endl;
 				cmd.FinPetri();
-				while(ros::ok())
-				{
+				while(ros::ok()){
 					ros::spinOnce();
 					loop_rate.sleep();
 				}
 			}
 		}
-
 		ros::spinOnce(); //permet aux fonction callback de ros dans les objets d'êtres appelées
 		loop_rate.sleep(); //permet de synchroniser la boucle while. Il attend le temps qu'il reste pour faire le 25Hz (ou la fréquence indiquée dans le loop_rate)
 	}

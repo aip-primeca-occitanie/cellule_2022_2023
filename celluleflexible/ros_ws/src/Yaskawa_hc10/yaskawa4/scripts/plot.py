@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 #from rospkg import on_ros_path
-  
+
 pos0 = []
 vel0 = []
 pos1 = []

@@ -28,6 +28,11 @@
         <joint name="end_effector_adaptater_mors1" value="0.03" />
         <joint name="end_effector_adaptater_mors2" value="0.03" />
     </group_state>
+    <!-- ********A LIRE !!!!! *********
+    Les groupes représentent une séquence de points et décrit un mouvement de pick and place pour le robot.
+    Il y a 8 déplacements possibles, donc 8 groupes. Les points doivent être placés dans l'ordre séquenciel du début du mouvement du robot vers la fin.
+    La position home du yaskawa a été légérement modifiée pour éviter une collision de la pince avec le robot lors de son ouverture (qui fait partie de l'initialisation 
+    effectuée avant le mouvement de pick and place). -->
     <group name="DN2P">
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />
     </group>
@@ -102,7 +107,7 @@
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
-        <joint name="yaska4_joint_6_t" value="0" />
+        <joint name="yaska4_joint_6_t" value="1.57079" />
     </group_state>
 
 
@@ -182,7 +187,7 @@
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
-        <joint name="yaska4_joint_6_t" value="0" />
+        <joint name="yaska4_joint_6_t" value="1.57079" />
     </group_state>
 
 
@@ -262,7 +267,7 @@
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
-        <joint name="yaska4_joint_6_t" value="0" />
+        <joint name="yaska4_joint_6_t" value="1.57079" />
     </group_state>
 
 
@@ -343,7 +348,7 @@
         <joint name="yaska4_joint_3_u" value="0" />
         <joint name="yaska4_joint_4_r" value="0" />
         <joint name="yaska4_joint_5_b" value="0" />
-        <joint name="yaska4_joint_6_t" value="0" />
+        <joint name="yaska4_joint_6_t" value="1.57079" />
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="hand" parent_link="yaska4_tool0" group="yaskawa4_hand"/>

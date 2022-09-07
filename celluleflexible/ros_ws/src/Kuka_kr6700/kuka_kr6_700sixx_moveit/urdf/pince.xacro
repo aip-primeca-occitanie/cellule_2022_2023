@@ -91,13 +91,13 @@
     <origin rpy="0 0 0" xyz="0 0 0" />
     <parent link="KGG_link" />
     <child link="liaison1_link" />
-    <limit effort="1000.0" lower="0" upper="0.03" velocity="0.5"/>
+    <limit effort="1000.0" lower="-0.5" upper="0.031" velocity="0.5"/>
   </joint>
   <joint name="KGG_laison2" type="prismatic" >
     <origin rpy="0 3.141592 0" xyz="0 0 0" />
     <parent link="KGG_link" />
     <child link="liaison2_link" />
-    <limit effort="1000.0" lower="0" upper="0.03" velocity="0.5"/>
+    <limit effort="1000.0" lower="-0.5" upper="0.031" velocity="0.5"/>
   </joint>
   <joint name="liason1_mors1" type="fixed" >
     <origin rpy="0 0 -1.57079" xyz="0.011 -0.039 -0.0145" />

@@ -22,27 +22,27 @@ def TrajectoryResultCallback(resultmsg):
 	nsec = []
 	global trajectoryErrorCode4
 	trajectoryErrorCode4 = resultmsg.result.response.error_code.val
-	for traj in resultmsg.result.response.planned_trajectories:
-		for points in traj.joint_trajectory.points:
-			if len(points.accelerations)==6:
-				pos.append(points.positions)
-				accel.append(points.accelerations)
-				vel.append(points.velocities)
-				sec.append(points.time_from_start.secs)
-				nsec.append(points.time_from_start.nsecs)
-	fichierpos = open("./src/Yaskawa_hc10/yaskawa4/scripts/pos.txt","a")
-	fichiervel = open("./src/Yaskawa_hc10/yaskawa4/scripts/vel.txt","a")
-	fichieracc = open("./src/Yaskawa_hc10/yaskawa4/scripts/acc.txt","a")
-	fichiertime = open("./src/Yaskawa_hc10/yaskawa4/scripts/time.txt","a")
-	for i in range(0,len(vel)):
-		fichieracc.write(f"{accel[i][0]} {accel[i][1]} {accel[i][2]} {accel[i][3]} {accel[i][4]} {accel[i][5]}\n")
-		fichiervel.write(f"{vel[i][0]} {vel[i][1]} {vel[i][2]} {vel[i][3]} {vel[i][4]} {vel[i][5]}\n")
-		fichierpos.write(f"{pos[i][0]} {pos[i][1]} {pos[i][2]} {pos[i][3]} {pos[i][4]} {pos[i][5]}\n")
-		fichiertime.write(f"{sec[i]} {nsec[i]}\n")
-	fichierpos.close()
-	fichiervel.close()
-	fichieracc.close()
-	fichiertime.close()
+# 	for traj in resultmsg.result.response.planned_trajectories:
+# 		for points in traj.joint_trajectory.points:
+# 			if len(points.accelerations)==6:
+# 				pos.append(points.positions)
+# 				accel.append(points.accelerations)
+# 				vel.append(points.velocities)
+# 				sec.append(points.time_from_start.secs)
+# 				nsec.append(points.time_from_start.nsecs)
+# 	fichierpos = open("./src/Yaskawa_hc10/yaskawa4/scripts/pos.txt","a")
+# 	fichiervel = open("./src/Yaskawa_hc10/yaskawa4/scripts/vel.txt","a")
+# 	fichieracc = open("./src/Yaskawa_hc10/yaskawa4/scripts/acc.txt","a")
+# 	fichiertime = open("./src/Yaskawa_hc10/yaskawa4/scripts/time.txt","a")
+# 	for i in range(0,len(vel)):
+# 		fichieracc.write(f"{accel[i][0]} {accel[i][1]} {accel[i][2]} {accel[i][3]} {accel[i][4]} {accel[i][5]}\n")
+# 		fichiervel.write(f"{vel[i][0]} {vel[i][1]} {vel[i][2]} {vel[i][3]} {vel[i][4]} {vel[i][5]}\n")
+# 		fichierpos.write(f"{pos[i][0]} {pos[i][1]} {pos[i][2]} {pos[i][3]} {pos[i][4]} {pos[i][5]}\n")
+# 		fichiertime.write(f"{sec[i]} {nsec[i]}\n")
+# 	fichierpos.close()
+# 	fichiervel.close()
+# 	fichieracc.close()
+# 	fichiertime.close()
 
 #Interface de gestion de l'erreur par l'utilisateur
 def ErrorTrajectoryExecution():
@@ -216,12 +216,12 @@ def ControlCallback(pub_yaska4):
 			goal_.goal.request = BuildSequenceRequest(armgroup,handgroup)
 			print("Executing Trajectory ...")
 			clientSequence_.send_goal(goal_.goal)
-			finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(1))
+			finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(60))
 			rospy.sleep(1)
 			if(finished_before_timeout & (trajectoryErrorCode4 == 1)):
 				print("Trajectory completed !")
 				rospy.loginfo(clientSequence_.get_goal_status_text())
-				# print("Results: %s" %client_.action_client.ActionResult)
+				# print("Results: %s" %clientSequence_.action_client.ActionResult)
 				#si tout s'est bien passé, on averti coppeliaSim de la fin d'execution du movement du robot
 				mymsgYaska4.FinDeplacerR4 = 1
 				rospy.loginfo(mymsgYaska4)
@@ -261,6 +261,7 @@ if __name__ == "__main__":
 	rospy.init_node('execute_trajectory_yaska4',anonymous=True)
 	mymsgYaska4 = FinDeplacerPiece_Msg()
 	rospy.Subscriber('/control_robot_yaska4',Int32, ControlCallback)
+	# Pour ploter les trajectoires du robot
 	rospy.Subscriber('/yaska4/sequence_move_group/result', MoveGroupSequenceActionResult, TrajectoryResultCallback)
 	pub_fintache = rospy.Publisher("/commande/Simulation/finTache", FinDeplacerPiece_Msg,  queue_size=1)
 	#création d'un client actionlib

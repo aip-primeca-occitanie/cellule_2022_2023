@@ -33,7 +33,7 @@
   </link>
 
   <joint name="pieds_plateau_table" type="fixed">
-    <origin rpy="1.57079 0 0" xyz="0 0 0.343" />
+    <origin rpy="1.57079 0 0" xyz="0.21 0 0.343" />
     <parent link="pieds_table_link" />
     <child link="plateau_table_link" />
   </joint>
