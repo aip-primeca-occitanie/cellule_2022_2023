@@ -2,9 +2,31 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(staubli_tx2_60l_moveit)
 
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  std_msgs
+  rospy
+  commande_locale
+)
 
-catkin_package()
+include_directories(include ${catkin_INCLUDE_DIRS})
 
-install(DIRECTORY config launch meshes urdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+catkin_package(
+  CATKIN_DEPENDS
+  roscpp
+  std_msgs
+  rospy
+)
+
+if(CATKIN_ENABLE_TESTING)
+find_package(roslaunch REQUIRED)
+roslaunch_add_file_check(launch)
+endif()
+
+install(DIRECTORY meshes urdf config launch scripts
+DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+catkin_install_python(
+  PROGRAMS scripts/execute_trajectory_staubli.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

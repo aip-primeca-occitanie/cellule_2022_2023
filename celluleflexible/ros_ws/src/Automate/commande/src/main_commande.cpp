@@ -189,7 +189,7 @@ int main(int argc, char **argv)
 			if(M[0])
 			{		
 				M[0]--;
-				robot.DeplacerPiece(ROBOT_3,1,2);
+				robot.DeplacerPiece(ROBOT_3,2,1);
 				M[2]++;
 				display();
 			}
@@ -246,7 +246,7 @@ int main(int argc, char **argv)
 		// 	display();
 		// }
 			if(M[2]){ 
-				if(robot.FinDeplacerPiece(ROBOT_4)){
+				if(robot.FinDeplacerPiece(ROBOT_3)){
 					M[2]--;
 					M[4]++;
 				}

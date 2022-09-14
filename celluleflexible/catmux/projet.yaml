@@ -37,6 +37,9 @@ windows:
         - sleep 15
         - rosrun commande run ${nb_robots}
       - commands:
+        - sleep 5
+        - rosrun robotic_platform_moveit main_robotic_platform
+      - commands:
         - echo "Terminal vierge"
   #launching Yaskawa4 nodes
   # - name: Yaskawa4
@@ -45,9 +48,6 @@ windows:
   #     - commands:
   #       - sleep 2
   #       - roslaunch yaskawa4 demo.launch
-  #     - commands:
-  #       - sleep 5
-  #       - rosrun robotic_platform_moveit main_robotic_platform "yaska4"
   #     - commands:
   #       - sleep 5
   #       - rosrun yaskawa4 execute_trajectory_yaska4.py
@@ -60,9 +60,6 @@ windows:
         - roslaunch yaskawa3 demo.launch
       - commands:
         - sleep 5
-        - rosrun robotic_platform_moveit main_robotic_platform "yaska3"
-      - commands:
-        - sleep 5
         - rosrun yaskawa3 execute_trajectory_yaska3.py
    #launching kuka nodes
   - name: Kuka
@@ -71,9 +68,6 @@ windows:
       - commands:
         - sleep 2
         - roslaunch kuka_kr6_700sixx_moveit demo.launch
-      - commands:
-        - sleep 5
-        - rosrun robotic_platform_moveit main_robotic_platform "kuka"
       - commands:
         - sleep 5
         - rosrun kuka_kr6_700sixx_moveit execute_trajectory_kuka.py
@@ -166,4 +160,4 @@ windows:
 #       - rosrun commande_locale simulation "4"
       
 #  #if: show_layouts # this window will only be started when the 'show_layouts' parameter is true
-    # unless: show_layouts # This window will only be displayed if 'show_layouts' is false
+# unless: show_layouts # This window will only be displayed if 'show_layouts' is false

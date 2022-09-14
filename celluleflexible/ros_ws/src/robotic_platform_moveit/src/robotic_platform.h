@@ -16,7 +16,10 @@ class robotic_platform
 {
 
 private:
-	ros::Publisher pub_robot_;
+	ros::Publisher pub_robot_kuka;
+	ros::Publisher pub_robot_staubli;
+	ros::Publisher pub_robot_yaska3;
+	ros::Publisher pub_robot_yaska4;
 	ros::Subscriber choixMode_;
 	ros::Subscriber robot_;
 	std_msgs::Int32 DeplacementRobot_;
@@ -24,12 +27,11 @@ private:
 	int yaska3Type_;
 	int kukaType_;
 	int staubliType_;
-	std::string name_;
 	enum Robot_{Coppelia = 0, Rviz, Atelier};
 	enum Group_{DN1P = 1, DN2P, DPN1, DPN2};
 	
 public:
-	robotic_platform(ros::NodeHandle noeud, std::string name);
+	robotic_platform(ros::NodeHandle noeud);
 	~robotic_platform();
 	void RobCallabck(const commande_locale::DeplacerPieceMsg msg);
 	void TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1);

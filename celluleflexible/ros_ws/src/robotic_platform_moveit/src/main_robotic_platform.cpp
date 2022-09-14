@@ -35,9 +35,7 @@ int main(int argc, char **argv)
 	
 	// Creation du noeud ROS
 	std::cout << "initialisation de ros\n" << std::endl;
-	string name="robot_";
-	name.append(argv[1]);
-	ros::init(argc,argv,name);
+	ros::init(argc,argv, "main_robotic_platform");
 	ROS_DEBUG_NAMED("verification de code", "Demarrage");
     ROS_DEBUG_STREAM_NAMED("verification de code", "demarrage");
 	ros::NodeHandle noeud;
@@ -47,7 +45,7 @@ int main(int argc, char **argv)
 	
 	// Importation des fonctions de contrôle
 	printf("lancement du noeud de contrôle\n");
-	robotic_platform myrobot(noeud,argv[1]);
+	robotic_platform myrobot(noeud);
 	printf("noeud lancée\n");
 	if (ros::ok())
 		printf("ros ok\n");
