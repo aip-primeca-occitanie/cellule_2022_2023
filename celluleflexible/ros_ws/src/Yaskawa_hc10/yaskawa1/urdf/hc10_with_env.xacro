@@ -25,7 +25,7 @@
     </joint>
 
     <joint name="table_yaska1" type="fixed">
-        <origin rpy="-1.57079 0 0" xyz="0.171 0.203 0.181" />
+        <origin rpy="-1.57079 1.57079 0" xyz="0.171 0.203 0.181" />
         <parent link="table_link" />
         <child link="yaska1_base_link" />
     </joint>

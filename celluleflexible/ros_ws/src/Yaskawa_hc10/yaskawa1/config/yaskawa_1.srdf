@@ -102,7 +102,7 @@
         <joint name="yaska1_joint_2_l" value="0" />
         <joint name="yaska1_joint_3_u" value="-1.5708" />
         <joint name="yaska1_joint_4_r" value="0" />
-        <joint name="yaska1_joint_5_b" value="0" />
+        <joint name="yaska1_joint_5_b" value="-3.1415" />
         <joint name="yaska1_joint_6_t" value="0" />
     </group_state>
     <!-- End Group DN2P -->
@@ -161,7 +161,7 @@
         <joint name="yaska1_joint_2_l" value="0" />
         <joint name="yaska1_joint_3_u" value="-1.5708" />
         <joint name="yaska1_joint_4_r" value="0" />
-        <joint name="yaska1_joint_5_b" value="0" />
+        <joint name="yaska1_joint_5_b" value="-3.1415" />
         <joint name="yaska1_joint_6_t" value="0" />
     </group_state>
     <!-- End Group DN1P -->
@@ -228,7 +228,7 @@
         <joint name="yaska1_joint_2_l" value="0" />
         <joint name="yaska1_joint_3_u" value="-1.5708" />
         <joint name="yaska1_joint_4_r" value="0" />
-        <joint name="yaska1_joint_5_b" value="0" />
+        <joint name="yaska1_joint_5_b" value="-3.1415" />
         <joint name="yaska1_joint_6_t" value="0" />
     </group_state>
     <!-- End Group DPN2 -->
@@ -287,7 +287,7 @@
         <joint name="yaska1_joint_2_l" value="0" />
         <joint name="yaska1_joint_3_u" value="-1.5708" />
         <joint name="yaska1_joint_4_r" value="0" />
-        <joint name="yaska1_joint_5_b" value="0" />
+        <joint name="yaska1_joint_5_b" value="-3.1415" />
         <joint name="yaska1_joint_6_t" value="0" />
     </group_state>
     <!-- End Group DPN1 -->
