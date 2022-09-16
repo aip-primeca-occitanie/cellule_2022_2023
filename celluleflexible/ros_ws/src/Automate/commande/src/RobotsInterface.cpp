@@ -54,7 +54,7 @@ RobotsInterface::RobotsInterface(ros::NodeHandle noeud, int nombre_robot)
 	mode = 0;
 	kukaType = 0;
 	yaska4Type = 0;
-	yaska3Type = 0;
+	yaska1Type = 0;
 	staubliType = 0;
 
 	//Retour des robots vers la commande
@@ -74,7 +74,7 @@ RobotsInterface::~RobotsInterface()
 void RobotsInterface::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& msg1)
 {
 	mode = msg1->mode;
-	yaska3Type = msg1->yaska3;
+	yaska1Type = msg1->yaska1;
 	yaska4Type = msg1->yaska4;
 	kukaType = msg1->kuka;
 	staubliType = msg1->staubli;
@@ -421,13 +421,13 @@ int RobotsInterface::FinDeplacerPiece(int numRobot){
 		case 3:
 			if(mode==0){
 				int Etat;
-				if(yaska3Type != 0){
+				if(yaska1Type != 0){
 					return FinTacheAtelierR3;
 				}
 				else return robotMacroDeplacement[numRobot-1];
 			}
 			else if (mode==1){
-				if(yaska3Type != 0){
+				if(yaska1Type != 0){
 					return FinTacheAtelierR3;
 				}
 				else return robotMacroDeplacement[numRobot-1];

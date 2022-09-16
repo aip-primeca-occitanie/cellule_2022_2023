@@ -18,13 +18,13 @@ class robotic_platform
 private:
 	ros::Publisher pub_robot_kuka;
 	ros::Publisher pub_robot_staubli;
-	ros::Publisher pub_robot_yaska3;
+	ros::Publisher pub_robot_yaska1;
 	ros::Publisher pub_robot_yaska4;
 	ros::Subscriber choixMode_;
 	ros::Subscriber robot_;
 	std_msgs::Int32 DeplacementRobot_;
 	int yaska4Type_;
-	int yaska3Type_;
+	int yaska1Type_;
 	int kukaType_;
 	int staubliType_;
 	enum Robot_{Coppelia = 0, Rviz, Atelier};

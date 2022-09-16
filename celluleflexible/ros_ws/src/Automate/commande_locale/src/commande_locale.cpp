@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 	int choixPoste=0;
 	int choixMode=0;
 	int choixYaska4 =0;
-	int choixYaska3 =0;
+	int choixYaska1 =0;
 	int choixStaubli =0;
 	int choixParam=0;
 	int choixKuka=0;
@@ -218,7 +218,7 @@ int main(int argc, char **argv)
 							"	2- Robot Kuka" 	<< endl <<
 							"	3- Robot Yaskawa4" 	<< endl <<
 							"	4- Robot Staubli"	<< endl <<
-							"	5- Robot Yaskawa3"	<< endl <<
+							"	5- Robot Yaskawa1"	<< endl <<
 							"	6- Config terminée" 	<< endl;
 						cout << "paramètre à modifier : ";
 						cin >> choixParam;
@@ -260,14 +260,14 @@ int main(int argc, char **argv)
 							cin >> choixStaubli;
 						}
 						if (choixParam==5){
-							cout <<"Robot Yaskawa3" << endl <<
+							cout <<"Robot Yaskawa1" << endl <<
 							       "	0- robot coppelia"<< endl <<
 							       "	1- robot rviz"<< endl <<
 							       "	2- robot atelier"<<endl;
-							cout << "type robot (Yaskawa3) : ";
-							cin >> choixYaska3;
+							cout << "type robot (Yaskawa1) : ";
+							cin >> choixYaska1;
 						}
-						if(cin.fail() || choixMode<0 || choixMode>1 || choixYaska4<0 || choixYaska4>2 || choixKuka<0 || choixKuka>2 || choixStaubli<0 || choixStaubli>2 || choixYaska3<0 || choixYaska3>2)
+						if(cin.fail() || choixMode<0 || choixMode>1 || choixYaska4<0 || choixYaska4>2 || choixKuka<0 || choixKuka>2 || choixStaubli<0 || choixStaubli>2 || choixYaska1<0 || choixYaska1>2)
 						{
 							cout << endl << " [Erreur mauvais choix ..]" << endl;
 							cin.clear();
@@ -277,7 +277,7 @@ int main(int argc, char **argv)
 					}
 					msg1.mode = choixMode;
 					msg1.yaska4 = choixYaska4;
-					msg1.yaska3 = choixYaska3;
+					msg1.yaska1 = choixYaska1;
 					msg1.staubli = choixStaubli;
 					msg1.kuka = choixKuka;
 					pubModeType.publish(msg1);

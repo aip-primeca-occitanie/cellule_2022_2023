@@ -88,7 +88,7 @@ private:
 	int FinTacheAtelierR3;
 	int FinTacheAtelierR4;
 	int mode;
-	int yaska3Type;
+	int yaska1Type;
 	int yaska4Type;
 	int staubliType;
 	int kukaType;
