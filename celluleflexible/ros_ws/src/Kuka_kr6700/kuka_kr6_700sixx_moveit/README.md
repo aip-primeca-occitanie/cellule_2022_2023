@@ -10,12 +10,11 @@ ex: DPN1 correspond à la prise d'un objet sur la navette et au dépot de l'obje
 ### launch
 Permet de lancer l'environnement RViz/Moveit avec le robot avec la commande :
 ```bash
-roslaunch yaskawa4 demo.launch
+roslaunch kuka_kr6_700sixx_moveit demo.launch
 ```
 
 Si on veut se connecter au vrai robot :
 ```bash
-roslaunch yaskawa4 demo.launch sim:=false robot_ip:=192.168.1.40 controller:=yrc1000
 ```
 ### meshes
 Contient les fichiers de modélisation 3D du robot et de son environnement. Elles sont utilisées dans les fichiers urdf.
@@ -25,6 +24,6 @@ Le script permet de construire une trajectoire à partir des points définis dan
 de CoppeliaSim.
 
 ### urdf
-hc10_with_env.xacro est le fichier loader par les launchs. Il contient l'ensemble des urdf et définit leurs liens dans le monde virtuel.
+kr6r700sixx.xacro est le fichier loader par les launchs. Il contient l'ensemble des urdf et définit leurs liens dans le monde virtuel.
 
 
