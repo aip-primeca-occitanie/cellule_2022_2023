@@ -28,7 +28,7 @@ private:
 	int kukaType_;
 	int staubliType_;
 	enum Robot_{Coppelia = 0, Rviz, Atelier};
-	enum Group_{DN1P = 1, DN2P, DPN1, DPN2};
+	enum Group_{DN2P1 = 1, DN2P4, DN3P1, DN3P4, DP1N2, DP4N2, DP1N3, DP4N3};
 	
 public:
 	robotic_platform(ros::NodeHandle noeud);

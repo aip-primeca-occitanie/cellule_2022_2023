@@ -187,7 +187,7 @@ def ControlCallback(pub_kuka):
 	# pub_motionSequenceRequest.publish(goal_)
 	#on récupère la trajectoire a réaliser définie dans les groupes du fichier config/.srdf
 	if pub_kuka.data == 1:
-		armgroup = moveit_commander.MoveGroupCommander("DN1P", robot_description="/kuka/robot_description", ns="/kuka")
+		armgroup = moveit_commander.MoveGroupCommander("DN2P1", robot_description="/kuka/robot_description", ns="/kuka")
 	elif pub_kuka.data == 2:
 		armgroup = moveit_commander.MoveGroupCommander("DN2P", robot_description="/kuka/robot_description", ns="/kuka")
 	elif pub_kuka.data == 3:

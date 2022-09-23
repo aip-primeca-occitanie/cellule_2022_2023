@@ -1,5 +1,5 @@
-stomp/DN1P:
-  group_name: DN1P
+stomp/DN2P1:
+  group_name: DN2P1
   optimization:
     num_timesteps: 60
     num_iterations: 40

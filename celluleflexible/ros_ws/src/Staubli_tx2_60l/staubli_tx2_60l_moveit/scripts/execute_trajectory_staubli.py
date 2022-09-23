@@ -187,7 +187,7 @@ def ControlCallback(pub_yaska4):
 	# pub_motionSequenceRequest.publish(goal_)
 	#on récupère la trajectoire a réaliser définie dans les groupes du fichier config/.srdf
 	if pub_yaska4.data == 1:
-		armgroup = moveit_commander.MoveGroupCommander("DN1P", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN2P1", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 2:
 		armgroup = moveit_commander.MoveGroupCommander("DN2P", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 3:

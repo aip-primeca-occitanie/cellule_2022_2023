@@ -189,17 +189,17 @@ int main(int argc, char **argv)
 			if(M[0])
 			{		
 				M[0]--;
-				robot.DeplacerPiece(ROBOT_1,1,2);
+				robot.DeplacerPiece(ROBOT_4,1,2);
 				M[2]++;
 				display();
 			}
-			if(M[1])
-			{		
-				M[1]--;
-				robot.DeplacerPiece(ROBOT_2,1,2);
-				M[3]++;
-				display();
-			}
+			// if(M[1])
+			// {		
+			// 	M[1]--;
+			// 	robot.DeplacerPiece(ROBOT_2,1,2);
+			// 	M[3]++;
+			// 	display();
+			// }
 		// if(M[10]){
 		// 	if(robot.FinDeplacerPiece(ROBOT_3)){
 		// 		M[10]--;
@@ -208,18 +208,32 @@ int main(int argc, char **argv)
 		// 	display();			
 		// }
 		// // Si deux tâche R4 a la suite
-		// if(M[9]){ 
-		// 	if(robot.FinDeplacerPiece(ROBOT_4)){
-		// 		cpt ++; // compteur pour gérer plusieurs tâches R4 successives
-		// 	}
-		// 	if(!robot.FinDeplacerPiece(ROBOT_4) && cpt != 0){
-		// 		M[9]--;
-		// 		cpt = 0; // fin deplacierpiece remis a zero, on peut passer a l'action suivante
-		// 		robot.DeplacerPiece(ROBOT_4,2,4);
-		// 		M[30]++;
-		// 	}
-		// 	display();
-		// }
+			if(M[2]){ 
+				if(robot.FinDeplacerPiece(ROBOT_4)){
+					M[2]--;
+					M[9]++;
+				}
+				display();
+			}
+			if(M[9]){ 
+				if(robot.FinDeplacerPiece(ROBOT_4)){
+					cpt ++; // compteur pour gérer plusieurs tâches R4 successives
+				}
+				if(!robot.FinDeplacerPiece(ROBOT_4) && cpt != 0){
+					M[9]--;
+					cpt = 0; // fin deplacierpiece remis a zero, on peut passer a l'action suivante
+					robot.DeplacerPiece(ROBOT_4,2,4);
+					M[30]++;
+				}
+				display();
+			}
+			if(M[30]){ 
+				if(robot.FinDeplacerPiece(ROBOT_4)){
+					M[30]--;
+					M[PlaceFin]++;
+				}
+				display();
+			}
 		// if(M[30] & M[11]){ 
 		// 	if(robot.FinDeplacerPiece(ROBOT_4)){
 		// 		cpt ++; // compteur pour gérer plusieurs tâches R4 successives
@@ -245,26 +259,19 @@ int main(int argc, char **argv)
 		// 	}
 		// 	display();
 		// }
-			if(M[2]){ 
-				if(robot.FinDeplacerPiece(ROBOT_1)){
-					M[2]--;
-					M[4]++;
-				}
-				display();
-			}
-			if(M[3]){ 
-				if(robot.FinDeplacerPiece(ROBOT_2)){
-					M[3]--;
-					M[5]++;
-				}
-				display();
-			}
-			if(M[4]&M[5]){
-				M[4]--;
-				M[5]--;
-				M[PlaceFin]++;
-				display();
-			}
+			// if(M[3]){ 
+			// 	if(robot.FinDeplacerPiece(ROBOT_2)){
+			// 		M[3]--;
+			// 		M[5]++;
+			// 	}
+			// 	display();
+			// }
+			// if(M[4]&M[5]){
+			// 	M[4]--;
+			// 	M[5]--;
+			// 	M[PlaceFin]++;
+			// 	display();
+			// }
 				
             
             

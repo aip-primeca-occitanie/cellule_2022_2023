@@ -1,5 +1,5 @@
 controller_list:
-  - name: fake_DN1P_controller
+  - name: fake_DN2P1_controller
     type: $(arg fake_execution_type)
     joints:
       - staubli_joint_1
@@ -14,7 +14,7 @@ controller_list:
       - end_effector_adaptater1
       - end_effector_adaptater2
 initial:  # Define initial robot poses per group
-  - group: DN1P
+  - group: DN2P1
     pose: home
   - group: staubli_hand
     pose: Close

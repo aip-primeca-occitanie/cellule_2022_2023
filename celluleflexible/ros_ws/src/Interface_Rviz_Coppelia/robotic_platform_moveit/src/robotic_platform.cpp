@@ -36,102 +36,98 @@ void robotic_platform::TypeMode(const commande_locale::Msg_ChoixMode::ConstPtr& 
 
 void robotic_platform::RobCallabck(const commande_locale::DeplacerPieceMsg msg)
 {
-	switch(msg.num_robot){
+	switch(msg.positionA){
+		// Déplacement du poste 1 vers navette
 		case 1:
-			//robot position basse
-			if(yaska1Type_ != Robot_::Coppelia){
-				// navette 2 vers poste 1
-				if(msg.positionA==2){
-					DeplacementRobot_.data=Group_::DN1P;
-				}
-				// navette 3 vers poste 4
-				else if(msg.positionA==3){
-					DeplacementRobot_.data=Group_::DPN1;
-				}
-				// poste 1 vers navette 2
-				else if (msg.positionB==2){
-					DeplacementRobot_.data=Group_::DN2P;
-				}
-				// poste 4 vers navette 3
-				else if (msg.positionB==3){
-					DeplacementRobot_.data=Group_::DPN2;
-				}
-				pub_robot_yaska1.publish(DeplacementRobot_);
+			if(msg.positionB==2){
+				DeplacementRobot_.data=Group_::DP1N2;
 			}
-			else std::cout << "Wrong mode of robot yaska1, change parameter"<<std::endl;
+			else if(msg.positionB==3){
+				DeplacementRobot_.data=Group_::DP1N3;
+			}
+			else{
+				DeplacementRobot_.data=-1;
+				ROS_INFO("Wrong Deplacement requested");
+			}
 			break;
+		// Déplacement de navette 2 vers poste
 		case 2:
-			//robot position haute
-			if(kukaType_ != Robot_::Coppelia){
-				// navette 2 vers poste 1
-				if(msg.positionA==2){
-					DeplacementRobot_.data=Group_::DN1P;
-				}
-				// navette 3 vers poste 4
-				else if(msg.positionA==3){
-					DeplacementRobot_.data=Group_::DPN1;
-				}
-				// poste 1 vers navette 2
-				else if (msg.positionB==2){
-					DeplacementRobot_.data=Group_::DN2P;
-				}
-				// poste 4 vers navette 3
-				else if (msg.positionB==3){
-					DeplacementRobot_.data=Group_::DPN2;
-				}
-				pub_robot_kuka.publish(DeplacementRobot_);
+			if(msg.positionB==1){
+				DeplacementRobot_.data=Group_::DN2P1;
 			}
-			else std::cout <<"Wrong mode of robot kuka, change parameter"<<std::endl;
+			else if(msg.positionB==4){
+				DeplacementRobot_.data=Group_::DN2P4;
+			}
+			else{
+				DeplacementRobot_.data=-1;
+				ROS_INFO("Wrong Deplacement requested");
+			}
 			break;
+		// Déplacement de navette 3 vers poste
 		case 3:
-			//robot position basse
-			if(staubliType_ != Robot_::Coppelia){
-				// navette 2 vers poste 1
-				if(msg.positionA==2){
-					DeplacementRobot_.data=Group_::DN1P;
-				}
-				// navette 3 vers poste 4
-				else if(msg.positionA==3){
-					DeplacementRobot_.data=Group_::DPN1;
-				}
-				// poste 1 vers navette 2
-				else if (msg.positionB==2){
-					DeplacementRobot_.data=Group_::DN2P;
-				}
-				// poste 4 vers navette 3
-				else if (msg.positionB==3){
-					DeplacementRobot_.data=Group_::DPN2;
-				}
-				pub_robot_staubli.publish(DeplacementRobot_);
+			if(msg.positionB==1){
+				DeplacementRobot_.data=Group_::DN3P1;
 			}
-			else std::cout<<"Wrong mode of robot staubli, change parameter"<<std::endl;
+			else if(msg.positionB==4){
+				DeplacementRobot_.data=Group_::DN3P4;
+			}
+			else{
+				DeplacementRobot_.data=-1;
+				ROS_INFO("Wrong Deplacement requested");
+			}
 			break;
+		// Déplacement de poste 4 vers navette
 		case 4:
-			//robot position basse
-			if(yaska4Type_ != Robot_::Coppelia){
-				// navette 2 vers poste 1
-				if(msg.positionA==2){
-					DeplacementRobot_.data=Group_::DN1P;
-				}
-				// navette 3 vers poste 4
-				else if(msg.positionA==3){
-					DeplacementRobot_.data=Group_::DPN1;
-				}
-				// poste 1 vers navette 2
-				else if (msg.positionB==2){
-					DeplacementRobot_.data=Group_::DN2P;
-				}
-				// poste 4 vers navette 3
-				else if (msg.positionB==3){
-					DeplacementRobot_.data=Group_::DPN2;
-				}
-				pub_robot_yaska4.publish(DeplacementRobot_);
+			if(msg.positionB==2){
+				DeplacementRobot_.data=Group_::DP4N2;
 			}
-			else std::cout << "Wrong mode of robot yaska4, change parameter"<< std::endl;
+			else if(msg.positionB==3){
+				DeplacementRobot_.data=Group_::DP4N3;
+			}
+			else{
+				DeplacementRobot_.data=-1;
+				ROS_INFO("Wrong Deplacement requested");
+			}
 			break;
 		default:
-			std::cout << "Wrong robot number" << std::endl;
+			DeplacementRobot_.data=-1;
+			ROS_INFO("Wrong Deplacement requested");
 			break;
+	}
+	if(DeplacementRobot_.data != -1){
+		switch(msg.num_robot){
+			case 1:
+				//robot position basse
+				if(yaska1Type_ != Robot_::Coppelia){
+					pub_robot_yaska1.publish(DeplacementRobot_);
+				}
+				else ROS_INFO("Wrong mode of robot yaska1, change parameter");
+				break;
+			case 2:
+				//robot position haute
+				if(kukaType_ != Robot_::Coppelia){
+					pub_robot_kuka.publish(DeplacementRobot_);
+				}
+				else ROS_INFO("Wrong mode of robot kuka, change parameter");
+				break;
+			case 3:
+				//robot position haute
+				if(staubliType_ != Robot_::Coppelia){
+					pub_robot_staubli.publish(DeplacementRobot_);
+				}
+				else ROS_INFO("Wrong mode of robot staubli, change parameter");
+				break;
+			case 4:
+				//robot position basse
+				if(yaska4Type_ != Robot_::Coppelia){
+					pub_robot_yaska4.publish(DeplacementRobot_);
+				}
+				else ROS_INFO("Wrong mode of robot yaska4, change parameter");
+				break;
+			default:
+				ROS_INFO("Wrong robot number");
+				break;
+		}
 	}
 }
 

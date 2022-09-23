@@ -1,4 +1,4 @@
-DN1P_controller:
+DN2P1_controller:
   type: effort_controllers/JointTrajectoryController
   joints:
     - yaska1_joint_1_s

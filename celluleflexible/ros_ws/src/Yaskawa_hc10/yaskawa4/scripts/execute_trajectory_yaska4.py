@@ -4,45 +4,114 @@ import rospy
 import actionlib
 import moveit_commander
 from std_msgs.msg import Int32
+import pyassimp
 from robots.msg import FinDeplacerPiece_Msg
-from moveit_msgs.msg import MoveGroupSequenceActionResult, MoveGroupSequenceActionGoal, MoveGroupSequenceAction, DisplayTrajectory
-from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint, MotionSequenceResponse
+from moveit_msgs.msg import MoveGroupSequenceActionResult, MoveGroupSequenceActionGoal, MoveGroupSequenceAction
+from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint, CollisionObject
 from sensor_msgs.msg import JointState
+from geometry_msgs.msg import PoseStamped, Point, Quaternion
+from shape_msgs.msg import Mesh, MeshTriangle
 
+#Variable globale
 trajectoryErrorCode4 = 1 #Succes = 1 in error_code
+
+# Fonction reprise de la fonction statique make_mesh() de planning_scene_interface.py
+# Elle permet de charger un fichier stl sous forme de CollisionObject
+def MakeCollisionObjectFromMeshFile(name, filename, scale=(1,1,1)):
+	co = CollisionObject()
+	if pyassimp is False:
+		rospy.loginfo("Pyassimp needs patch https://launchpadlibrarian.net/319496602/patchPyassim.txt")
+	scene = pyassimp.load(filename)
+	if not scene.meshes or len(scene.meshes) == 0:
+		rospy.loginfo("There are no meshes in the file")
+	if len(scene.meshes[0].faces) == 0:
+		rospy.loginfo("There are no faces in the mesh")
+	co.operation = CollisionObject.ADD
+	co.id = name
+	# co.header = pose.header
+	mesh = Mesh()
+	first_face = scene.meshes[0].faces[0]
+	if hasattr(first_face, "__len__"):
+		for face in scene.meshes[0].faces:
+			if len(face) == 3:
+				triangle = MeshTriangle()
+				triangle.vertex_indices = [face[0], face[1], face[2]]
+				mesh.triangles.append(triangle)
+	elif hasattr(first_face, "indices"):
+		for face in scene.meshes[0].faces:
+			if len(face.indices) == 3:
+				triangle = MeshTriangle()
+				triangle.vertex_indices = [
+					face.indices[0],
+					face.indices[1],
+					face.indices[2],
+				]
+				mesh.triangles.append(triangle)
+	else:
+		rospy.loginfo("Unable to build triangles from mesh due to mesh object structure")
+	for vertex in scene.meshes[0].vertices:
+		point = Point()
+		point.x = vertex[0] * scale[0]
+		point.y = vertex[1] * scale[1]
+		point.z = vertex[2] * scale[2]
+		mesh.vertices.append(point)
+	co.meshes = [mesh]
+	# co.mesh_poses = [pose.pose]
+	pyassimp.release(scene)
+	return co
+
+# Cette fonction définit la postion de la navette sur le rail en fonction du mouvement de pick and place effectué,
+# et ajoute la navette dans l'environnement RViz
+def AddShuttleToWorkspace(armgroup,ps,nav):
+	pose = PoseStamped()
+	pose.header.frame_id = "rail_milieu_link"
+	pose.pose.position = Point(x=0.0 , y=0.0 , z=0.0)
+	pose.pose.orientation = Quaternion(x= 0.0 , y= 0., z= 0., w= 0.0)
+
+	nav.header = pose.header
+	nav.mesh_poses = [pose.pose]
+	rospy.loginfo("Adding shuttle to workspace ...")
+	ps.add_object(nav)
+	rospy.loginfo("Shuttle successfully added !")
+
+# Cette fonction permet d'enlever la navette de l'environnement RViz, est appelé à la fin de l'exécution d'un mouvement.
+def RemoveShuttleFromWorkspace(ps):
+	ps.remove_world_object("Navette")
+	rospy.loginfo("Removed shuttle from workspace !")
 
 #Callback de fin de trajectoire 
 #permet de vérifier que la trajectoire s'est bien effectuée 
 #permet de créer des fichiers txt pour visualiser les trajectoires des joints en utilisant le script plot.py
 def TrajectoryResultCallback(resultmsg):
-	accel = []
-	vel = []
-	pos = []
-	sec = []
-	nsec = []
+
 	global trajectoryErrorCode4
 	trajectoryErrorCode4 = resultmsg.result.response.error_code.val
-# 	for traj in resultmsg.result.response.planned_trajectories:
-# 		for points in traj.joint_trajectory.points:
-# 			if len(points.accelerations)==6:
-# 				pos.append(points.positions)
-# 				accel.append(points.accelerations)
-# 				vel.append(points.velocities)
-# 				sec.append(points.time_from_start.secs)
-# 				nsec.append(points.time_from_start.nsecs)
-# 	fichierpos = open("./src/Yaskawa_hc10/yaskawa4/scripts/pos.txt","a")
-# 	fichiervel = open("./src/Yaskawa_hc10/yaskawa4/scripts/vel.txt","a")
-# 	fichieracc = open("./src/Yaskawa_hc10/yaskawa4/scripts/acc.txt","a")
-# 	fichiertime = open("./src/Yaskawa_hc10/yaskawa4/scripts/time.txt","a")
-# 	for i in range(0,len(vel)):
-# 		fichieracc.write(f"{accel[i][0]} {accel[i][1]} {accel[i][2]} {accel[i][3]} {accel[i][4]} {accel[i][5]}\n")
-# 		fichiervel.write(f"{vel[i][0]} {vel[i][1]} {vel[i][2]} {vel[i][3]} {vel[i][4]} {vel[i][5]}\n")
-# 		fichierpos.write(f"{pos[i][0]} {pos[i][1]} {pos[i][2]} {pos[i][3]} {pos[i][4]} {pos[i][5]}\n")
-# 		fichiertime.write(f"{sec[i]} {nsec[i]}\n")
-# 	fichierpos.close()
-# 	fichiervel.close()
-# 	fichieracc.close()
-# 	fichiertime.close()
+	# accel = []
+	# vel = []
+	# pos = []
+	# sec = []
+	# nsec = []
+	# for traj in resultmsg.result.response.planned_trajectories:
+	# 	for points in traj.joint_trajectory.points:
+	# 		if len(points.accelerations)==6:
+	# 			pos.append(points.positions)
+	# 			accel.append(points.accelerations)
+	# 			vel.append(points.velocities)
+	# 			sec.append(points.time_from_start.secs)
+	# 			nsec.append(points.time_from_start.nsecs)
+	# fichierpos = open("./src/Yaskawa_hc10/yaskawa4/scripts/pos.txt","a")
+	# fichiervel = open("./src/Yaskawa_hc10/yaskawa4/scripts/vel.txt","a")
+	# fichieracc = open("./src/Yaskawa_hc10/yaskawa4/scripts/acc.txt","a")
+	# fichiertime = open("./src/Yaskawa_hc10/yaskawa4/scripts/time.txt","a")
+	# for i in range(0,len(vel)):
+	# 	fichieracc.write(f"{accel[i][0]} {accel[i][1]} {accel[i][2]} {accel[i][3]} {accel[i][4]} {accel[i][5]}\n")
+	# 	fichiervel.write(f"{vel[i][0]} {vel[i][1]} {vel[i][2]} {vel[i][3]} {vel[i][4]} {vel[i][5]}\n")
+	# 	fichierpos.write(f"{pos[i][0]} {pos[i][1]} {pos[i][2]} {pos[i][3]} {pos[i][4]} {pos[i][5]}\n")
+	# 	fichiertime.write(f"{sec[i]} {nsec[i]}\n")
+	# fichierpos.close()
+	# fichiervel.close()
+	# fichieracc.close()
+	# fichiertime.close()
 
 #Interface de gestion de l'erreur par l'utilisateur
 def ErrorTrajectoryExecution():
@@ -187,39 +256,49 @@ def ControlCallback(pub_yaska4):
 	# pub_motionSequenceRequest.publish(goal_)
 	#on récupère la trajectoire a réaliser définie dans les groupes du fichier config/.srdf
 	if pub_yaska4.data == 1:
-		armgroup = moveit_commander.MoveGroupCommander("DN1P", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN2P1", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 2:
-		armgroup = moveit_commander.MoveGroupCommander("DN2P", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN2P4", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 3:
-		armgroup = moveit_commander.MoveGroupCommander("DPN1", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN3P1", robot_description="/yaska4/robot_description", ns="/yaska4")
 	elif pub_yaska4.data == 4:
-		armgroup = moveit_commander.MoveGroupCommander("DPN2", robot_description="/yaska4/robot_description", ns="/yaska4")
+		armgroup = moveit_commander.MoveGroupCommander("DN3P4", robot_description="/yaska4/robot_description", ns="/yaska4")
+	elif pub_yaska4.data == 5:
+		armgroup = moveit_commander.MoveGroupCommander("DP1N2", robot_description="/yaska4/robot_description", ns="/yaska4")
+	elif pub_yaska4.data == 6:
+		armgroup = moveit_commander.MoveGroupCommander("DP4N2", robot_description="/yaska4/robot_description", ns="/yaska4")
+	elif pub_yaska4.data == 7:
+		armgroup = moveit_commander.MoveGroupCommander("DP1N3", robot_description="/yaska4/robot_description", ns="/yaska4")
+	elif pub_yaska4.data == 8:
+		armgroup = moveit_commander.MoveGroupCommander("DP4N3", robot_description="/yaska4/robot_description", ns="/yaska4")
 	else :
-		print("Error callback control yaska4 \n")
+		rospy.loginfo("Error callback control yaska4 \n")
 		return
 	# on récupère le groupe associé à la pince du robot
 	handgroup = moveit_commander.MoveGroupCommander("yaskawa4_hand", robot_description="/yaska4/robot_description", ns="/yaska4")
-	print(f"Deplacement is {armgroup.get_name()}")
+	rospy.loginfo(f"Deplacement is {armgroup.get_name()}")
+	# Ajout de la navette dans l'environnement
+	AddShuttleToWorkspace(armgroup,planingScene,navette)
 	while(True):
 		#Initialise la position du robot à "home" avec ompl
 		initialize_ = MoveGroupSequenceActionGoal()
 		initialize_.goal.request = Initialize(armgroup,handgroup)
-		print("Initiating ...")
+		rospy.loginfo("Initiating ...")
 		clientSequence_.send_goal(initialize_.goal)
 		finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(30))
 		#Si l'initialisation s'est bien passé, on commence le pick and place
 		if(finished_before_timeout & (trajectoryErrorCode4 == 1)):
-			print("Initialization succeeded !")
+			rospy.loginfo("Initialization succeeded !")
 			#construction de la séquence de point à envoyer
 			# armgroup.set_start_state_to_current_state()
 			goal_ = MoveGroupSequenceActionGoal()
 			goal_.goal.request = BuildSequenceRequest(armgroup,handgroup)
-			print("Executing Trajectory ...")
+			rospy.loginfo("Executing Trajectory ...")
 			clientSequence_.send_goal(goal_.goal)
 			finished_before_timeout = clientSequence_.wait_for_result(rospy.Duration(60))
 			rospy.sleep(1)
 			if(finished_before_timeout & (trajectoryErrorCode4 == 1)):
-				print("Trajectory completed !")
+				rospy.loginfo("Trajectory completed !")
 				rospy.loginfo(clientSequence_.get_goal_status_text())
 				# print("Results: %s" %clientSequence_.action_client.ActionResult)
 				#si tout s'est bien passé, on averti coppeliaSim de la fin d'execution du movement du robot
@@ -229,18 +308,20 @@ def ControlCallback(pub_yaska4):
 				rospy.sleep(1)
 				mymsgYaska4.FinDeplacerR4 = 0
 				pub_fintache.publish(mymsgYaska4)
+				RemoveShuttleFromWorkspace(planingScene)
 				break
 			else:
 				print("Error during trajectory execution")
 				choice = ErrorTrajectoryExecution()
 				if(choice == 2):
-					print("Aborting trajectory")
+					rospy.loginfo("Aborting trajectory")
 					mymsgYaska4.FinDeplacerR4 = 1
 					rospy.loginfo(mymsgYaska4)
 					pub_fintache.publish(mymsgYaska4)
 					rospy.sleep(1)
 					mymsgYaska4.FinDeplacerR4 = 0
 					pub_fintache.publish(mymsgYaska4)
+					RemoveShuttleFromWorkspace(planingScene)
 					break
 		#Si l'initialisation a échouée
 		else:
@@ -254,6 +335,7 @@ def ControlCallback(pub_yaska4):
 				rospy.sleep(1)
 				mymsgYaska4.FinDeplacerR4 = 0
 				pub_fintache.publish(mymsgYaska4)
+				RemoveShuttleFromWorkspace(planingScene)
 				break
 
 if __name__ == "__main__":
@@ -263,10 +345,18 @@ if __name__ == "__main__":
 	rospy.Subscriber('/control_robot_yaska4',Int32, ControlCallback)
 	# Pour ploter les trajectoires du robot
 	rospy.Subscriber('/yaska4/sequence_move_group/result', MoveGroupSequenceActionResult, TrajectoryResultCallback)
+	# Pour avertir Coppelia d'une fin de mouvement
 	pub_fintache = rospy.Publisher("/commande/Simulation/finTache", FinDeplacerPiece_Msg,  queue_size=1)
 	#création d'un client actionlib
 	clientSequence_ = actionlib.SimpleActionClient('/yaska4/sequence_move_group', MoveGroupSequenceAction)
 	#attente de connexion
 	clientSequence_.wait_for_server()
+	#Scene de l'environnement Rviz
+	planingScene = moveit_commander.PlanningSceneInterface(ns= "/yaska4")
+	#Création de la navette
+	name = "Navette"
+	scale = (0.1,0.1,0.1)
+	filename = "src/Yaskawa_hc10/yaskawa4/meshes/env/Navette.stl"
+	navette = MakeCollisionObjectFromMeshFile(name, filename, scale)
 	rospy.spin()
 	moveit_commander.roscpp_shutdown()

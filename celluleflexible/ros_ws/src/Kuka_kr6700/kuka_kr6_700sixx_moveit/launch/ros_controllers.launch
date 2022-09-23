@@ -6,6 +6,6 @@
 
   <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" args="DN1P_controller kuka_hand_controller "/>
+    output="screen" args="DN2P1_controller kuka_hand_controller "/>
 
 </launch>
