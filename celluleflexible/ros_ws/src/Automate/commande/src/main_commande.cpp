@@ -222,7 +222,7 @@ int main(int argc, char **argv)
 				if(!robot.FinDeplacerPiece(ROBOT_4) && cpt != 0){
 					M[9]--;
 					cpt = 0; // fin deplacierpiece remis a zero, on peut passer a l'action suivante
-					robot.DeplacerPiece(ROBOT_4,2,4);
+					robot.DeplacerPiece(ROBOT_4,3,4);
 					M[30]++;
 				}
 				display();

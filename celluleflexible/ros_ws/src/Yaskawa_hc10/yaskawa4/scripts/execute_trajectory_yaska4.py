@@ -3,17 +3,39 @@ import sys
 import rospy
 import actionlib
 import moveit_commander
-from std_msgs.msg import Int32
 import pyassimp
+import re
+import numpy as np
+from std_msgs.msg import Int32
 from robots.msg import FinDeplacerPiece_Msg
 from moveit_msgs.msg import MoveGroupSequenceActionResult, MoveGroupSequenceActionGoal, MoveGroupSequenceAction
-from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint, CollisionObject
+from moveit_msgs.msg import MotionSequenceRequest, MotionSequenceItem, Constraints, JointConstraint, CollisionObject, AttachedCollisionObject
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import PoseStamped, Point, Quaternion
 from shape_msgs.msg import Mesh, MeshTriangle
 
 #Variable globale
 trajectoryErrorCode4 = 1 #Succes = 1 in error_code
+
+#Pour orienter la navette dans l'environnement
+def get_quaternion_from_euler(roll, pitch, yaw):
+#   """
+#   Convert an Euler angle to a quaternion.
+   
+#   Input
+#     :param roll: The roll (rotation around x-axis) angle in radians.
+#     :param pitch: The pitch (rotation around y-axis) angle in radians.
+#     :param yaw: The yaw (rotation around z-axis) angle in radians.
+ 
+#   Output
+#     :return qx, qy, qz, qw: The orientation in quaternion [x,y,z,w] format
+#   """
+  qx = np.sin(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) - np.cos(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+  qy = np.cos(roll/2) * np.sin(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.cos(pitch/2) * np.sin(yaw/2)
+  qz = np.cos(roll/2) * np.cos(pitch/2) * np.sin(yaw/2) - np.sin(roll/2) * np.sin(pitch/2) * np.cos(yaw/2)
+  qw = np.cos(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+ 
+  return [qx, qy, qz, qw]
 
 # Fonction reprise de la fonction statique make_mesh() de planning_scene_interface.py
 # Elle permet de charger un fichier stl sous forme de CollisionObject
@@ -28,7 +50,6 @@ def MakeCollisionObjectFromMeshFile(name, filename, scale=(1,1,1)):
 		rospy.loginfo("There are no faces in the mesh")
 	co.operation = CollisionObject.ADD
 	co.id = name
-	# co.header = pose.header
 	mesh = Mesh()
 	first_face = scene.meshes[0].faces[0]
 	if hasattr(first_face, "__len__"):
@@ -56,27 +77,37 @@ def MakeCollisionObjectFromMeshFile(name, filename, scale=(1,1,1)):
 		point.z = vertex[2] * scale[2]
 		mesh.vertices.append(point)
 	co.meshes = [mesh]
-	# co.mesh_poses = [pose.pose]
 	pyassimp.release(scene)
 	return co
 
 # Cette fonction définit la postion de la navette sur le rail en fonction du mouvement de pick and place effectué,
 # et ajoute la navette dans l'environnement RViz
 def AddShuttleToWorkspace(armgroup,ps,nav):
+	aco = AttachedCollisionObject()
 	pose = PoseStamped()
 	pose.header.frame_id = "rail_milieu_link"
-	pose.pose.position = Point(x=0.0 , y=0.0 , z=0.0)
-	pose.pose.orientation = Quaternion(x= 0.0 , y= 0., z= 0., w= 0.0)
-
+	if(re.findall('2',str(armgroup.get_name()))):
+		quaternion = get_quaternion_from_euler(1.57079, 0. ,-1.57079)
+		pose.pose.position = Point(x = 0.12 , y = 0.001 , z = 0.1)
+		pose.pose.orientation = Quaternion(x= quaternion[0] , y= quaternion[1], z= quaternion[2], w= quaternion[3])		
+	else:
+		quaternion = get_quaternion_from_euler(1.57079, 0. ,-1.57079)
+		pose.pose.position = Point(x = -0.29 , y = 0.001 , z = 0.1)
+		pose.pose.orientation = Quaternion(x= quaternion[0] , y= quaternion[1], z= quaternion[2], w= quaternion[3])		
 	nav.header = pose.header
 	nav.mesh_poses = [pose.pose]
 	rospy.loginfo("Adding shuttle to workspace ...")
-	ps.add_object(nav)
+	aco.object = nav
+	aco.link_name = "rail_milieu_link"
+	aco.touch_links = ["rail_milieu_link"]
+	ps.attach_object(aco)
 	rospy.loginfo("Shuttle successfully added !")
 
 # Cette fonction permet d'enlever la navette de l'environnement RViz, est appelé à la fin de l'exécution d'un mouvement.
 def RemoveShuttleFromWorkspace(ps):
-	ps.remove_world_object("Navette")
+	ps.remove_attached_object(link = "rail_milieu_link", name = "Navette")
+	rospy.sleep(0.05)
+	ps.remove_world_object(name = "Navette")
 	rospy.loginfo("Removed shuttle from workspace !")
 
 #Callback de fin de trajectoire 
@@ -350,13 +381,18 @@ if __name__ == "__main__":
 	#création d'un client actionlib
 	clientSequence_ = actionlib.SimpleActionClient('/yaska4/sequence_move_group', MoveGroupSequenceAction)
 	#attente de connexion
+	rospy.loginfo("En attente de connexion du client actionlib ...")
 	clientSequence_.wait_for_server()
+	rospy.loginfo("Client connecté !")
 	#Scene de l'environnement Rviz
+	rospy.loginfo("Initialisation de la scène ...")
 	planingScene = moveit_commander.PlanningSceneInterface(ns= "/yaska4")
 	#Création de la navette
+	rospy.loginfo("Import de la navette ...")
 	name = "Navette"
 	scale = (0.1,0.1,0.1)
 	filename = "src/Yaskawa_hc10/yaskawa4/meshes/env/Navette.stl"
 	navette = MakeCollisionObjectFromMeshFile(name, filename, scale)
+	rospy.loginfo("Navette chargée !")
 	rospy.spin()
 	moveit_commander.roscpp_shutdown()
