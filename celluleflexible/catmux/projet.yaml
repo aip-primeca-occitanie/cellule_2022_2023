@@ -34,7 +34,7 @@ windows:
         - sleep 2
         - rosrun commande_locale simulation ${nb_robots}
       - commands:
-        - sleep 15
+        - sleep 30
         - rosrun commande run ${nb_robots}
       - commands:
         - sleep 5
@@ -77,10 +77,10 @@ windows:
     layout: tiled # One can use the default layouts specified by tmux
     splits:
       - commands:
-        - sleep 15
+        - sleep 30
         - rosrun robots robot "1"
       - commands:
-         - sleep 15
+         - sleep 30
          - rosrun robots robot "2"
   #launching 4 Robots coppelia
   - name: robots_coppelia4
@@ -89,29 +89,29 @@ windows:
     layout: tiled # One can use the default layouts specified by tmux
     splits:
       - commands:
-        - sleep 15
+        - sleep 30
         - rosrun robots robot "1"
       - commands:
-         - sleep 15
+         - sleep 30
          - rosrun robots robot "2"
       - commands:
-         - sleep 15
+         - sleep 30
          - rosrun robots robot "3"
       - commands:
-         - sleep 15
+         - sleep 30
          - rosrun robots robot "4"
   #launching aiguillage, log and shuttles
   - name: aiguillages_log_shuttle
     layout: tiled
     splits:
       - commands:
-        - sleep 15
+        - sleep 30
         - rosrun aiguillages run_Aiguillage
       - commands:
-        - sleep 15
+        - sleep 30
         - rosrun shuttles main_ShuttleManager 
       - commands:
-        - sleep 15
+        - sleep 30
         - rosrun commande_locale log_manager
       - commands:
         - echo "Terminal"
