@@ -5,7 +5,7 @@ common:
   #   - ssh-ing to another machine
   before_commands:
   # Replace Desktop with your path to your cloned repo
-    - cd ~/Desktop/Cellule_2022_copelia/celluleflexible/ros_ws
+    - cd ../ros_ws/
     - source devel/setup.bash
  # before commands can be specified global and per window
 
