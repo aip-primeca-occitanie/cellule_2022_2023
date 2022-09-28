@@ -159,7 +159,7 @@ def ErrorTrajectoryExecution():
 def Initialize(armgroup,handgroup):
 	motionSequenceRequest_ = MotionSequenceRequest()
 	motionPlanItemInitialize_ = MotionSequenceItem()
-	constraints_ = Constraints()	
+	constraints_ = Constraints()
 	#le premier planning a besoin d'un start_state, les autres démarrent automatiquement au goal précédent
 	motionPlanItemInitialize_.req.pipeline_id = "ompl"
 	motionPlanItemInitialize_.req.max_velocity_scaling_factor = 1.0

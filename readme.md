@@ -34,7 +34,6 @@
 ```
 		sudo apt-get install tmux
 		pip3 install --user catmux
-		mv Bureau/Cellule_2022_copelia/celluleflexible/catmux/session.py .local/lib/python3.8/site-packages/catmux/session.py
 ```
 - Une fois l'installation terminé il faut vérifier à la ligne 7 du fichier Cellule_2022_copelia/celluleflexible/catmux/projet.yaml que le chemin d'accès corresponde au votre :
 ```
@@ -66,7 +65,7 @@
 
 - Pour quitter la session:
 ```
-		#Soit faire dans un terminal
+		#Soit faire dans un terminal vierge
 		tmux kill-session
 		#Ou le raccourci (ctrl+b into shift+k into y)
 ```

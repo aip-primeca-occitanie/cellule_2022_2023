@@ -7,8 +7,7 @@ common:
   # Replace Desktop with your path to your cloned repo
     - cd ~/Desktop/Cellule_2022_copelia/celluleflexible/ros_ws
     - source devel/setup.bash
-    - clear
-    - echo "Launching project" # before commands can be specified global and per window
+ # before commands can be specified global and per window
 
   # The default window will be the one displayed when first connecting to the tmux session
   default_window: commande
