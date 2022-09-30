@@ -50,7 +50,7 @@ windows:
       - commands:
         - sleep 5
         - rosrun yaskawa4 execute_trajectory_yaska4.py
-  #launching Yaskawa3 nodes
+  #launching Yaskawa1 nodes
   # - name: Yaskawa1
   #   layout: tiled
   #   splits:
@@ -70,6 +70,16 @@ windows:
   #     - commands:
   #       - sleep 5
   #       - rosrun kuka_kr6_700sixx_moveit execute_trajectory_kuka.py
+   #launching staubli nodes
+  - name: Staubli
+    layout: tiled
+    splits:
+      - commands:
+        - sleep 2
+        - roslaunch staubli_tx2_60l_moveit demo.launch
+      - commands:
+        - sleep 5
+        - rosrun staubli_tx2_60l_moveit execute_trajectory_staubli.py
   #launching 2 Robots coppelia
   - name: robots_coppelia2
     if: "2"

@@ -9,26 +9,8 @@
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
-    
-    <!-- groupe de la pince du yaskawa -->
-    <group name="yaskawa4_hand">
-        <link name="cylinder_link"/>
-        <link name="adaptater_plate_link"/>
-        <link name="end_effector_link"/>
-        <link name="adaptater_mors1_link"/>
-        <link name="adaptater_mors2_link"/>
-        <link name="mors_link1"/>
-        <link name="mors_link2"/>
-    </group>
-        <group_state name="Open" group="yaskawa4_hand">
-        <joint name="end_effector_adaptater_mors1" value="0.00" />
-        <joint name="end_effector_adaptater_mors2" value="0.00" />
-    </group_state>
-        <group_state name="Close" group="yaskawa4_hand">
-        <joint name="end_effector_adaptater_mors1" value="0.03" />
-        <joint name="end_effector_adaptater_mors2" value="0.03" />
-    </group_state>
-    <!-- ********A LIRE !!!!! *********
+
+    <!-- ******** A LIRE !!!!! *********
     Les groupes représentent une séquence de points et décrit un mouvement de pick and place pour le robot.
     Il y a 8 déplacements possibles, donc 8 groupes. Les points doivent être placés dans l'ordre séquenciel du début du mouvement du robot vers la fin.
     Deux mouvements sont réalisés par le script execute_trajectory et est composé de :
@@ -52,6 +34,25 @@
     Si on souhaite ajouter des points (ou en enlever), il faudra modifier le script qui construit la trajectoire pour redéfinir les points où le blend radius peut être appliqué.
     La position home du yaskawa a été légérement modifiée pour éviter une collision de la pince avec le robot lors de son ouverture (qui fait partie de l'initialisation 
     effectuée avant le mouvement de pick and place). -->
+
+    <!-- groupe de la pince du yaskawa -->
+    <group name="yaskawa4_hand">
+        <link name="cylinder_link"/>
+        <link name="adaptater_plate_link"/>
+        <link name="end_effector_link"/>
+        <link name="adaptater_mors1_link"/>
+        <link name="adaptater_mors2_link"/>
+        <link name="mors_link1"/>
+        <link name="mors_link2"/>
+    </group>
+        <group_state name="Open" group="yaskawa4_hand">
+        <joint name="end_effector_adaptater_mors1" value="0.00" />
+        <joint name="end_effector_adaptater_mors2" value="0.00" />
+    </group_state>
+        <group_state name="Close" group="yaskawa4_hand">
+        <joint name="end_effector_adaptater_mors1" value="0.03" />
+        <joint name="end_effector_adaptater_mors2" value="0.03" />
+    </group_state>
     <group name="DN3P4">
         <chain base_link="yaska4_base_link" tip_link="yaska4_tool0" />
     </group>

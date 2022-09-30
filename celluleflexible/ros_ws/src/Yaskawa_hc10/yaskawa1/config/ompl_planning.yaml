@@ -181,7 +181,7 @@ yaskawa1_hand:
     - LazyPRMstar
     - SPARS
     - SPARStwo
-DN2P:
+DN2P4:
   planner_configs:
     - AnytimePathShortening
     - SBL
@@ -209,7 +209,7 @@ DN2P:
     - SPARStwo
   projection_evaluator: joints(yaska1_joint_1_s,yaska1_joint_2_l)
   longest_valid_segment_fraction: 0.005
-DPN1:
+DN3P1:
   planner_configs:
     - AnytimePathShortening
     - SBL
@@ -237,7 +237,119 @@ DPN1:
     - SPARStwo
   projection_evaluator: joints(yaska1_joint_1_s,yaska1_joint_2_l)
   longest_valid_segment_fraction: 0.005
-DPN2:
+DN3P4:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska1_joint_1_s,yaska1_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+DP1N2:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska1_joint_1_s,yaska1_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+DP1N3:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska1_joint_1_s,yaska1_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+DP4N2:
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+  projection_evaluator: joints(yaska1_joint_1_s,yaska1_joint_2_l)
+  longest_valid_segment_fraction: 0.005
+DP4N3:
   planner_configs:
     - AnytimePathShortening
     - SBL

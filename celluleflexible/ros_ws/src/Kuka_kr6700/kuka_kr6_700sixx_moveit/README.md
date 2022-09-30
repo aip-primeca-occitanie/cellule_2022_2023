@@ -5,8 +5,6 @@ Ces fichiers sont chargés au lancement de RViz.
 Le fichier .srdf contient des groupes (DNP1, ..) dont la suite de points permet à Moveit de construire une trajectoire de pick and place 
 et correspond à la fonction DeplacerPiece() de CoppeliaSim.
 
-ex: DPN1 correspond à la prise d'un objet sur la navette et au dépot de l'objet sur l'un des postes de travail.
-
 ### launch
 Permet de lancer l'environnement RViz/Moveit avec le robot avec la commande :
 ```bash

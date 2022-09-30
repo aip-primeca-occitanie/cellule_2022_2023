@@ -59,7 +59,7 @@ Visualization Manager:
         Goal State Color: 250; 128; 0
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
-        Query Goal State: true
+        Query Goal State: false
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -74,7 +74,7 @@ Visualization Manager:
       Scene Robot:
         Attached Body Color: 150; 50; 150
         Links: ~
-        Robot Alpha: 0.5
+        Robot Alpha: 1.0
         Show Scene Robot: true
       Value: true
   Enabled: true

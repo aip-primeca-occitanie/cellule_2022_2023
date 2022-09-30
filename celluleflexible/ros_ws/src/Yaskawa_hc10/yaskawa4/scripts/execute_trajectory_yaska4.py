@@ -106,7 +106,7 @@ def AddShuttleToWorkspace(armgroup,ps,nav):
 # Cette fonction permet d'enlever la navette de l'environnement RViz, est appelé à la fin de l'exécution d'un mouvement.
 def RemoveShuttleFromWorkspace(ps):
 	ps.remove_attached_object(link = "rail_milieu_link", name = "Navette")
-	rospy.sleep(0.05)
+	rospy.sleep(0.1)
 	ps.remove_world_object(name = "Navette")
 	rospy.loginfo("Removed shuttle from workspace !")
 
@@ -147,8 +147,8 @@ def TrajectoryResultCallback(resultmsg):
 #Interface de gestion de l'erreur par l'utilisateur
 def ErrorTrajectoryExecution():
 	print("""What would you like to do? 
-	1. Finish trajectory 
-	2. Abort trajectory """)
+	1. New trajectory execution atempt
+	2. Abort trajectory execution""")
 	while(True):
 		choice = input('Choice:')
 		if(choice.isdigit() and int(choice) in range(1,3)):
@@ -342,7 +342,7 @@ def ControlCallback(pub_yaska4):
 				RemoveShuttleFromWorkspace(planingScene)
 				break
 			else:
-				print("Error during trajectory execution")
+				rospy.loginfo("Error during trajectory execution")
 				choice = ErrorTrajectoryExecution()
 				if(choice == 2):
 					rospy.loginfo("Aborting trajectory")
@@ -356,10 +356,10 @@ def ControlCallback(pub_yaska4):
 					break
 		#Si l'initialisation a échouée
 		else:
-			print("Error during initialization")
+			rospy.loginfo("Error during initialization")
 			choice = ErrorTrajectoryExecution()
 			if(choice == 2):
-				print("Aborting trajectory")
+				rospy.loginfo("Aborting trajectory")
 				mymsgYaska4.FinDeplacerR4 = 1
 				rospy.loginfo(mymsgYaska4)
 				pub_fintache.publish(mymsgYaska4)
