@@ -1,6 +1,6 @@
 # Installation du projet de zéro :
 
-- Si vous êtes sur windows, lancer une machine virtuelle Ubuntu 20.04
+- Si vous êtes sur windows, lancer une machine virtuelle Ubuntu 20.04 et ROS Noetic
 - Ouvrir un terminal et faire :
 ```
 		sudo apt update
