@@ -69,5 +69,6 @@
 		tmux kill-session
 		#Ou le raccourci (ctrl+b into shift+k into y)
 ```
-
+auteur : Alexandre Belveze
+mail : alexandre.belveze@gmail.com
 
